@@ -41,3 +41,60 @@ export const Link = styled(ReactRouterLink)`
     text-decoration: underline;
   }
 `;
+
+export const Base = styled.form`
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  width: 100%;
+`;
+
+export const Input = styled.input`
+  background: #333;
+  border-radius: 4px;
+  border: 0;
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  padding: 5px 20px;
+  margin-bottom: 20px;
+  &:last-of-type {
+    margin-bottom: 30px;
+  }
+`;
+
+export const Submit = styled.button`
+  background: white;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 24px 0 12px;
+  padding: 16px;
+  border: 0;
+  color: #022855;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: .5s;
+  &:disabled {
+    opacity: 0.5;
+    &:hover {
+      background: white;
+      color: #022855;
+      border: 1px solid white;
+    }
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    border: 1px solid white;
+  }
+`;
+
+export const Error = styled.div`
+  background: #e87c03;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 0 0 16px;
+  color: white;
+  padding: 15px 20px;
+`;
