@@ -22,7 +22,7 @@ export function HeaderVerificationContainer({ bg, children }) {
     <>
       <Header bg={bg}>
         <Header.Frame>
-          <Header.Logo onClick={handleLogout} alt="Lech Poznań" src={logo} />
+          <Header.Logo onClick={handleLogout} alt="Lech Poznań" src={logo} to={ROUTES.SIGN_IN} />
         </Header.Frame>
         {children}
       </Header>
