@@ -19,5 +19,11 @@ export function translate(message) {
   ) {
     return "Brak użytkownika z podanym e-mailem. Sprawdź jeszcze raz i spróbuj ponownie.";
   }
+  if (
+    message ===
+    "We have blocked all requests from this device due to unusual activity. Try again later."
+  ) {
+    return "Link aktywacyjny został już wysłany. Sprawdź skrzynkę pocztową.";
+  }
   return message;
 }

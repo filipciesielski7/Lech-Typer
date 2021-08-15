@@ -9,7 +9,7 @@ import { translate } from "../helpers/translate";
 
 const Signup = () => {
   const history = useHistory();
-  const { signup } = useAuth();
+  const { signup, sendVerificationEmail } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +25,10 @@ const Signup = () => {
             displayName: firstName,
           })
           .then(() => {
-            history.push(ROUTES.BROWSE);
+            sendVerificationEmail();
+          })
+          .then(() => {
+            history.push(ROUTES.VERIFICATION);
           })
       )
       .catch((error) => {

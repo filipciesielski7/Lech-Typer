@@ -2,6 +2,7 @@ import React from "react";
 import {
   Container,
   Title,
+  SubTitle,
   Text,
   Link,
   TextSmall,
@@ -15,8 +16,16 @@ export default function Form({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
 
+// export default function VerifiactionForm({ children, ...restProps }) {
+//   return <VerifiactionContainer {...restProps}>{children}</VerifiactionContainer>;
+// }
+
 Form.Title = function FormTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
+};
+
+Form.SubTitle = function FormSubTitle({ children, ...restProps }) {
+  return <SubTitle {...restProps}>{children}</SubTitle>;
 };
 
 Form.Text = function FormText({ children, ...restProps }) {

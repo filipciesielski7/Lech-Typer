@@ -22,6 +22,10 @@ export function AuthProvider({ children }) {
     return auth.signOut();
   }
 
+  function sendVerificationEmail() {
+    return auth.currentUser.sendEmailVerification();
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -29,6 +33,6 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  const value = { currentUser, signup, signin, logout };
+  const value = { currentUser, signup, signin, logout, sendVerificationEmail };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
