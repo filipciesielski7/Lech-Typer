@@ -70,6 +70,17 @@ export const Input = styled.input`
   }
 `;
 
+export const InputForgotPassword = styled.input`
+  background: #333;
+  border-radius: 4px;
+  border: 0;
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  padding: 5px 20px;
+  margin-bottom: 0px;
+`;
+
 export const Submit = styled.button`
   background: white;
   border-radius: 4px;
@@ -99,6 +110,15 @@ export const Submit = styled.button`
 
 export const Error = styled.div`
   background: #e87c03;
+  border-radius: 4px;
+  font-size: 14px;
+  margin: 0 0 16px;
+  color: white;
+  padding: 15px 20px;
+`;
+
+export const Confirmation = styled.div`
+  background: #338a3e;
   border-radius: 4px;
   font-size: 14px;
   margin: 0 0 16px;

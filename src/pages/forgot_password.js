@@ -4,30 +4,38 @@ import FooterContainer from "../containers/footer";
 import Form from "../components/form";
 import * as ROUTES from "../constants/routes";
 import { useAuth } from "../contexts/AuthContext";
-import { useHistory } from "react-router";
 import { translate } from "../helpers/translate";
 
-const Signin = () => {
-  const history = useHistory();
-  const { signin } = useAuth();
+const ForgotPassword = () => {
+  const { resetPassword } = useAuth();
   const [emailAddress, setEmailAddress] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const isInvalid = password === "" || emailAddress === "";
+  const [confirmation, setConfirmation] = useState("");
+  const isInvalid = emailAddress === "";
 
   function handleSubmit(event) {
     event.preventDefault();
-    signin(emailAddress, password)
+    resetPassword(emailAddress)
       .then(() => {
-        history.push(ROUTES.BROWSE);
+        setConfirmation("Link do odzyskania hasła został wysłany.");
       })
       .catch((error) => {
-        if (translate(error.message) !== "Nieprawidłowe hasło.") {
-          setEmailAddress("");
-          setPassword("");
-        } else {
-          setPassword("");
-        }
+        setConfirmation("");
+        setEmailAddress("");
+        setError(translate(error.message));
+      });
+  }
+
+  function resendForgotPassword(event) {
+    event.preventDefault();
+    resetPassword(emailAddress)
+      .then(() => {
+        setConfirmation("");
+        setError("Link do odzyskania hasła został wysłany ponownie.");
+      })
+      .catch((error) => {
+        setConfirmation("");
+        setEmailAddress("");
         setError(translate(error.message));
       });
   }
@@ -36,37 +44,34 @@ const Signin = () => {
     <>
       <HeaderContainer />
       <Form>
-        <Form.Title>Zaloguj się</Form.Title>
+        <Form.Title>Odzyskaj hasło</Form.Title>
+        <Form.SubTitle>Wprowadź swój adres email.</Form.SubTitle>
         {error && <Form.Error>{error}</Form.Error>}
+        {confirmation && <Form.Confirmation>{confirmation}</Form.Confirmation>}
 
         <Form.Base method="POST" onSubmit={handleSubmit}>
-          <Form.Input
+          <Form.InputForgotPassword
             placeholder="Email"
             typr="email"
             value={emailAddress}
             onChange={({ target }) => setEmailAddress(target.value)}
           />
-          <Form.Input
-            type="password"
-            autoComplete="off"
-            placeholder="Hasło"
-            value={password}
-            onChange={({ target }) => setPassword(target.value)}
-          />
 
           <Form.Submit disabled={isInvalid} type="submit">
-            Zaloguj się
+            Zresetuj hasło
           </Form.Submit>
         </Form.Base>
 
         <Form.Text>
-          Nowy gracz?{" "}
-          <Form.Link to={ROUTES.SIGN_UP}>Zarejestruj się.</Form.Link>
+          Wiadomość nie dotarła?{" "}
+          <Form.Link to={ROUTES.BROWSE} onClick={resendForgotPassword}>
+            Prześlij ponownie
+          </Form.Link>
         </Form.Text>
         <Form.TextSmall></Form.TextSmall>
         <Form.Text>
-          Zapomniałeś hasła?{" "}
-          <Form.Link to={ROUTES.FORGOT_PASSWORD}>Odzyskaj hasło.</Form.Link>
+          Nowy gracz?{" "}
+          <Form.Link to={ROUTES.SIGN_UP}>Zarejestruj się.</Form.Link>
         </Form.Text>
         <Form.TextSmall>
           Ta strona korzysta z zabezpieczenia Google reCAPTCHA, by upewnić się,
@@ -78,4 +83,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default ForgotPassword;

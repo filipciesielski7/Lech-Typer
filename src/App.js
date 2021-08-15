@@ -4,10 +4,15 @@ import Home from "./pages/home";
 import Signup from "./pages/signup";
 import Signin from "./pages/signin";
 import { AuthProvider } from "./contexts/AuthContext";
-import { PrivateRoute, LoggedInRoute, VerificationRoute } from "./helpers/routes";
+import {
+  PrivateRoute,
+  LoggedInRoute,
+  VerificationRoute,
+} from "./helpers/routes";
 import * as ROUTES from "./constants/routes";
 import Browse from "./pages/browse";
 import Verification from "./pages/verification";
+import ForgotPassword from "./pages/forgot_password";
 
 function App() {
   return (
@@ -17,8 +22,15 @@ function App() {
           <LoggedInRoute exact path={ROUTES.HOME} component={Home} />
           <LoggedInRoute path={ROUTES.SIGN_UP} component={Signup} />
           <LoggedInRoute path={ROUTES.SIGN_IN} component={Signin} />
+          <LoggedInRoute
+            path={ROUTES.FORGOT_PASSWORD}
+            component={ForgotPassword}
+          />
           <PrivateRoute path={ROUTES.BROWSE} component={Browse} />
-          <VerificationRoute path={ROUTES.VERIFICATION} component={Verification} />
+          <VerificationRoute
+            path={ROUTES.VERIFICATION}
+            component={Verification}
+          />
         </Switch>
       </AuthProvider>
     </Router>

@@ -53,6 +53,7 @@ export const ButtonLink = styled(ReactRouterLink)`
   border-radius: 4px;
   padding: 8px 17px;
   cursor: pointer;
+  border: 1px solid white;
   text-decoration: none;
   transition: 0.5s;
 
@@ -60,7 +61,7 @@ export const ButtonLink = styled(ReactRouterLink)`
     background: #022855;
     color: white;
     border: 1px solid white;
-    transform: scale(1.1);
+    // transform: scale(1.1);
   }
 
   @media (max-width: 350px) {

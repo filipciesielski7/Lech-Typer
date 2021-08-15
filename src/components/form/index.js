@@ -8,17 +8,15 @@ import {
   TextSmall,
   Base,
   Input,
+  InputForgotPassword,
   Submit,
   Error,
+  Confirmation,
 } from "./styles/form";
 
 export default function Form({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
-
-// export default function VerifiactionForm({ children, ...restProps }) {
-//   return <VerifiactionContainer {...restProps}>{children}</VerifiactionContainer>;
-// }
 
 Form.Title = function FormTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
@@ -48,10 +46,21 @@ Form.Input = function FormInput({ children, ...restProps }) {
   return <Input {...restProps}>{children}</Input>;
 };
 
+Form.InputForgotPassword = function FormInputForgotPassword({
+  children,
+  ...restProps
+}) {
+  return <InputForgotPassword {...restProps}>{children}</InputForgotPassword>;
+};
+
 Form.Submit = function FormSubmit({ children, ...restProps }) {
   return <Submit {...restProps}>{children}</Submit>;
 };
 
 Form.Error = function FormError({ children, ...restProps }) {
   return <Error {...restProps}>{children}</Error>;
+};
+
+Form.Confirmation = function FormConfirmation({ children, ...restProps }) {
+  return <Confirmation {...restProps}>{children}</Confirmation>;
 };
