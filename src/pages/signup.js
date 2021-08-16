@@ -48,12 +48,24 @@ const Signup = () => {
       });
   }
 
+  function handleTwitterRegistration(event) {
+    event.preventDefault();
+  }
+
   return (
     <>
       <HeaderContainer />
       <Form>
         <Form.Title>Zarejestruj się</Form.Title>
         {error && <Form.Error>{error}</Form.Error>}
+
+        <Form.Base method="POST" onSubmit={handleTwitterRegistration}>
+          <Form.SubmitTwitter type="submit">
+            <Form.ImageTwitter />
+            Zarejestruj się przez Twitter
+          </Form.SubmitTwitter>
+          <Form.Divider>lub</Form.Divider>
+        </Form.Base>
 
         <Form.Base method="POST" onSubmit={handleSubmit}>
           <Form.Input

@@ -17,6 +17,7 @@ const ForgotPassword = () => {
     event.preventDefault();
     resetPassword(emailAddress)
       .then(() => {
+        setError("");
         setConfirmation("Link do odzyskania hasła został wysłany.");
       })
       .catch((error) => {
@@ -28,16 +29,21 @@ const ForgotPassword = () => {
 
   function resendForgotPassword(event) {
     event.preventDefault();
-    resetPassword(emailAddress)
-      .then(() => {
-        setConfirmation("");
-        setError("Link do odzyskania hasła został wysłany ponownie.");
-      })
-      .catch((error) => {
-        setConfirmation("");
-        setEmailAddress("");
-        setError(translate(error.message));
-      });
+    if (!isInvalid) {
+      resetPassword(emailAddress)
+        .then(() => {
+          setConfirmation("");
+          setError("Link do odzyskania hasła został wysłany ponownie.");
+        })
+        .catch((error) => {
+          setConfirmation("");
+          setEmailAddress("");
+          setError(translate(error.message));
+        });
+    } else {
+      setConfirmation("");
+      setError("Nie podano adresu email.");
+    }
   }
 
   return (
@@ -68,15 +74,22 @@ const ForgotPassword = () => {
             Prześlij ponownie
           </Form.Link>
         </Form.Text>
+
+        <Form.TextSmall></Form.TextSmall>
+        <Form.Text>
+          Zmienione hasło?{" "}
+          <Form.Link to={ROUTES.SIGN_IN}>Zaloguj się.</Form.Link>
+        </Form.Text>
+
         <Form.TextSmall></Form.TextSmall>
         <Form.Text>
           Nowy gracz?{" "}
           <Form.Link to={ROUTES.SIGN_UP}>Zarejestruj się.</Form.Link>
         </Form.Text>
-        <Form.TextSmall>
+        {/* <Form.TextSmall>
           Ta strona korzysta z zabezpieczenia Google reCAPTCHA, by upewnić się,
           że nie jesteś botem.
-        </Form.TextSmall>
+        </Form.TextSmall> */}
       </Form>
       <FooterContainer />
     </>

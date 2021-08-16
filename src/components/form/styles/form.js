@@ -92,7 +92,7 @@ export const Submit = styled.button`
   color: #022855;
   cursor: pointer;
   border: 1px solid white;
-  transition: .5s;
+  transition: 0.5s;
   &:disabled {
     opacity: 0.5;
     &:hover {
@@ -124,4 +124,75 @@ export const Confirmation = styled.div`
   margin: 0 0 16px;
   color: white;
   padding: 15px 20px;
+`;
+
+export const SubmitTwitter = styled.button`
+  background: #1d9cf0;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  padding: 16px;
+  color: white;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: 0.5s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0);
+  }
+`;
+
+export const ImageTwitter = styled.img`
+  height: 18px;
+  margin-right: 5px;
+`;
+
+export const Divider = styled.div`
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+`;
+
+export const Line = styled.div`
+  border-top: 1px solid #737373;
+  width: 100%;
+  height: 1px;
+`;
+
+export const TextShortSmall = styled.p`
+  font-size: 13px;
+  color: #8c8c8c;
+  margin: 0px 10px;
+`;
+
+export const VerificationSubmit = styled.button`
+  background: white;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 0 12px;
+  padding: 16px;
+  border: 0;
+  color: #022855;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: 0.5s;
+  &:disabled {
+    opacity: 0.5;
+    &:hover {
+      background: white;
+      color: #022855;
+      border: 1px solid white;
+    }
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0);
+    color: white;
+    border: 1px solid white;
+  }
 `;

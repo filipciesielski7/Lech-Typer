@@ -37,9 +37,9 @@ const Verification = () => {
           Sprawdź pocztę, aktywuj konto i przejdź dalej. Link aktywacyjny został
           wysłany na adres: {currentUser.email}
         </Form.SubTitle>
-        <Form.Submit type="submit" onClick={handleSubmit} disabled={false}>
+        <Form.VerificationSubmit type="submit" onClick={handleSubmit}>
           Przejdź dalej
-        </Form.Submit>
+        </Form.VerificationSubmit>
         <Form.Text>
           Wiadomość nie dotarła?{" "}
           <Form.Link to={ROUTES.BROWSE} onClick={resendVerificationEmail}>
