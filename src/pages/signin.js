@@ -44,7 +44,7 @@ const Signin = () => {
       <HeaderContainer />
       <Form>
         <Form.Title>Zaloguj się</Form.Title>
-        {error && <Form.Error>{error}</Form.Error>}
+        {/* {error && <Form.Error>{error}</Form.Error>} */}
 
         <Form.Base method="POST" onSubmit={handleTwitterLogin}>
           <Form.SubmitTwitter type="submit">
@@ -53,6 +53,8 @@ const Signin = () => {
           </Form.SubmitTwitter>
           <Form.Divider>lub</Form.Divider>
         </Form.Base>
+
+        {error && <Form.Error>{error}</Form.Error>}
 
         <Form.Base method="POST" onSubmit={handleSubmit}>
           <Form.Input

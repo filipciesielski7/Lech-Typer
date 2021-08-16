@@ -57,7 +57,7 @@ const Signup = () => {
       <HeaderContainer />
       <Form>
         <Form.Title>Zarejestruj się</Form.Title>
-        {error && <Form.Error>{error}</Form.Error>}
+        {/* {error && <Form.Error>{error}</Form.Error>} */}
 
         <Form.Base method="POST" onSubmit={handleTwitterRegistration}>
           <Form.SubmitTwitter type="submit">
@@ -66,6 +66,8 @@ const Signup = () => {
           </Form.SubmitTwitter>
           <Form.Divider>lub</Form.Divider>
         </Form.Base>
+
+        {error && <Form.Error>{error}</Form.Error>}
 
         <Form.Base method="POST" onSubmit={handleSubmit}>
           <Form.Input

@@ -13,27 +13,21 @@ const ForgotPassword = () => {
   const [confirmation, setConfirmation] = useState("");
   const isInvalid = emailAddress === "";
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    resetPassword(emailAddress)
-      .then(() => {
-        setError("");
-        setConfirmation("Link do odzyskania hasła został wysłany.");
-      })
-      .catch((error) => {
-        setConfirmation("");
-        setEmailAddress("");
-        setError(translate(error.message));
-      });
-  }
+  const [firstReset, setFirstReset] = useState("Zresetuj hasło");
 
-  function resendForgotPassword(event) {
+  function handleSubmit(event) {
     event.preventDefault();
     if (!isInvalid) {
       resetPassword(emailAddress)
         .then(() => {
-          setConfirmation("");
-          setError("Link do odzyskania hasła został wysłany ponownie.");
+          setError("");
+          if (firstReset === "Zresetuj hasło") {
+            setConfirmation("Link do odzyskania hasła został wysłany.");
+          } else {
+            setConfirmation("");
+            setError("Link do odzyskania hasła został wysłany ponownie.");
+          }
+          setFirstReset("Wyślij ponownie");
         })
         .catch((error) => {
           setConfirmation("");
@@ -51,7 +45,11 @@ const ForgotPassword = () => {
       <HeaderContainer />
       <Form>
         <Form.Title>Odzyskaj hasło</Form.Title>
-        <Form.SubTitle>Wprowadź swój adres email.</Form.SubTitle>
+        <Form.SubTitle>
+          Wpisz adres e-mail, który był przez Ciebie użyty do rejestracji.
+          Wyślemy na niego łącze umożliwiające
+          zresetowanie hasła.
+        </Form.SubTitle>
         {error && <Form.Error>{error}</Form.Error>}
         {confirmation && <Form.Confirmation>{confirmation}</Form.Confirmation>}
 
@@ -64,18 +62,18 @@ const ForgotPassword = () => {
           />
 
           <Form.Submit disabled={isInvalid} type="submit">
-            Zresetuj hasło
+            {firstReset}
           </Form.Submit>
         </Form.Base>
 
-        <Form.Text>
+        {/* <Form.Text>
           Wiadomość nie dotarła?{" "}
           <Form.Link to={ROUTES.BROWSE} onClick={resendForgotPassword}>
             Prześlij ponownie
           </Form.Link>
-        </Form.Text>
+        </Form.Text>*/}
+        {/* <Form.TextSmall></Form.TextSmall> */}
 
-        <Form.TextSmall></Form.TextSmall>
         <Form.Text>
           Zmienione hasło?{" "}
           <Form.Link to={ROUTES.SIGN_IN}>Zaloguj się.</Form.Link>
@@ -86,10 +84,10 @@ const ForgotPassword = () => {
           Nowy gracz?{" "}
           <Form.Link to={ROUTES.SIGN_UP}>Zarejestruj się.</Form.Link>
         </Form.Text>
-        {/* <Form.TextSmall>
+        <Form.TextSmall>
           Ta strona korzysta z zabezpieczenia Google reCAPTCHA, by upewnić się,
           że nie jesteś botem.
-        </Form.TextSmall> */}
+        </Form.TextSmall>
       </Form>
       <FooterContainer />
     </>
