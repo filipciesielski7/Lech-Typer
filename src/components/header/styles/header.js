@@ -67,5 +67,6 @@ export const ButtonLink = styled(ReactRouterLink)`
   @media (max-width: 350px) {
     padding: 8px 10px;
     font-size: 13px;
+    display: none !important;
   }
 `;

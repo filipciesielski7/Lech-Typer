@@ -6,6 +6,7 @@ import * as ROUTES from "../constants/routes";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { translate } from "../helpers/translate";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Signup = () => {
   const history = useHistory();
@@ -14,7 +15,9 @@ const Signup = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const isInvalid = firstName === "" || password === "" || emailAddress === "";
+  const [robot, setRobot] = useState(true);
+  const isInvalid =
+    firstName === "" || password === "" || emailAddress === "" || robot;
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -54,9 +57,11 @@ const Signup = () => {
       .then((result) => {
         // result.user.updateProfile({
         //   displayName: "@" + result.additionalUserInfo.username,
-        // // });
+        // });
         // console.log(result.user);
         // console.log(result.additionalUserInfo);
+      })
+      .then(() => {
         history.push(ROUTES.BROWSE);
       })
       .catch((error) => {
@@ -100,6 +105,11 @@ const Signup = () => {
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
+          <ReCAPTCHA
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+            onChange={() => setRobot(false)}
+          />
+
           <Form.Submit disabled={isInvalid} type="submit">
             Zarejestruj się
           </Form.Submit>

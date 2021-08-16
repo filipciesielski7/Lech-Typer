@@ -84,10 +84,10 @@ const ForgotPassword = () => {
           Nowy gracz?{" "}
           <Form.Link to={ROUTES.SIGN_UP}>Zarejestruj się.</Form.Link>
         </Form.Text>
-        <Form.TextSmall>
+        {/* <Form.TextSmall>
           Ta strona korzysta z zabezpieczenia Google reCAPTCHA, by upewnić się,
           że nie jesteś botem.
-        </Form.TextSmall>
+        </Form.TextSmall> */}
       </Form>
       <FooterContainer />
     </>

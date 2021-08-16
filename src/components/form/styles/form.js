@@ -12,6 +12,9 @@ export const Container = styled.div`
   max-width: 450px;
   padding: 60px 68px 40px;
   margin-bottom: 0px;
+  @media (max-width: 470px) {
+    padding: 60px 28px 40px;
+  }
 `;
 
 export const Title = styled.h1`
