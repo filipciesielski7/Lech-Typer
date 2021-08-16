@@ -9,7 +9,7 @@ import { translate } from "../helpers/translate";
 
 const Signup = () => {
   const history = useHistory();
-  const { signup, sendVerificationEmail } = useAuth();
+  const { signup, sendVerificationEmail, signupWithTwitter } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -50,6 +50,18 @@ const Signup = () => {
 
   function handleTwitterRegistration(event) {
     event.preventDefault();
+    signupWithTwitter()
+      .then((result) => {
+        // result.user.updateProfile({
+        //   displayName: "@" + result.additionalUserInfo.username,
+        // // });
+        // console.log(result.user);
+        // console.log(result.additionalUserInfo);
+        history.push(ROUTES.BROWSE);
+      })
+      .catch((error) => {
+        setError(translate(error.message));
+      });
   }
 
   return (
@@ -62,7 +74,7 @@ const Signup = () => {
         <Form.Base method="POST" onSubmit={handleTwitterRegistration}>
           <Form.SubmitTwitter type="submit">
             <Form.ImageTwitter />
-            Zarejestruj się przez Twitter
+            Kontynuuj z Twitter
           </Form.SubmitTwitter>
           <Form.Divider>lub</Form.Divider>
         </Form.Base>

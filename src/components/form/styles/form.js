@@ -28,6 +28,12 @@ export const SubTitle = styled.h1`
   margin-bottom: 28px;
 `;
 
+export const SubTitleSpan = styled.span`
+  color: white;
+  font-size: 19px;
+  font-weight: bold;
+`;
+
 export const Text = styled.p`
   color: #737373;
   font-size: 16px;

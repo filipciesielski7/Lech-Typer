@@ -3,6 +3,7 @@ import {
   Container,
   Title,
   SubTitle,
+  SubTitleSpan,
   Text,
   Link,
   TextSmall,
@@ -30,6 +31,10 @@ Form.Title = function FormTitle({ children, ...restProps }) {
 
 Form.SubTitle = function FormSubTitle({ children, ...restProps }) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
+};
+
+Form.SubTitleSpan = function FormSubTitleSpan({ children, ...restProps }) {
+  return <SubTitleSpan {...restProps}>{children}</SubTitleSpan>;
 };
 
 Form.Text = function FormText({ children, ...restProps }) {

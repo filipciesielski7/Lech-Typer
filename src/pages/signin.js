@@ -9,7 +9,7 @@ import { translate } from "../helpers/translate";
 
 const Signin = () => {
   const history = useHistory();
-  const { signin } = useAuth();
+  const { signin, signinWithTwitter } = useAuth();
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -34,9 +34,18 @@ const Signin = () => {
 
   function handleTwitterLogin(event) {
     event.preventDefault();
-    signin(emailAddress, password).then(() => {
-      history.push(ROUTES.BROWSE);
-    });
+    signinWithTwitter()
+      .then((result) => {
+        // result.user.updateProfile({
+        //   displayName: "@" + result.additionalUserInfo.username,
+        // // });
+        // console.log(result.user);
+        // console.log(result.additionalUserInfo);
+        history.push(ROUTES.BROWSE);
+      })
+      .catch((error) => {
+        setError(translate(error.message));
+      });
   }
 
   return (

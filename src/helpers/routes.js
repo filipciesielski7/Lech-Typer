@@ -25,6 +25,9 @@ export function PrivateRoute({ component: Component, ...restProps }) {
     <Route
       {...restProps}
       render={(props) => {
+        if (currentUser && currentUser.email === null) {
+          return <Component {...props} />;
+        }
         if (currentUser && currentUser.emailVerified) {
           return <Component {...props} />;
         } else {

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { auth } from "../firebase";
+import { auth, provider } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -16,6 +16,16 @@ export function AuthProvider({ children }) {
 
   function signin(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
+  }
+
+  function signupWithTwitter(email, password) {
+    auth.languageCode = "pl";
+    return auth.signInWithPopup(provider);
+  }
+
+  function signinWithTwitter(email, password) {
+    auth.languageCode = "pl";
+    return auth.signInWithPopup(provider);
   }
 
   function logout() {
@@ -37,6 +47,15 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
-  const value = { currentUser, signup, signin, logout, sendVerificationEmail, resetPassword };
+  const value = {
+    currentUser,
+    signup,
+    signin,
+    logout,
+    sendVerificationEmail,
+    resetPassword,
+    signupWithTwitter,
+    signinWithTwitter,
+  };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

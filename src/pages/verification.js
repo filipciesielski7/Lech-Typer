@@ -32,11 +32,14 @@ const Verification = () => {
       <HeaderVerificationContainer />
       <Form>
         <Form.Title>Weryfikacja</Form.Title>
-        {error && <Form.Error>{error}</Form.Error>}
+        {/* {error && <Form.Error>{error}</Form.Error>} */}
         <Form.SubTitle>
-          Sprawdź pocztę, aktywuj konto i przejdź dalej. Link aktywacyjny został
-          wysłany na adres: {currentUser.email}
+          Cześć <Form.SubTitleSpan>{currentUser.displayName}</Form.SubTitleSpan>
+          , sprawdź pocztę, aktywuj konto i przejdź dalej. Link aktywacyjny
+          został wysłany na adres:{" "}
+          <Form.SubTitleSpan>{currentUser.email}</Form.SubTitleSpan>
         </Form.SubTitle>
+        {error && <Form.Error>{error}</Form.Error>}
         <Form.VerificationSubmit type="submit" onClick={handleSubmit}>
           Przejdź dalej
         </Form.VerificationSubmit>
