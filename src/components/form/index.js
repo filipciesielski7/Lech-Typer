@@ -19,6 +19,7 @@ import {
   Divider,
   Line,
   TextShortSmall,
+  Recaptcha,
 } from "./styles/form";
 
 export default function Form({ children, ...restProps }) {
@@ -27,6 +28,10 @@ export default function Form({ children, ...restProps }) {
 
 Form.Title = function FormTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
+};
+
+Form.Recaptcha = function FormRecaptcha({ children, ...restProps }) {
+  return <Recaptcha {...restProps}>{children}</Recaptcha>;
 };
 
 Form.SubTitle = function FormSubTitle({ children, ...restProps }) {
@@ -68,7 +73,10 @@ Form.Submit = function FormSubmit({ children, ...restProps }) {
   return <Submit {...restProps}>{children}</Submit>;
 };
 
-Form.VerificationSubmit = function FormVerificationSubmit({ children, ...restProps }) {
+Form.VerificationSubmit = function FormVerificationSubmit({
+  children,
+  ...restProps
+}) {
   return <VerificationSubmit {...restProps}>{children}</VerificationSubmit>;
 };
 

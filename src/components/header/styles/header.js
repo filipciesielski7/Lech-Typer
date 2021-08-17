@@ -64,9 +64,16 @@ export const ButtonLink = styled(ReactRouterLink)`
     // transform: scale(1.1);
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 375px) {
     padding: 8px 10px;
     font-size: 13px;
+    display: none !important;
+  }
+`;
+
+export const LogoLink = styled(ReactRouterLink)`
+  color: white;
+  @media (min-width: 376px) {
     display: none !important;
   }
 `;

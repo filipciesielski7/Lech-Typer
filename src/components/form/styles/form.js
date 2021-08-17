@@ -205,3 +205,16 @@ export const VerificationSubmit = styled.button`
     border: 1px solid white;
   }
 `;
+
+export const Recaptcha = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+  border-radius: 4px;
+
+  @media (max-width: 375px) {
+    overflow: hidden;
+    justify-content: start;
+  }
+`;

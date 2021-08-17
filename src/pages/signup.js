@@ -105,10 +105,12 @@ const Signup = () => {
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
-          <ReCAPTCHA
-            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
-            onChange={() => setRobot(false)}
-          />
+          <Form.Recaptcha>
+            <ReCAPTCHA
+              sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+              onChange={() => setRobot(false)}
+            />
+          </Form.Recaptcha>
 
           <Form.Submit disabled={isInvalid} type="submit">
             Zarejestruj się
