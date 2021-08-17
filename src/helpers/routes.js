@@ -25,10 +25,10 @@ export function PrivateRoute({ component: Component, ...restProps }) {
     <Route
       {...restProps}
       render={(props) => {
-        if (currentUser && currentUser.email === null) {
-          return <Component {...props} />;
-        }
-        if (currentUser && currentUser.emailVerified) {
+        if (
+          (currentUser && currentUser.email === null) ||
+          (currentUser && currentUser.emailVerified)
+        ) {
           return <Component {...props} />;
         } else {
           return currentUser ? (
@@ -48,7 +48,10 @@ export function VerificationRoute({ component: Component, ...restProps }) {
     <Route
       {...restProps}
       render={(props) => {
-        if (currentUser && currentUser.emailVerified) {
+        if (
+          (currentUser && currentUser.email === null) ||
+          (currentUser && currentUser.emailVerified)
+        ) {
           return <Redirect to={ROUTES.BROWSE} />;
         } else {
           return currentUser ? (

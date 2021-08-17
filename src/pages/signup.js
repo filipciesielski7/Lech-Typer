@@ -28,6 +28,7 @@ const Signup = () => {
             displayName: firstName,
           })
           .then(() => {
+            console.log(result);
             sendVerificationEmail();
           })
           .then(() => {
@@ -39,7 +40,10 @@ const Signup = () => {
           translate(error.message) === "Hasło musi zawierać minimum 6 znaków."
         ) {
           setPassword("");
-        } else if (translate(error.message) === "Błędny adres e-mail.") {
+        } else if (
+          translate(error.message) === "Błędny adres e-mail." ||
+          "Ten e-mail już jest przypisany do konta."
+        ) {
           setEmailAddress("");
           setPassword("");
         } else {

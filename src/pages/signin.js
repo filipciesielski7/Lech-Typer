@@ -38,7 +38,7 @@ const Signin = () => {
       .then((result) => {
         // result.user.updateProfile({
         //   displayName: "@" + result.additionalUserInfo.username,
-        // // });
+        // });
         // console.log(result.user);
         // console.log(result.additionalUserInfo);
         history.push(ROUTES.BROWSE);
