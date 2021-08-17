@@ -5,25 +5,33 @@ import Form from "../components/form";
 import { useAuth } from "../contexts/AuthContext";
 import { translate } from "../helpers/translate";
 import * as ROUTES from "../constants/routes";
+import Spinner from "react-spinner-material";
 
 const Verification = () => {
   const { currentUser } = useAuth();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function resendVerificationEmail(event) {
+    setLoading(true);
+    setError("");
     event.preventDefault();
     currentUser
       .sendEmailVerification()
       .then(() => {
+        setLoading(false);
         setError("Link aktywacyjny został ponownie wysłany.");
       })
       .catch((error) => {
+        setLoading(false);
         setError(translate(error.message));
       });
   }
 
   function handleSubmit(event) {
+    setLoading(true);
     event.preventDefault();
+    setLoading(false);
     window.location.reload();
   }
 
@@ -41,7 +49,18 @@ const Verification = () => {
         </Form.SubTitle>
         {error && <Form.Error>{error}</Form.Error>}
         <Form.VerificationSubmit type="submit" onClick={handleSubmit}>
-          Przejdź dalej
+          {loading ? (
+            <Form.LoadingIcon>
+              <Spinner
+                radius={25}
+                color={"#1d9cf0"}
+                stroke={3}
+                visible={true}
+              />
+            </Form.LoadingIcon>
+          ) : (
+            "Przejdź dalej"
+          )}
         </Form.VerificationSubmit>
         <Form.Text>
           Wiadomość nie dotarła?{" "}
