@@ -20,6 +20,7 @@ import {
   Line,
   TextShortSmall,
   Recaptcha,
+  LoadingIcon,
 } from "./styles/form";
 
 export default function Form({ children, ...restProps }) {
@@ -90,6 +91,10 @@ Form.Error = function FormError({ children, ...restProps }) {
 
 Form.Confirmation = function FormConfirmation({ children, ...restProps }) {
   return <Confirmation {...restProps}>{children}</Confirmation>;
+};
+
+Form.LoadingIcon = function FormLoadingIcon({ children, ...restProps }) {
+  return <LoadingIcon {...restProps}>{children}</LoadingIcon>;
 };
 
 Form.Divider = function FormDivider({ children, ...restProps }) {

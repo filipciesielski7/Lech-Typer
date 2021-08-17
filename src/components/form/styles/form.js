@@ -212,9 +212,16 @@ export const Recaptcha = styled.div`
   justify-content: center;
   background: #f9f9f9;
   border-radius: 4px;
+  overflow: hidden;
 
   @media (max-width: 375px) {
-    overflow: hidden;
     justify-content: start;
   }
+`;
+
+export const LoadingIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  height: 18px;
 `;

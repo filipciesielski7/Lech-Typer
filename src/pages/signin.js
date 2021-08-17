@@ -6,6 +6,7 @@ import * as ROUTES from "../constants/routes";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { translate } from "../helpers/translate";
+import Spinner from "react-spinner-material";
 
 const Signin = () => {
   const history = useHistory();
@@ -14,11 +15,14 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const isInvalid = password === "" || emailAddress === "";
+  const [loading, setLoading] = useState(false);
 
   function handleSubmit(event) {
+    setLoading(true);
     event.preventDefault();
     signin(emailAddress, password)
       .then(() => {
+        setLoading(false);
         history.push(ROUTES.BROWSE);
       })
       .catch((error) => {
@@ -28,11 +32,13 @@ const Signin = () => {
         } else {
           setPassword("");
         }
+        setLoading(false);
         setError(translate(error.message));
       });
   }
 
   function handleTwitterLogin(event) {
+    setLoading(true);
     event.preventDefault();
     signinWithTwitter()
       .then((result) => {
@@ -41,9 +47,11 @@ const Signin = () => {
         // });
         // console.log(result.user);
         // console.log(result.additionalUserInfo);
+        setLoading(false);
         history.push(ROUTES.BROWSE);
       })
       .catch((error) => {
+        setLoading(false);
         setError(translate(error.message));
       });
   }
@@ -81,7 +89,18 @@ const Signin = () => {
           />
 
           <Form.Submit disabled={isInvalid} type="submit">
-            Zaloguj się
+            {loading ? (
+              <Form.LoadingIcon>
+                <Spinner
+                  radius={25}
+                  color={"#1d9cf0"}
+                  stroke={3}
+                  visible={true}
+                />
+              </Form.LoadingIcon>
+            ) : (
+              "Zaloguj się"
+            )}
           </Form.Submit>
         </Form.Base>
 

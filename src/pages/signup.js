@@ -7,6 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { translate } from "../helpers/translate";
 import ReCAPTCHA from "react-google-recaptcha";
+import Spinner from "react-spinner-material";
 
 const Signup = () => {
   const history = useHistory();
@@ -16,10 +17,12 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [robot, setRobot] = useState(true);
+  const [loading, setLoading] = useState(false);
   const isInvalid =
     firstName === "" || password === "" || emailAddress === "" || robot;
 
   function handleSubmit(event) {
+    setLoading(true);
     event.preventDefault();
     signup(emailAddress, password)
       .then((result) =>
@@ -32,6 +35,7 @@ const Signup = () => {
             sendVerificationEmail();
           })
           .then(() => {
+            setLoading(false);
             history.push(ROUTES.VERIFICATION);
           })
       )
@@ -51,11 +55,13 @@ const Signup = () => {
           setFirstName("");
           setPassword("");
         }
+        setLoading(false);
         setError(translate(error.message));
       });
   }
 
   function handleTwitterRegistration(event) {
+    setLoading(true);
     event.preventDefault();
     signupWithTwitter()
       .then((result) => {
@@ -66,9 +72,11 @@ const Signup = () => {
         // console.log(result.additionalUserInfo);
       })
       .then(() => {
+        setLoading(false);
         history.push(ROUTES.BROWSE);
       })
       .catch((error) => {
+        setLoading(false);
         setError(translate(error.message));
       });
   }
@@ -117,7 +125,18 @@ const Signup = () => {
           </Form.Recaptcha>
 
           <Form.Submit disabled={isInvalid} type="submit">
-            Zarejestruj się
+            {loading ? (
+              <Form.LoadingIcon>
+                <Spinner
+                  radius={25}
+                  color={"#1d9cf0"}
+                  stroke={3}
+                  visible={true}
+                />
+              </Form.LoadingIcon>
+            ) : (
+              "Zarejestruj się"
+            )}
           </Form.Submit>
         </Form.Base>
 
