@@ -30,6 +30,7 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    localStorage.removeItem("twitterUsername");
     return auth.signOut().then(() => {
       setCurrentUser(null);
     });

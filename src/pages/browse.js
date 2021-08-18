@@ -1,37 +1,32 @@
-import React, { useState } from "react";
-import { HeaderContainer } from "../containers/header";
+import React, { useState, useEffect } from "react";
+import { HeaderBrowseContainer } from "../containers/header-browse";
+import { Loading } from "../components";
 import FooterContainer from "../containers/footer";
 import Form from "../components/form";
 import { useAuth } from "../contexts/AuthContext";
-import { translate } from "../helpers/translate";
-import * as ROUTES from "../constants/routes";
-import { useHistory } from "react-router";
 
 const Browse = () => {
-  const history = useHistory();
-  const { logout, currentUser } = useAuth();
-  const [error, setError] = useState("");
+  const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
 
-  function handleLogout(event) {
-    event.preventDefault();
-    logout()
-      .then(() => {
-        history.push(ROUTES.SIGN_IN);
-      })
-      .catch((error) => {
-        setError(translate(error.message));
-      });
-  }
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 800);
+  }, []);
 
   return (
     <>
-      <HeaderContainer />
+      {loading ? <Loading /> : <Loading.ReleaseBody />}
+      <HeaderBrowseContainer />
       <Form>
-        <Form.Title>Witamy {currentUser.displayName}</Form.Title>
-        {error && <Form.Error>{error}</Form.Error>}
-        <Form.Base method="POST" onSubmit={handleLogout}>
-          <Form.Submit type="submit">Wyloguj się</Form.Submit>
-        </Form.Base>
+        <Form.Title>
+          Witamy{" "}
+          {currentUser.email === null
+            ? "@" + twitterUsername
+            : currentUser.displayName}
+        </Form.Title>
       </Form>
       <FooterContainer />
     </>

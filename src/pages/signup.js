@@ -11,7 +11,11 @@ import Spinner from "react-spinner-material";
 
 const Signup = () => {
   const history = useHistory();
-  const { signup, sendVerificationEmail, signupWithTwitter } = useAuth();
+  const {
+    signup,
+    sendVerificationEmail,
+    signupWithTwitter,
+  } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -65,11 +69,10 @@ const Signup = () => {
     event.preventDefault();
     signupWithTwitter()
       .then((result) => {
-        // result.user.updateProfile({
-        //   displayName: "@" + result.additionalUserInfo.username,
-        // });
-        // console.log(result.user);
-        // console.log(result.additionalUserInfo);
+        localStorage.setItem(
+          "twitterUsername",
+          JSON.stringify(result.additionalUserInfo.username)
+        );
       })
       .then(() => {
         setLoading(false);

@@ -42,11 +42,10 @@ const Signin = () => {
     event.preventDefault();
     signinWithTwitter()
       .then((result) => {
-        // result.user.updateProfile({
-        //   displayName: "@" + result.additionalUserInfo.username,
-        // });
-        // console.log(result.user);
-        // console.log(result.additionalUserInfo);
+        localStorage.setItem(
+          "twitterUsername",
+          JSON.stringify(result.additionalUserInfo.username)
+        );
         setLoading(false);
         history.push(ROUTES.BROWSE);
       })
@@ -61,7 +60,6 @@ const Signin = () => {
       <HeaderContainer />
       <Form>
         <Form.Title>Zaloguj się</Form.Title>
-        {/* {error && <Form.Error>{error}</Form.Error>} */}
 
         <Form.Base method="POST" onSubmit={handleTwitterLogin}>
           <Form.SubmitTwitter type="submit">
@@ -87,7 +85,6 @@ const Signin = () => {
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
-
           <Form.Submit disabled={isInvalid} type="submit">
             {loading ? (
               <Form.LoadingIcon>
@@ -113,10 +110,6 @@ const Signin = () => {
           Zapomniałeś hasła?{" "}
           <Form.Link to={ROUTES.FORGOT_PASSWORD}>Odzyskaj hasło.</Form.Link>
         </Form.Text>
-        {/* <Form.TextSmall>
-          Ta strona korzysta z zabezpieczenia Google reCAPTCHA, by upewnić się,
-          że nie jesteś botem.
-        </Form.TextSmall> */}
       </Form>
       <FooterContainer />
     </>
