@@ -3,14 +3,17 @@ import {
   Container,
   Title,
   SubTitle,
+  SettingSubTitle,
   SubTitleSpan,
   Text,
+  Edit,
   Link,
   TextSmall,
   Base,
   Input,
   InputForgotPassword,
   Submit,
+  SubmitDeleteAccount,
   VerificationSubmit,
   SubmitTwitter,
   Error,
@@ -21,6 +24,7 @@ import {
   TextShortSmall,
   Recaptcha,
   LoadingIcon,
+  SettingContainer,
 } from "./styles/form";
 
 export default function Form({ children, ...restProps }) {
@@ -37,6 +41,13 @@ Form.Recaptcha = function FormRecaptcha({ children, ...restProps }) {
 
 Form.SubTitle = function FormSubTitle({ children, ...restProps }) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
+};
+
+Form.SettingSubTitle = function FormSettingSubTitle({
+  children,
+  ...restProps
+}) {
+  return <SettingSubTitle {...restProps}>{children}</SettingSubTitle>;
 };
 
 Form.SubTitleSpan = function FormSubTitleSpan({ children, ...restProps }) {
@@ -63,6 +74,10 @@ Form.Input = function FormInput({ children, ...restProps }) {
   return <Input {...restProps}>{children}</Input>;
 };
 
+Form.Edit = function FormEdit({ children, ...restProps }) {
+  return <Edit {...restProps}>{children}</Edit>;
+};
+
 Form.InputForgotPassword = function FormInputForgotPassword({
   children,
   ...restProps
@@ -72,6 +87,13 @@ Form.InputForgotPassword = function FormInputForgotPassword({
 
 Form.Submit = function FormSubmit({ children, ...restProps }) {
   return <Submit {...restProps}>{children}</Submit>;
+};
+
+Form.SubmitDeleteAccount = function FormSubmitDeleteAccount({
+  children,
+  ...restProps
+}) {
+  return <SubmitDeleteAccount {...restProps}>{children}</SubmitDeleteAccount>;
 };
 
 Form.VerificationSubmit = function FormVerificationSubmit({
@@ -95,6 +117,13 @@ Form.Confirmation = function FormConfirmation({ children, ...restProps }) {
 
 Form.LoadingIcon = function FormLoadingIcon({ children, ...restProps }) {
   return <LoadingIcon {...restProps}>{children}</LoadingIcon>;
+};
+
+Form.SettingContainer = function FormSettingContainer({
+  children,
+  ...restProps
+}) {
+  return <SettingContainer {...restProps}>{children}</SettingContainer>;
 };
 
 Form.Divider = function FormDivider({ children, ...restProps }) {

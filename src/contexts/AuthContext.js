@@ -10,6 +10,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [loadingBrowse, setLoadingBrowse] = useState(true);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -31,6 +32,8 @@ export function AuthProvider({ children }) {
 
   function logout() {
     localStorage.removeItem("twitterUsername");
+    localStorage.removeItem("twitterProfileImage");
+    setLoadingBrowse(true);
     return auth.signOut().then(() => {
       setCurrentUser(null);
     });
@@ -62,6 +65,8 @@ export function AuthProvider({ children }) {
     resetPassword,
     signupWithTwitter,
     signinWithTwitter,
+    loadingBrowse,
+    setLoadingBrowse,
   };
   return (
     <AuthContext.Provider value={value}>

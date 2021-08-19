@@ -43,8 +43,8 @@ const Verification = () => {
         {/* {error && <Form.Error>{error}</Form.Error>} */}
         <Form.SubTitle>
           Cześć <Form.SubTitleSpan>{currentUser.displayName}</Form.SubTitleSpan>
-          , sprawdź pocztę, aktywuj konto i przejdź dalej. Link aktywacyjny
-          został wysłany na adres:{" "}
+          , sprawdź pocztę, zweryfikuj adres email i przejdź dalej. Link
+          aktywacyjny został wysłany na adres:{" "}
           <Form.SubTitleSpan>{currentUser.email}</Form.SubTitleSpan>
         </Form.SubTitle>
         {error && <Form.Error>{error}</Form.Error>}

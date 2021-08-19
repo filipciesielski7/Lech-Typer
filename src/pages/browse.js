@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import { Loading } from "../components";
 import FooterContainer from "../containers/footer";
@@ -6,19 +6,18 @@ import Form from "../components/form";
 import { useAuth } from "../contexts/AuthContext";
 
 const Browse = () => {
-  const { currentUser } = useAuth();
-  const [loading, setLoading] = useState(true);
+  const { currentUser, loadingBrowse, setLoadingBrowse } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
 
   useEffect(() => {
     setTimeout(() => {
-      setLoading(false);
+      setLoadingBrowse(false);
     }, 800);
-  }, []);
+  }, [setLoadingBrowse]);
 
   return (
     <>
-      {loading ? <Loading /> : <Loading.ReleaseBody />}
+      {loadingBrowse ? <Loading /> : <Loading.ReleaseBody />}
       <HeaderBrowseContainer />
       <Form>
         <Form.Title>
@@ -26,6 +25,7 @@ const Browse = () => {
           {currentUser.email === null
             ? "@" + twitterUsername
             : currentUser.displayName}
+          , strona główna
         </Form.Title>
       </Form>
       <FooterContainer />

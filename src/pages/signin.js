@@ -46,6 +46,10 @@ const Signin = () => {
           "twitterUsername",
           JSON.stringify(result.additionalUserInfo.username)
         );
+        localStorage.setItem(
+          "twitterProfileImage",
+          JSON.stringify(result.additionalUserInfo.profile.profile_image_url)
+        );
         setLoading(false);
         history.push(ROUTES.BROWSE);
       })

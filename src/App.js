@@ -13,6 +13,7 @@ import * as ROUTES from "./constants/routes";
 import Browse from "./pages/browse";
 import Verification from "./pages/verification";
 import ForgotPassword from "./pages/forgot_password";
+import UpdateProfile from "./pages/update_profile";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
             component={ForgotPassword}
           />
           <PrivateRoute path={ROUTES.BROWSE} component={Browse} />
+          <PrivateRoute
+            path={ROUTES.UPDATE_PROFILE}
+            component={UpdateProfile}
+          />
           <VerificationRoute
             path={ROUTES.VERIFICATION}
             component={Verification}

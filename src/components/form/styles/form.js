@@ -77,6 +77,9 @@ export const Input = styled.input`
   &:last-of-type {
     margin-bottom: 30px;
   }
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
 
 export const InputForgotPassword = styled.input`
@@ -222,6 +225,54 @@ export const Recaptcha = styled.div`
 export const LoadingIcon = styled.div`
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   height: 18px;
+`;
+
+export const SettingSubTitle = styled.h1`
+  color: #8c8c8c;
+  font-size: 19px;
+  font-weight: bold;
+`;
+
+export const SettingContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+`;
+
+export const SubmitDeleteAccount = styled.button`
+  background: #cc0000;
+  color: white;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 24px 0 12px;
+  padding: 16px;
+  border: 0;
+  cursor: pointer;
+  border: 1px solid white;
+  transition: 0.5s;
+
+  &:hover {
+    background: #ed4337;
+  }
+`;
+
+export const Edit = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  p {
+    margin-left: 5px;
+    font-size: 14px;
+  }
 `;

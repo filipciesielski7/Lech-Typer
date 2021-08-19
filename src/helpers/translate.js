@@ -23,7 +23,13 @@ export function translate(message) {
     message ===
     "We have blocked all requests from this device due to unusual activity. Try again later."
   ) {
-    return "Link aktywacyjny został już wysłany. Sprawdź skrzynkę pocztową.";
+    return "Zbyt podejrzana aktywność z tego urządzenia. Spróbuj ponownie później.";
+  }
+  if (
+    message ===
+    "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
+  ) {
+    return "Ta operacja wymaga niedawnego uwierzytelnienia. Zaloguj się ponownie przed ponowną próbą zmiany hasła.";
   }
   return message;
 }

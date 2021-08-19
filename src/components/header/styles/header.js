@@ -77,3 +77,91 @@ export const LogoLink = styled(ReactRouterLink)`
     display: none !important;
   }
 `;
+
+export const Username = styled.p`
+  padding: 5px;
+  opacity: 0.8;
+  @media (max-width: 500px) {
+    display: none !important;
+  }
+`;
+
+// const arrow = keyframes`
+// 0% {transform: translateY(-5px);
+// opacity: 0;}
+// 100% {transform: translateY(5px);
+// opacity: 1;}
+// `;
+
+export const IconDown = styled.span`
+  opacity: 0.8;
+`;
+
+export const Profile = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+
+  &:hover > ${IconDown} {
+    opacity: 1;
+  }
+  &:hover > ${Username} {
+    opacity: 1;
+  }
+`;
+
+export const ProfileImage = styled.img`
+  border-radius: 4px;
+  height: 35px;
+  margin-right: 5px;
+`;
+
+export const Link = styled(ReactRouterLink)`
+  text-decoration: none;
+  color: white;
+  transition: 0.5s;
+`;
+
+export const Group = styled.div`
+  display: flex;
+  align-items: center;
+  height: 35px;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 4px;
+
+  &:hover {
+    background: white;
+    color: #022855;
+  }
+  &:hover > ${Link} {
+    color: #022855;
+  }
+`;
+
+export const Dropdown = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  color: white;
+  width: 190px;
+  top: 80px;
+  // background: black;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 0px 0px 3px white;
+
+  right: 56px;
+  @media (max-width: 1000px) {
+    right: 30px;
+  }
+  p {
+    font-size: 15px;
+    margin-left: 10px;
+  }
+`;

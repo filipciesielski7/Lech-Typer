@@ -11,11 +11,7 @@ import Spinner from "react-spinner-material";
 
 const Signup = () => {
   const history = useHistory();
-  const {
-    signup,
-    sendVerificationEmail,
-    signupWithTwitter,
-  } = useAuth();
+  const { signup, sendVerificationEmail, signupWithTwitter } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -72,6 +68,10 @@ const Signup = () => {
         localStorage.setItem(
           "twitterUsername",
           JSON.stringify(result.additionalUserInfo.username)
+        );
+        localStorage.setItem(
+          "twitterProfileImage",
+          JSON.stringify(result.additionalUserInfo.profile.profile_image_url)
         );
       })
       .then(() => {
