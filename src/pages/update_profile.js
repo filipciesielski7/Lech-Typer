@@ -175,13 +175,17 @@ const UpdateProfile = () => {
         {error && <Form.Error>{error}</Form.Error>}
         {confirmation && <Form.Confirmation>{confirmation}</Form.Confirmation>}
 
-        <Form.Text>
-          Na tej stronie możesz zmienić dane powiązane z Twoim kontem w Lech
-          Typer. Wszystkie zmiany należy wykonywać pojedyńczo.
-        </Form.Text>
-        <Form.TextSmall></Form.TextSmall>
-        <Form.TextSmall></Form.TextSmall>
-        <Form.TextSmall></Form.TextSmall>
+        {isTwitterUser ? null : (
+          <>
+            <Form.Text>
+              Na tej stronie możesz zmienić dane powiązane z Twoim kontem w Lech
+              Typer. Wszystkie zmiany należy wykonywać pojedyńczo.
+            </Form.Text>
+            <Form.TextSmall></Form.TextSmall>
+            <Form.TextSmall></Form.TextSmall>
+            <Form.TextSmall></Form.TextSmall>
+          </>
+        )}
 
         <Form.Base method="POST" onSubmit={handleSubmit}>
           <Form.SettingContainer>
