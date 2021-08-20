@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import FooterContainer from "../containers/footer";
-import { Loading } from "../components";
+import { Confirmation, Loading } from "../components";
 import Form from "../components/form";
 import { useAuth } from "../contexts/AuthContext";
 import Spinner from "react-spinner-material";
@@ -9,13 +9,18 @@ import * as ROUTES from "../constants/routes";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { translate } from "../helpers/translate";
+import { useHistory } from "react-router";
 
 const UpdateProfile = () => {
-  const { currentUser, loadingBrowse, setLoadingBrowse } = useAuth();
+  const history = useHistory();
+  const { currentUser, loadingBrowse, setLoadingBrowse, setDeletedAccount } =
+    useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
 
   const [loading, setLoading] = useState(false);
+  const [deleteAccount, setDeleteAccount] = useState(false);
   const [loading2, setLoading2] = useState(false);
+  const [errorDeleteAccount, setErrorDeleteAccount] = useState("");
 
   const isTwitterUser = currentUser.email === null;
 
@@ -49,7 +54,6 @@ const UpdateProfile = () => {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    setLoading2(false);
     setTimeout(() => {
       setLoadingBrowse(false);
     }, 800);
@@ -164,9 +168,69 @@ const UpdateProfile = () => {
     setLoading(false);
   }
 
+  function handleDeleteButton(event) {
+    setLoading2(true);
+    event.preventDefault();
+    setErrorDeleteAccount("");
+    setLoading2(false);
+    setDeleteAccount(true);
+  }
+
+  function rejectDeleteAccount(event) {
+    event.preventDefault();
+    setDeleteAccount(false);
+  }
+
+  function confirmDeleteAccount(event) {
+    event.preventDefault();
+    currentUser
+      .delete()
+      .then(() => {
+        setDeletedAccount(true);
+        history.push(ROUTES.DELETED_ACCOUNT);
+      })
+      .catch((error) => setErrorDeleteAccount(translate(error.message)));
+  }
+
   return (
     <>
       {loadingBrowse ? <Loading /> : <Loading.ReleaseBody />}
+      {deleteAccount ? (
+        <Confirmation>
+          <Confirmation.ChoiceContainer>
+            <Confirmation.Title>
+              Potwierdzenie usunięcia konta
+            </Confirmation.Title>
+            {errorDeleteAccount && (
+              <Form.Error>{errorDeleteAccount}</Form.Error>
+            )}
+            <Confirmation.SubTitle>
+              Czy jesteś pewien, że chcesz trwale usunąć swoje konto wraz z
+              przypisanymi do niego wszystkimi danymi?
+            </Confirmation.SubTitle>
+            <Confirmation.ButtonsContainer>
+              <Confirmation.RejectDeleteAccountButton
+                onClick={rejectDeleteAccount}
+              >
+                Nie
+              </Confirmation.RejectDeleteAccountButton>
+              <Confirmation.ConfirmDeleteAccountButton
+                onClick={confirmDeleteAccount}
+              >
+                Tak
+              </Confirmation.ConfirmDeleteAccountButton>
+            </Confirmation.ButtonsContainer>
+            <Confirmation.Text>
+              Ta operacja jest nieodwracalna.{" "}
+              <Form.Link to={ROUTES.BROWSE}>
+                Powrót do strony głównej.
+              </Form.Link>
+            </Confirmation.Text>
+          </Confirmation.ChoiceContainer>
+        </Confirmation>
+      ) : (
+        <Confirmation.ReleaseBody />
+      )}
       <HeaderBrowseContainer />
 
       <Form>
@@ -401,13 +465,7 @@ const UpdateProfile = () => {
             </>
           )}
 
-          <Form.SubmitDeleteAccount
-            type="submit"
-            onClick={(event) => {
-              event.preventDefault();
-              console.log("Deleted account");
-            }}
-          >
+          <Form.SubmitDeleteAccount type="submit" onClick={handleDeleteButton}>
             {loading2 ? (
               <Form.LoadingIcon>
                 <Spinner

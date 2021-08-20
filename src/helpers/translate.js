@@ -29,7 +29,13 @@ export function translate(message) {
     message ===
     "This operation is sensitive and requires recent authentication. Log in again before retrying this request."
   ) {
-    return "Ta operacja wymaga niedawnego uwierzytelnienia. Zaloguj się ponownie przed ponowną próbą zmiany hasła.";
+    return "Ta operacja wymaga niedawnego uwierzytelnienia. Zaloguj się ponownie przed ponowną próbą.";
+  }
+  if (
+    message ===
+    "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
+  ) {
+    return "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
   }
   return message;
 }

@@ -19,6 +19,22 @@ export function LoggedInRoute({ component: Component, ...restProps }) {
   );
 }
 
+export function DeleteAccountRoute({ component: Component, ...restProps }) {
+  const { deletedAccount } = useAuth();
+  return (
+    <Route
+      {...restProps}
+      render={(props) => {
+        return deletedAccount ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={ROUTES.BROWSE} />
+        );
+      }}
+    />
+  );
+}
+
 export function PrivateRoute({ component: Component, ...restProps }) {
   const { currentUser } = useAuth();
   return (

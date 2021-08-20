@@ -21,7 +21,7 @@ const Signup = () => {
   const isInvalid =
     firstName === "" || password === "" || emailAddress === "" || robot;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     setLoading(true);
     event.preventDefault();
     signup(emailAddress, password)
@@ -31,7 +31,6 @@ const Signup = () => {
             displayName: firstName,
           })
           .then(() => {
-            console.log(result);
             sendVerificationEmail();
           })
           .then(() => {
@@ -60,7 +59,7 @@ const Signup = () => {
       });
   }
 
-  function handleTwitterRegistration(event) {
+  async function handleTwitterRegistration(event) {
     setLoading(true);
     event.preventDefault();
     signupWithTwitter()

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HeaderContainer } from "../containers/header";
 import FooterContainer from "../containers/footer";
 import Form from "../components/form";
@@ -10,12 +10,16 @@ import Spinner from "react-spinner-material";
 
 const Signin = () => {
   const history = useHistory();
-  const { signin, signinWithTwitter } = useAuth();
+  const { signin, signinWithTwitter, setDeletedAccount } = useAuth();
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const isInvalid = password === "" || emailAddress === "";
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setDeletedAccount(false);
+  }, [setDeletedAccount]);
 
   function handleSubmit(event) {
     setLoading(true);

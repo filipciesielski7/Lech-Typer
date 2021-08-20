@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [loadingBrowse, setLoadingBrowse] = useState(true);
+  const [deletedAccount, setDeletedAccount] = useState(false);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -67,6 +68,8 @@ export function AuthProvider({ children }) {
     signinWithTwitter,
     loadingBrowse,
     setLoadingBrowse,
+    deletedAccount,
+    setDeletedAccount,
   };
   return (
     <AuthContext.Provider value={value}>

@@ -8,12 +8,14 @@ import {
   PrivateRoute,
   LoggedInRoute,
   VerificationRoute,
+  DeleteAccountRoute,
 } from "./helpers/routes";
 import * as ROUTES from "./constants/routes";
 import Browse from "./pages/browse";
 import Verification from "./pages/verification";
 import ForgotPassword from "./pages/forgot_password";
 import UpdateProfile from "./pages/update_profile";
+import DeletedAccount from "./pages/deleted_account";
 
 function App() {
   return (
@@ -36,6 +38,11 @@ function App() {
             path={ROUTES.VERIFICATION}
             component={Verification}
           />
+          <DeleteAccountRoute // zmienic na tylko po linku
+            path={ROUTES.DELETED_ACCOUNT}
+            component={DeletedAccount}
+          />
+          <LoggedInRoute exact path="*" component={Home} />
         </Switch>
       </AuthProvider>
     </Router>
