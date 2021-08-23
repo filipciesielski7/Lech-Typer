@@ -17,6 +17,8 @@ const Browse = () => {
     }, 800);
   }, [setLoadingBrowse]);
 
+  console.log(currentUser.uid);
+
   return (
     <>
       {loadingBrowse ? <Loading /> : <Loading.ReleaseBody />}

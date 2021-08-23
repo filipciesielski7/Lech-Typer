@@ -1,5 +1,5 @@
 import React from "react";
-import { Prediction, Flexbox } from "../components";
+import { Prediction } from "../components";
 
 export function PredictionContainer({ children }) {
   return (
