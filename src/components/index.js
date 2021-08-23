@@ -4,3 +4,7 @@ export { default as Footer } from "./footer";
 export { default as Form } from "./form";
 export { default as Loading } from "./loading";
 export { default as Confirmation } from "./confirmation";
+export { default as Prediction } from "./prediction";
+export { default as Ranking } from "./ranking";
+export { default as Overview } from "./overview";
+export { default as Flexbox } from "./flexbox";

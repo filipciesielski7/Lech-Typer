@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
-import { Loading } from "../components";
+import { Loading, Flexbox } from "../components";
 import FooterContainer from "../containers/footer";
-import Form from "../components/form";
+import { PredictionContainer } from "../containers/prediction";
+import { RankingContainer } from "../containers/ranking";
+import { OverviewContainer } from "../containers/overview";
 import { useAuth } from "../contexts/AuthContext";
 
 const Browse = () => {
@@ -19,15 +21,15 @@ const Browse = () => {
     <>
       {loadingBrowse ? <Loading /> : <Loading.ReleaseBody />}
       <HeaderBrowseContainer />
-      <Form>
-        <Form.Title>
-          Witamy{" "}
-          {currentUser.email === null
-            ? "@" + twitterUsername
-            : currentUser.displayName}
-          , strona główna
-        </Form.Title>
-      </Form>
+      <Flexbox>
+        <Flexbox.Column>
+          <PredictionContainer />
+          <RankingContainer />
+        </Flexbox.Column>
+        <Flexbox.Column>
+          <OverviewContainer />
+        </Flexbox.Column>
+      </Flexbox>
       <FooterContainer />
     </>
   );
