@@ -8,16 +8,25 @@ import { OverviewContainer } from "../containers/overview";
 import { useAuth } from "../contexts/AuthContext";
 
 const Browse = () => {
-  const { currentUser, loadingBrowse, setLoadingBrowse } = useAuth();
+  const { currentUser, loadingBrowse, setLoadingBrowse, db } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
+  const isTwitterUser = currentUser.email === null;
+
+  const addUserToRealtimeDatabase = async () => {
+    await db.ref(`users/${currentUser.uid}`).set({
+      user_id: `${currentUser.uid}`,
+      user_name: `${
+        isTwitterUser ? "@" + twitterUsername : currentUser.displayName
+      }`,
+    });
+  };
 
   useEffect(() => {
+    addUserToRealtimeDatabase();
     setTimeout(() => {
       setLoadingBrowse(false);
     }, 800);
-  }, [setLoadingBrowse]);
-
-  console.log(currentUser.uid);
+  }, [setLoadingBrowse, addUserToRealtimeDatabase]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { auth, provider } from "../firebase";
+import { auth, provider, db } from "../firebase";
 
 const AuthContext = createContext();
 
@@ -70,6 +70,7 @@ export function AuthProvider({ children }) {
     setLoadingBrowse,
     deletedAccount,
     setDeletedAccount,
+    db,
   };
   return (
     <AuthContext.Provider value={value}>
