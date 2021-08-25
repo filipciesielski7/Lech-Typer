@@ -13,9 +13,17 @@ import { useHistory } from "react-router";
 
 const UpdateProfile = () => {
   const history = useHistory();
-  const { currentUser, loadingBrowse, setLoadingBrowse, setDeletedAccount } =
-    useAuth();
+  const {
+    currentUser,
+    loadingBrowse,
+    setLoadingBrowse,
+    setDeletedAccount,
+    db,
+  } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
+
+  const [wrongUsername, setWrongUsername] = useState(false);
+  const [usernameLoading, setUsernameLoading] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [deleteAccount, setDeleteAccount] = useState(false);
@@ -52,6 +60,14 @@ const UpdateProfile = () => {
   let message = "Najpierw zapisz aktualne zmiany.";
 
   const [isValid, setIsValid] = useState(false);
+
+  function saveChanges(isValid, wrongUsername) {
+    if (isValid && !wrongUsername && firstName !== "") {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -102,6 +118,24 @@ const UpdateProfile = () => {
     setErrorPassword("");
   }
 
+  // async function checkIfUniq() {
+  //    let canBeChanged = true;
+  //       const users = db.ref("users");
+  //   users.on("value", (snapshot) => {
+  //     for (const [, value] of Object.entries(snapshot.val())) {
+  //       if (value.user_name === firstName) {
+  //       canBeChanged = false;
+  //       console.log(value.user_name);
+  //       console.log(firstName);
+  //       setFirstName(currentUser.displayName);
+  //       setErrorFirstName(
+  //         translate("Nazwa użytkownika jest już zajęta.")
+  //       );
+  //       }
+  //     }
+  //   }
+  // }
+
   function handleSubmit(event) {
     setLoading(true);
     event.preventDefault();
@@ -118,6 +152,13 @@ const UpdateProfile = () => {
         currentUser
           .updateProfile({
             displayName: firstName,
+          })
+          .then(() => {
+            const users = db.ref("users");
+            users.child(`${currentUser.uid}`).set({
+              user_id: `${currentUser.uid}`,
+              user_name: `${currentUser.displayName}`,
+            });
           })
           .then(() => {
             setConfirmationFirstName("Zmieniono nazwę gracza.");
@@ -186,10 +227,48 @@ const UpdateProfile = () => {
     currentUser
       .delete()
       .then(() => {
+        const users = db.ref("users");
+        users.child(`${currentUser.uid}`).remove();
+      })
+      .then(() => {
         setDeletedAccount(true);
         history.push(ROUTES.DELETED_ACCOUNT);
       })
       .catch((error) => setErrorDeleteAccount(translate(error.message)));
+  }
+
+  async function isUsernameValid(name) {
+    setUsernameLoading(!usernameLoading);
+    setUsernameLoading(true);
+    setErrorFirstName("");
+    setWrongUsername(false);
+    const usersArray = [];
+    const users = db.ref("users");
+    await users.on("value", (snapshot) => {
+      for (const [, value] of Object.entries(snapshot.val())) {
+        if (value.user_name !== currentUser.displayName) {
+          usersArray.push(value.user_name);
+          if (value.user_name === name) {
+            setWrongUsername(true);
+            setErrorFirstName(translate("Nazwa użytkownika jest już zajęta."));
+          }
+        }
+      }
+    });
+    if (name.length < 3 && name.length > 0) {
+      setWrongUsername(true);
+      setErrorFirstName(
+        translate("Nazwa użytkownika musi zawierać minimum 3 znaki.")
+      );
+    } else if (usersArray.includes(name)) {
+      setWrongUsername(true);
+      setErrorFirstName(translate("Nazwa użytkownika jest już zajęta."));
+    } else if (name.match("^[a-zA-Z0-9]+$") === null && name !== "") {
+      setWrongUsername(true);
+      setErrorFirstName(translate("Nazwa użytkownika ma zły format."));
+    }
+    setFirstName(name);
+    setUsernameLoading(false);
   }
 
   return (
@@ -281,7 +360,8 @@ const UpdateProfile = () => {
               <>
                 <Form.Edit
                   onClick={() => {
-                    setFirstName(currentUser.displayName);
+                    isUsernameValid(currentUser.displayName);
+                    // setFirstName(currentUser.displayName);
                     ValidCheck(currentUser.displayName, null, null);
                   }}
                 >
@@ -299,9 +379,11 @@ const UpdateProfile = () => {
             }
             disabled={invalidUpdateFirstName}
             value={firstName}
+            autoComplete="off"
             id="FirstName"
             onChange={({ target }) => {
-              setFirstName(target.value);
+              isUsernameValid(target.value);
+              // setFirstName(target.value);
               ValidCheck(target.value, null, null);
             }}
           />
@@ -434,7 +516,7 @@ const UpdateProfile = () => {
               )}
               {errorPassword && <Form.Error>{errorPassword}</Form.Error>}
               <Form.Submit
-                disabled={!isValid}
+                disabled={saveChanges(isValid, wrongUsername)}
                 type="submit"
                 // onClick={handleSubmit}
               >

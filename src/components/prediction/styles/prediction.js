@@ -66,4 +66,5 @@ export const TeamName = styled.p`
   font-size: 18px;
   font-weight: 500;
   margin-top: 10px;
+  text-align: center;
 `;

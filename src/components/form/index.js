@@ -25,6 +25,7 @@ import {
   Recaptcha,
   LoadingIcon,
   SettingContainer,
+  Username,
 } from "./styles/form";
 
 export default function Form({ children, ...restProps }) {
@@ -117,6 +118,10 @@ Form.Confirmation = function FormConfirmation({ children, ...restProps }) {
 
 Form.LoadingIcon = function FormLoadingIcon({ children, ...restProps }) {
   return <LoadingIcon {...restProps}>{children}</LoadingIcon>;
+};
+
+Form.Username = function FormUsername({ children, ...restProps }) {
+  return <Username {...restProps}>{children}</Username>;
 };
 
 Form.SettingContainer = function FormSettingContainer({

@@ -11,15 +11,21 @@ import Spinner from "react-spinner-material";
 
 const Signup = () => {
   const history = useHistory();
-  const { signup, sendVerificationEmail, signupWithTwitter } = useAuth();
+  const { signup, sendVerificationEmail, signupWithTwitter, db } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [robot, setRobot] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [wrongUsername, setWrongUsername] = useState(false);
+  const [usernameLoading, setUsernameLoading] = useState(false);
   const isInvalid =
-    firstName === "" || password === "" || emailAddress === "" || robot;
+    firstName === "" ||
+    password === "" ||
+    emailAddress === "" ||
+    robot ||
+    wrongUsername;
 
   async function handleSubmit(event) {
     setLoading(true);
@@ -83,12 +89,37 @@ const Signup = () => {
       });
   }
 
+  async function isUsernameValid(name) {
+    setUsernameLoading(!usernameLoading);
+    setUsernameLoading(true);
+    setError("");
+    setWrongUsername(false);
+    const usersArray = [];
+    const users = db.ref("users");
+    await users.on("value", (snapshot) => {
+      for (const [, value] of Object.entries(snapshot.val())) {
+        usersArray.push(value.user_name);
+      }
+    });
+    if (name.length < 3 && name.length > 0) {
+      setWrongUsername(true);
+      setError(translate("Nazwa użytkownika musi zawierać minimum 3 znaki."));
+    } else if (usersArray.includes(name)) {
+      setWrongUsername(true);
+      setError(translate("Nazwa użytkownika jest już zajęta."));
+    } else if (name.match("^[a-zA-Z0-9]+$") === null && name !== "") {
+      setWrongUsername(true);
+      setError(translate("Nazwa użytkownika ma zły format."));
+    }
+    setFirstName(name);
+    setUsernameLoading(false);
+  }
+
   return (
     <>
       <HeaderContainer />
       <Form>
         <Form.Title>Zarejestruj się</Form.Title>
-        {/* {error && <Form.Error>{error}</Form.Error>} */}
 
         <Form.Base method="POST" onSubmit={handleTwitterRegistration}>
           <Form.SubmitTwitter type="submit">
@@ -104,8 +135,28 @@ const Signup = () => {
           <Form.Input
             placeholder="Nazwa gracza"
             value={firstName}
-            onChange={({ target }) => setFirstName(target.value)}
+            onChange={({ target }) => isUsernameValid(target.value)}
+            pattern="^[a-zA-Z0-9]+$"
           />
+
+          {/* <Form.Username>
+            {usernameLoading ? (
+              <Form.LoadingIcon>
+                <Spinner
+                  radius={25}
+                  color={"#1d9cf0"}
+                  stroke={3}
+                  visible={true}
+                />
+              </Form.LoadingIcon>
+            ) : wrongUsername ? (
+              <>
+                <MdDoNotDisturbOn />
+                dsfsdf
+              </>
+            ) : null}
+          </Form.Username> */}
+
           <Form.Input
             placeholder="Email"
             typr="email"

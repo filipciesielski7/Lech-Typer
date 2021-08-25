@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import { Loading, Flexbox } from "../components";
 import FooterContainer from "../containers/footer";
@@ -12,14 +12,31 @@ const Browse = () => {
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
   const isTwitterUser = currentUser.email === null;
 
-  const addUserToRealtimeDatabase = async () => {
-    await db.ref(`users/${currentUser.uid}`).set({
-      user_id: `${currentUser.uid}`,
-      user_name: `${
-        isTwitterUser ? "@" + twitterUsername : currentUser.displayName
-      }`,
-    });
-  };
+  const addUserToRealtimeDatabase = useCallback(async () => {
+    const users = db.ref("users");
+    await users
+      .child(`${currentUser.uid}`)
+      .once("value")
+      .then((snapshot) => {
+        if (snapshot.exists() && snapshot.val().user_name !== "null") {
+          return null;
+        } else {
+          db.ref(`users/${currentUser.uid}`).set({
+            user_id: `${currentUser.uid}`,
+            user_name: `${
+              isTwitterUser ? "@" + twitterUsername : currentUser.displayName
+            }`,
+            points: 0,
+          });
+        }
+      });
+  }, [
+    currentUser.uid,
+    isTwitterUser,
+    twitterUsername,
+    db,
+    currentUser.displayName,
+  ]);
 
   useEffect(() => {
     addUserToRealtimeDatabase();

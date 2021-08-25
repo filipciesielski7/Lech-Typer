@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { HeaderVerificationContainer } from "../containers/header-verification";
 import FooterContainer from "../containers/footer";
+import { Loading } from "../components";
 import Form from "../components/form";
 import { useAuth } from "../contexts/AuthContext";
 import { translate } from "../helpers/translate";
@@ -8,9 +9,11 @@ import * as ROUTES from "../constants/routes";
 import Spinner from "react-spinner-material";
 
 const Verification = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, loadingBrowse, setLoadingBrowse, db } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
+  const isTwitterUser = currentUser.email === null;
 
   function resendVerificationEmail(event) {
     setLoading(true);
@@ -35,12 +38,45 @@ const Verification = () => {
     window.location.reload();
   }
 
+  const addUserToRealtimeDatabase = useCallback(async () => {
+    const users = db.ref("users");
+    await users
+      .child(`${currentUser.uid}`)
+      .once("value")
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          return;
+        } else {
+          db.ref(`users/${currentUser.uid}`).set({
+            user_id: `${currentUser.uid}`,
+            user_name: `${
+              isTwitterUser ? "@" + twitterUsername : currentUser.displayName
+            }`,
+            points: 0,
+          });
+        }
+      });
+  }, [
+    currentUser.uid,
+    isTwitterUser,
+    twitterUsername,
+    db,
+    currentUser.displayName,
+  ]);
+
+  useEffect(() => {
+    addUserToRealtimeDatabase();
+    setTimeout(() => {
+      setLoadingBrowse(false);
+    }, 800);
+  }, [setLoadingBrowse, addUserToRealtimeDatabase]);
+
   return (
     <>
+      {loadingBrowse ? <Loading /> : <Loading.ReleaseBody />}
       <HeaderVerificationContainer />
       <Form>
         <Form.Title>Weryfikacja</Form.Title>
-        {/* {error && <Form.Error>{error}</Form.Error>} */}
         <Form.SubTitle>
           Cześć <Form.SubTitleSpan>{currentUser.displayName}</Form.SubTitleSpan>
           , sprawdź pocztę, zweryfikuj adres email i przejdź dalej. Link

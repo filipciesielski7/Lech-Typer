@@ -276,3 +276,11 @@ export const Edit = styled.label`
     font-size: 14px;
   }
 `;
+
+export const Username = styled.div`
+  dispaly: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 15px;
+`;
