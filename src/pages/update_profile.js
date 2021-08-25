@@ -24,6 +24,7 @@ const UpdateProfile = () => {
 
   const [wrongUsername, setWrongUsername] = useState(false);
   const [usernameLoading, setUsernameLoading] = useState(false);
+  const [firstOnChange, setFirstOnChange] = useState(true);
 
   const [loading, setLoading] = useState(false);
   const [deleteAccount, setDeleteAccount] = useState(false);
@@ -118,25 +119,7 @@ const UpdateProfile = () => {
     setErrorPassword("");
   }
 
-  // async function checkIfUniq() {
-  //    let canBeChanged = true;
-  //       const users = db.ref("users");
-  //   users.on("value", (snapshot) => {
-  //     for (const [, value] of Object.entries(snapshot.val())) {
-  //       if (value.user_name === firstName) {
-  //       canBeChanged = false;
-  //       console.log(value.user_name);
-  //       console.log(firstName);
-  //       setFirstName(currentUser.displayName);
-  //       setErrorFirstName(
-  //         translate("Nazwa użytkownika jest już zajęta.")
-  //       );
-  //       }
-  //     }
-  //   }
-  // }
-
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     setLoading(true);
     event.preventDefault();
     clearAllMessages();
@@ -248,7 +231,7 @@ const UpdateProfile = () => {
       for (const [, value] of Object.entries(snapshot.val())) {
         if (value.user_name !== currentUser.displayName) {
           usersArray.push(value.user_name);
-          if (value.user_name === name) {
+          if (value.user_name === name && firstOnChange) {
             setWrongUsername(true);
             setErrorFirstName(translate("Nazwa użytkownika jest już zajęta."));
           }
@@ -268,6 +251,7 @@ const UpdateProfile = () => {
       setErrorFirstName(translate("Nazwa użytkownika ma zły format."));
     }
     setFirstName(name);
+    setFirstOnChange(false);
     setUsernameLoading(false);
   }
 
