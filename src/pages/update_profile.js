@@ -141,6 +141,7 @@ const UpdateProfile = () => {
             users.child(`${currentUser.uid}`).set({
               user_id: `${currentUser.uid}`,
               user_name: `${currentUser.displayName}`,
+              points: 0,
             });
           })
           .then(() => {

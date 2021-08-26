@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import { Loading, Flexbox } from "../components";
 import FooterContainer from "../containers/footer";
@@ -12,38 +12,42 @@ const Browse = () => {
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
   const isTwitterUser = currentUser.email === null;
 
-  const addUserToRealtimeDatabase = useCallback(async () => {
-    const users = db.ref("users");
-    await users
-      .child(`${currentUser.uid}`)
-      .once("value")
-      .then((snapshot) => {
-        if (snapshot.exists() && snapshot.val().user_name !== "null") {
-          return null;
-        } else {
-          db.ref(`users/${currentUser.uid}`).set({
-            user_id: `${currentUser.uid}`,
-            user_name: `${
-              isTwitterUser ? "@" + twitterUsername : currentUser.displayName
-            }`,
-            points: 0,
-          });
-        }
-      });
-  }, [
-    currentUser.uid,
-    isTwitterUser,
-    twitterUsername,
-    db,
-    currentUser.displayName,
-  ]);
-
   useEffect(() => {
+    const addUserToRealtimeDatabase = () => {
+      const users = db.ref("users");
+      users
+        .child(`${currentUser.uid}`)
+        .once("value")
+        .then((snapshot) => {
+          if (snapshot.exists() && snapshot.val().user_name !== "null") {
+            return null;
+          } else {
+            db.ref(`users/${currentUser.uid}`).set({
+              user_id: `${currentUser.uid}`,
+              user_name: `${
+                isTwitterUser ? "@" + twitterUsername : currentUser.displayName
+              }`,
+              points: 0,
+            });
+          }
+        })
+        .catch((error) => {
+          // setError(translate(error.message));
+          console.log(error.message);
+        });
+    };
     addUserToRealtimeDatabase();
     setTimeout(() => {
       setLoadingBrowse(false);
     }, 800);
-  }, [setLoadingBrowse, addUserToRealtimeDatabase]);
+  }, [
+    setLoadingBrowse,
+    currentUser.displayName,
+    currentUser.uid,
+    db,
+    isTwitterUser,
+    twitterUsername,
+  ]);
 
   return (
     <>
@@ -52,7 +56,7 @@ const Browse = () => {
       <Flexbox>
         <Flexbox.Column>
           <PredictionContainer />
-          <RankingContainer />
+          <RankingContainer></RankingContainer>
         </Flexbox.Column>
         <Flexbox.Column>
           <OverviewContainer />

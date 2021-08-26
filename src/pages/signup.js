@@ -27,7 +27,7 @@ const Signup = () => {
     robot ||
     wrongUsername;
 
-  async function handleSubmit(event) {
+  function handleSubmit(event) {
     setLoading(true);
     event.preventDefault();
     signup(emailAddress, password)
@@ -41,7 +41,7 @@ const Signup = () => {
           })
           .then(() => {
             setLoading(false);
-            history.push(ROUTES.VERIFICATION);
+            history.push(ROUTES.BROWSE);
           })
       )
       .catch((error) => {
@@ -65,7 +65,7 @@ const Signup = () => {
       });
   }
 
-  async function handleTwitterRegistration(event) {
+  function handleTwitterRegistration(event) {
     setLoading(true);
     event.preventDefault();
     signupWithTwitter()

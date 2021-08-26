@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { HeaderVerificationContainer } from "../containers/header-verification";
 import FooterContainer from "../containers/footer";
 import { Loading } from "../components";
@@ -12,8 +12,6 @@ const Verification = () => {
   const { currentUser, loadingBrowse, setLoadingBrowse, db } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
-  const isTwitterUser = currentUser.email === null;
 
   function resendVerificationEmail(event) {
     setLoading(true);
@@ -38,38 +36,51 @@ const Verification = () => {
     window.location.reload();
   }
 
-  const addUserToRealtimeDatabase = useCallback(async () => {
-    const users = db.ref("users");
-    await users
-      .child(`${currentUser.uid}`)
-      .once("value")
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          return;
-        } else {
-          db.ref(`users/${currentUser.uid}`).set({
-            user_id: `${currentUser.uid}`,
-            user_name: `${
-              isTwitterUser ? "@" + twitterUsername : currentUser.displayName
-            }`,
-            points: 0,
-          });
-        }
-      });
-  }, [
-    currentUser.uid,
-    isTwitterUser,
-    twitterUsername,
-    db,
-    currentUser.displayName,
-  ]);
+  // const addUserToRealtimeDatabase = useCallback(() => {
+  //   const users = db.ref("users");
+  //   users
+  //     .child(`${currentUser.uid}`)
+  //     .once("value")
+  //     .then((snapshot) => {
+  //       if (snapshot.exists() && snapshot.val().user_name !== "null") {
+  //         return;
+  //       } else {
+  //         db.ref(`users/${currentUser.uid}`).set({
+  //           user_id: `${currentUser.uid}`,
+  //           user_name: `${currentUser.displayName}`,
+  //           points: 0,
+  //         });
+  //       }
+  //     });
+  // }, [currentUser.uid, db, currentUser.displayName]);
 
   useEffect(() => {
+    const addUserToRealtimeDatabase = () => {
+      const users = db.ref("users");
+      users
+        .child(`${currentUser.uid}`)
+        .once("value")
+        .then((snapshot) => {
+          if (snapshot.exists() && snapshot.val().user_name !== "null") {
+            return;
+          } else {
+            db.ref(`users/${currentUser.uid}`).set({
+              user_id: `${currentUser.uid}`,
+              user_name: `${currentUser.displayName}`,
+              points: 0,
+            });
+          }
+        })
+        .catch((error) => {
+          setError(translate(error.message));
+        });
+    };
     addUserToRealtimeDatabase();
     setTimeout(() => {
       setLoadingBrowse(false);
     }, 800);
-  }, [setLoadingBrowse, addUserToRealtimeDatabase]);
+    return true;
+  }, [setLoadingBrowse, currentUser.displayName, currentUser.uid, db]);
 
   return (
     <>

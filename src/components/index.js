@@ -8,3 +8,4 @@ export { default as Prediction } from "./prediction";
 export { default as Ranking } from "./ranking";
 export { default as Overview } from "./overview";
 export { default as Flexbox } from "./flexbox";
+export { default as User } from "./user";

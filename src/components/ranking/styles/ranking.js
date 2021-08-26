@@ -25,3 +25,21 @@ export const Title = styled.h1`
   font-weight: bold;
   margin-bottom: 28px;
 `;
+
+export const Bar = styled.div`
+  display: flex;
+  background: white;
+  width: 100%;
+  border-radius: 4px;
+`;
+
+export const BarSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #737373;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 10px;
+`;
