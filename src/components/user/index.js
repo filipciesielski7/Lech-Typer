@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Username, Points, Position } from "./styles/user";
+import {
+  Container,
+  Username,
+  Points,
+  Position,
+  ProfileImage,
+  ProfileImageContainer,
+} from "./styles/user";
 
 const User = ({ user, photoURL }) => {
   const { user_name, points } = user;
@@ -9,13 +16,18 @@ const User = ({ user, photoURL }) => {
       <Position>
         <p>1.</p>
       </Position>
-      {photoURL ? <img src={photoURL} alt="user" /> : null}
       <Username>
         <p>{user_name}</p>
       </Username>
       <Points>
         <p>{points}</p>
       </Points>
+
+      {photoURL ? (
+        <ProfileImageContainer>
+          <ProfileImage src={photoURL} alt={user_name}></ProfileImage>
+        </ProfileImageContainer>
+      ) : null}
     </Container>
   );
 };
