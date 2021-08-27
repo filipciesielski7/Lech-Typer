@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Ranking, User } from "../components";
 import { useAuth } from "../contexts/AuthContext";
 
 export function RankingContainer({ children }) {
-  const { db } = useAuth();
-  const [usersList, setUsersList] = useState([]);
+  const { getUsersList } = useAuth();
 
-  useEffect(() => {
-    const usersArray = [];
-    const users = db.ref("users");
-    users.on("value", (snapshot) => {
-      for (const [, value] of Object.entries(snapshot.val())) {
-        usersArray.push({
-          user_name: value.user_name,
-          user_id: value.user_id,
-          points: value.points,
-        });
+  function usersArray() {
+    const array = getUsersList();
+    array.sort((a, b) => {
+      if (a.points === b.points) {
+        return a.user_name.toUpperCase() > b.user_name.toUpperCase()
+          ? 1
+          : b.user_name.toUpperCase() > a.user_name.toUpperCase()
+          ? -1
+          : 0;
       }
+      return a.points > b.points ? 1 : -1;
     });
-    setUsersList(usersArray);
-  }, [db]);
+
+    const sortedArray = array.slice(0, 7);
+    sortedArray.push(array[array.length - 1]);
+    return sortedArray;
+  }
 
   return (
     <>
@@ -30,8 +32,12 @@ export function RankingContainer({ children }) {
           <Ranking.BarSection>Nazwa uzytkownika</Ranking.BarSection>
           <Ranking.BarSection>Punkty</Ranking.BarSection>
         </Ranking.Bar>
-        {usersList.map((user) => {
-          return <User key={user.user_id} user={user} />;
+        {usersArray().map((user, index) => {
+          if (user) {
+            return <User key={index} user={user} photoURL={user.photoURL} />;
+          } else {
+            return null;
+          }
         })}
         {children}
       </Ranking>

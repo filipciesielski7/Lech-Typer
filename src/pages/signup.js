@@ -81,7 +81,7 @@ const Signup = () => {
       })
       .then(() => {
         setLoading(false);
-        history.push(ROUTES.BROWSE);
+        history.push(ROUTES.VERIFICATION);
       })
       .catch((error) => {
         setLoading(false);

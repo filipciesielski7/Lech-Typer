@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [loadingBrowse, setLoadingBrowse] = useState(true);
   const [deletedAccount, setDeletedAccount] = useState(false);
+  const [usersList, setUsersList] = useState([]);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -48,11 +49,63 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
+  function getUsersList(
+    uid = "",
+    username = "",
+    photoURL = "",
+    withAdding = false
+  ) {
+    const users = db.ref("users");
+    const usersArray = [];
+    if (withAdding) {
+      users
+        .child(`${uid}`)
+        .once("value")
+        .then((snapshot) => {
+          if (snapshot.exists() && snapshot.val().user_name !== "null") {
+            return null;
+          } else {
+            db.ref(`users/${uid}`).set({
+              user_id: `${uid}`,
+              user_name: `${username}`,
+              photoURL: photoURL,
+              points: 0,
+            });
+          }
+        })
+        .then(() => {
+          users.on("value", (snapshot) => {
+            for (const [, value] of Object.entries(snapshot.val())) {
+              usersArray.push({
+                user_name: value.user_name,
+                user_id: value.user_id,
+                photoURL: value.photoURL,
+                points: value.points,
+              });
+            }
+          });
+        });
+    } else {
+      users.on("value", (snapshot) => {
+        for (const [, value] of Object.entries(snapshot.val())) {
+          usersArray.push({
+            user_name: value.user_name,
+            user_id: value.user_id,
+            photoURL: value.photoURL,
+            points: value.points,
+          });
+        }
+      });
+    }
+    return usersArray;
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       setIsAuthenticating(false);
     });
+    setUsersList(getUsersList());
     return unsubscribe;
   }, []);
 
@@ -71,6 +124,9 @@ export function AuthProvider({ children }) {
     deletedAccount,
     setDeletedAccount,
     db,
+    getUsersList,
+    usersList,
+    setUsersList,
   };
   return (
     <AuthContext.Provider value={value}>

@@ -8,35 +8,24 @@ import { OverviewContainer } from "../containers/overview";
 import { useAuth } from "../contexts/AuthContext";
 
 const Browse = () => {
-  const { currentUser, loadingBrowse, setLoadingBrowse, db } = useAuth();
+  const {
+    currentUser,
+    loadingBrowse,
+    setLoadingBrowse,
+    db,
+    getUsersList,
+    setUsersList,
+  } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
   const isTwitterUser = currentUser.email === null;
 
   useEffect(() => {
-    const addUserToRealtimeDatabase = () => {
-      const users = db.ref("users");
-      users
-        .child(`${currentUser.uid}`)
-        .once("value")
-        .then((snapshot) => {
-          if (snapshot.exists() && snapshot.val().user_name !== "null") {
-            return null;
-          } else {
-            db.ref(`users/${currentUser.uid}`).set({
-              user_id: `${currentUser.uid}`,
-              user_name: `${
-                isTwitterUser ? "@" + twitterUsername : currentUser.displayName
-              }`,
-              points: 0,
-            });
-          }
-        })
-        .catch((error) => {
-          // setError(translate(error.message));
-          console.log(error.message);
-        });
-    };
-    addUserToRealtimeDatabase();
+    getUsersList(
+      currentUser.uid,
+      isTwitterUser ? "@" + twitterUsername : currentUser.displayName,
+      JSON.parse(localStorage.getItem("twitterProfileImage")),
+      true
+    );
     setTimeout(() => {
       setLoadingBrowse(false);
     }, 800);
@@ -47,6 +36,8 @@ const Browse = () => {
     db,
     isTwitterUser,
     twitterUsername,
+    setUsersList,
+    getUsersList,
   ]);
 
   return (

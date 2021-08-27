@@ -10,7 +10,8 @@ import Spinner from "react-spinner-material";
 
 const Signin = () => {
   const history = useHistory();
-  const { signin, signinWithTwitter, setDeletedAccount } = useAuth();
+  const { signin, signinWithTwitter, setDeletedAccount } =
+    useAuth();
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -27,7 +28,7 @@ const Signin = () => {
     signin(emailAddress, password)
       .then(() => {
         setLoading(false);
-        history.push(ROUTES.BROWSE);
+        history.push(ROUTES.VERIFICATION);
       })
       .catch((error) => {
         if (translate(error.message) !== "Nieprawidłowe hasło.") {
@@ -54,8 +55,27 @@ const Signin = () => {
           "twitterProfileImage",
           JSON.stringify(result.additionalUserInfo.profile.profile_image_url)
         );
+      })
+      // .then(() => {
+      //   const users = db.ref("users");
+      //   users
+      //     .child(`${currentUser.uid}`)
+      //     .once("value")
+      //     .then((snapshot) => {
+      //       if (snapshot.exists() && snapshot.val().user_name !== "null") {
+      //         return;
+      //       } else {
+      //         db.ref(`users/${currentUser.uid}`).set({
+      //           user_id: `${currentUser.uid}`,
+      //           user_name: `${currentUser.displayName}`,
+      //           points: 0,
+      //         });
+      //       }
+      //     });
+      // })
+      .then(() => {
         setLoading(false);
-        history.push(ROUTES.BROWSE);
+        history.push(ROUTES.VERIFICATION);
       })
       .catch((error) => {
         setLoading(false);

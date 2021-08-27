@@ -36,24 +36,6 @@ const Verification = () => {
     window.location.reload();
   }
 
-  // const addUserToRealtimeDatabase = useCallback(() => {
-  //   const users = db.ref("users");
-  //   users
-  //     .child(`${currentUser.uid}`)
-  //     .once("value")
-  //     .then((snapshot) => {
-  //       if (snapshot.exists() && snapshot.val().user_name !== "null") {
-  //         return;
-  //       } else {
-  //         db.ref(`users/${currentUser.uid}`).set({
-  //           user_id: `${currentUser.uid}`,
-  //           user_name: `${currentUser.displayName}`,
-  //           points: 0,
-  //         });
-  //       }
-  //     });
-  // }, [currentUser.uid, db, currentUser.displayName]);
-
   useEffect(() => {
     const addUserToRealtimeDatabase = () => {
       const users = db.ref("users");
@@ -67,6 +49,7 @@ const Verification = () => {
             db.ref(`users/${currentUser.uid}`).set({
               user_id: `${currentUser.uid}`,
               user_name: `${currentUser.displayName}`,
+              photoURL: null,
               points: 0,
             });
           }
