@@ -87,13 +87,15 @@ export function AuthProvider({ children }) {
         });
     } else {
       users.on("value", (snapshot) => {
-        for (const [, value] of Object.entries(snapshot.val())) {
-          usersArray.push({
-            user_name: value.user_name,
-            user_id: value.user_id,
-            photoURL: value.photoURL,
-            points: value.points,
-          });
+        if (snapshot.exists()) {
+          for (const [, value] of Object.entries(snapshot.val())) {
+            usersArray.push({
+              user_name: value.user_name,
+              user_id: value.user_id,
+              photoURL: value.photoURL,
+              points: value.points,
+            });
+          }
         }
       });
     }

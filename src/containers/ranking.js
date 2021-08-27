@@ -19,7 +19,7 @@ export function RankingContainer({ children }) {
     });
 
     const sortedArray = array.slice(0, 7);
-    sortedArray.push(array[array.length - 1]);
+    // sortedArray.push(array[array.length - 1]);
     return sortedArray;
   }
 
