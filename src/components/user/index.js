@@ -8,13 +8,17 @@ import {
   ProfileImageContainer,
 } from "./styles/user";
 
-const User = ({ user, photoURL }) => {
-  const { user_name, points } = user;
+const User = ({ index, currentUserRanking, length, user, photoURL }) => {
+  const { user_name, points, position } = user;
 
   return (
-    <Container>
+    <Container
+      index={index}
+      length={length}
+      currentUserRanking={currentUserRanking}
+    >
       <Position>
-        <p>1.</p>
+        <p>{position ? `${position}.` : "-"}</p>
       </Position>
       <Username>
         <p>{user_name}</p>

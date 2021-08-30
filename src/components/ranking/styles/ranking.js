@@ -28,9 +28,13 @@ export const Title = styled.h1`
 
 export const Bar = styled.div`
   display: flex;
-  background: white;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
   border-radius: 4px;
+  padding: 7px;
+  margin-bottom: 10px;
+  background: white;
 `;
 
 export const BarSection = styled.div`
@@ -39,7 +43,19 @@ export const BarSection = styled.div`
   align-items: center;
   text-align: center;
   color: #737373;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   margin: 10px;
+`;
+
+export const ListContainer = styled.div`
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.75);
+`;
+
+export const ListBreak = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px;
 `;

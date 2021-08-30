@@ -5,19 +5,32 @@ export const Container = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  border-radius: 4px;
-  margin-top: 5px;
-  padding: 10px;
+
+  padding: 20px;
   width: 100%;
+  color: ${({ currentUserRanking }) =>
+    currentUserRanking ? "#ae8745" : "white"};
+  font-weight: ${({ currentUserRanking }) =>
+    currentUserRanking ? "bold" : "normal"};
+  opacity: 0.8;
 
-  border: 1px solid #737373
-  border-radius: 4px;
-  color: #737373;
-  cursor:pointer;
-
-  &:hover{
-    color:white;
+  // cursor: pointer;
+  &:hover {
+    transform: scale(1.03);
+    z-index: 1;
+    opacity: 1;
+    border-radius: 4px;
+    color: ${({ currentUserRanking }) =>
+      currentUserRanking ? "#ae8745" : "white"};
   }
+
+  background: ${({ index }) => (index % 2 === 0 ? "#014B94" : "#022855")};
+  border-radius: ${({ index, length }) =>
+    index === length - 1 || index === 0 ? "4px" : "0px"};
+  border-bottom-left-radius: ${({ index, length }) =>
+    index === length - 2 || index === length - 1 ? "4px" : "0px"};
+  border-bottom-right-radius: ${({ index, length }) =>
+    index === length - 2 || index === length - 1 ? "4px" : "0px"};
 `;
 
 export const Username = styled.div`
@@ -26,6 +39,9 @@ export const Username = styled.div`
   justify-content: start;
   width: 62%;
   overflow: hidden;
+  @media (max-width: 350px) {
+    width: 62%;
+  }
 `;
 
 export const Points = styled.div`
@@ -33,6 +49,9 @@ export const Points = styled.div`
   align-items: center;
   justify-content: start;
   margin-left: 5%;
+  @media (max-width: 350px) {
+    margin-left: 20%;
+  }
 `;
 
 export const Position = styled.div`
