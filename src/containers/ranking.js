@@ -54,7 +54,7 @@ export function RankingContainer({ children }) {
 
     let sortedArray = [];
     if (array[0] !== undefined) {
-      const max_size = 5; // CHANGING RANKING SIZE
+      const max_size = 5; // RANKING LIST SIZE
       const newArray = addPositionsToArray(array, username, max_size);
 
       sortedArray = newArray.slice(0, max_size);

@@ -17,8 +17,8 @@ const User = ({ index, currentUserRanking, length, user, photoURL }) => {
       length={length}
       currentUserRanking={currentUserRanking}
     >
-      <Position>
-        <p>{position ? `${position}.` : "-"}</p>
+      <Position position={position}>
+        <p>{position ? `${position}.` : "0."}</p>
       </Position>
       <Username>
         <p>{user_name}</p>

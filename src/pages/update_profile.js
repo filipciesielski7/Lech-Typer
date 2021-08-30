@@ -55,7 +55,10 @@ const UpdateProfile = () => {
   const [showBackspacePassword, setShowBackspacePassword] = useState(false);
 
   // PREVENTING FROM UPDATING TWO VALUES AT THE SAME TIME
-  const [invalidUpdateFirstName, setInvalidUpdateFirstName] = useState(false);
+  const [invalidUpdateFirstName, setInvalidUpdateFirstName] = useState(
+    currentUser.email === null ? true : false
+  );
+
   const [invalidUpdateEmail, setInvalidUpdateEmail] = useState(false);
   const [invalidUpdatePassword, setInvalidUpdatePassword] = useState(false);
   let message = "Najpierw zapisz aktualne zmiany.";
@@ -247,7 +250,10 @@ const UpdateProfile = () => {
     } else if (usersArray.includes(name)) {
       setWrongUsername(true);
       setErrorFirstName(translate("Nazwa użytkownika jest już zajęta."));
-    } else if (name.match("^[a-zA-Z0-9]+$") === null && name !== "") {
+    } else if (
+      name.match("^[a-zA-Z0-9ęółśążźćńĘÓŁŚĄŻŹĆŃ]+$") === null &&
+      name !== ""
+    ) {
       setWrongUsername(true);
       setErrorFirstName(translate("Nazwa użytkownika ma zły format."));
     }
@@ -319,7 +325,7 @@ const UpdateProfile = () => {
           <Form.SettingContainer>
             <Form.SettingSubTitle>Nazwa gracza</Form.SettingSubTitle>
             {isTwitterUser ? (
-              <p></p>
+              <></>
             ) : invalidUpdateFirstName ||
               invalidUpdateFirstName ||
               invalidUpdatePassword ? null : (
@@ -340,7 +346,7 @@ const UpdateProfile = () => {
             )}
 
             {isTwitterUser ? (
-              <p></p>
+              <></>
             ) : showBackspaceFirstName ? (
               <>
                 <Form.Edit

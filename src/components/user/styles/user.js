@@ -60,6 +60,8 @@ export const Position = styled.div`
   justify-content: start;
   margin-right: 5%;
   margin-left: 3%;
+
+  visibility: ${({ position }) => (position ? "" : "hidden")};
 `;
 
 export const ProfileImage = styled.img`

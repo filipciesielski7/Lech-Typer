@@ -107,7 +107,10 @@ const Signup = () => {
     } else if (usersArray.includes(name)) {
       setWrongUsername(true);
       setError(translate("Nazwa użytkownika jest już zajęta."));
-    } else if (name.match("^[a-zA-Z0-9]+$") === null && name !== "") {
+    } else if (
+      name.match("^[a-zA-Z0-9ęółśążźćńĘÓŁŚĄŻŹĆŃ]+$") === null &&
+      name !== ""
+    ) {
       setWrongUsername(true);
       setError(translate("Nazwa użytkownika ma zły format."));
     }
