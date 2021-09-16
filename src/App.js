@@ -16,6 +16,7 @@ import Verification from "./pages/verification";
 import ForgotPassword from "./pages/forgot_password";
 import UpdateProfile from "./pages/update_profile";
 import DeletedAccount from "./pages/deleted_account";
+import Ranking from "./pages/ranking";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             path={ROUTES.UPDATE_PROFILE}
             component={UpdateProfile}
           />
+          <PrivateRoute path={ROUTES.RANKING} component={Ranking} />
           <VerificationRoute
             path={ROUTES.VERIFICATION}
             component={Verification}

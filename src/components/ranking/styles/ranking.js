@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
@@ -24,6 +25,35 @@ export const Title = styled.h1`
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 28px;
+`;
+
+export const SubTitle = styled(ReactRouterLink)`
+  color: #737373;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: white;
+  }
+  @media (max-width: 470px) {
+    font-size: 12px;
+  }
+  @media (max-width: 300px) {
+    font-size: 10px;
+  }
+`;
+
+export const TitleBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  @media (max-width: 950px) {
+    align-items: center;
+  }
 `;
 
 export const Bar = styled.div`
@@ -53,9 +83,14 @@ export const ListContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.75);
 `;
 
-export const ListBreak = styled.div`
+export const ListBreak = styled(ReactRouterLink)`
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 15px;
+  color: white;
+
+  &:hover {
+    transform: scale(1.3);
+  }
 `;

@@ -1,7 +1,8 @@
 import React from "react";
 import { Ranking, User } from "../components";
 import { useAuth } from "../contexts/AuthContext";
-import { BsThreeDots } from "react-icons/bs";
+import { BsThreeDots, BsArrowRight } from "react-icons/bs";
+import * as ROUTES from "../constants/routes";
 
 export function RankingContainer({ children }) {
   const { getUsersList, currentUser } = useAuth();
@@ -78,7 +79,18 @@ export function RankingContainer({ children }) {
   return (
     <>
       <Ranking>
-        <Ranking.Title>Ranking</Ranking.Title>
+        <Ranking.TitleBar>
+          <Ranking.Title>Ranking</Ranking.Title>
+          <Ranking.SubTitle to={ROUTES.RANKING}>
+            Pokaz całość
+            <BsArrowRight
+              style={{
+                marginLeft: "5px",
+              }}
+            />
+          </Ranking.SubTitle>
+        </Ranking.TitleBar>
+
         <Ranking.Bar>
           <Ranking.BarSection>Pozycja</Ranking.BarSection>
           <Ranking.BarSection>Nazwa użytkownika</Ranking.BarSection>
@@ -101,7 +113,7 @@ export function RankingContainer({ children }) {
             } else if (user && index === usersArray().length - 1) {
               return (
                 <React.Fragment key={index}>
-                  <Ranking.ListBreak>
+                  <Ranking.ListBreak to={ROUTES.RANKING}>
                     <BsThreeDots />
                   </Ranking.ListBreak>
                   <User

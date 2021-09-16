@@ -2,6 +2,8 @@ import React from "react";
 import {
   Container,
   Title,
+  SubTitle,
+  TitleBar,
   Bar,
   BarSection,
   ListContainer,
@@ -14,6 +16,14 @@ export default function Ranking({ children, ...restProps }) {
 
 Ranking.Title = function RankingTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
+};
+
+Ranking.SubTitle = function RankingSubTitle({ children, ...restProps }) {
+  return <SubTitle {...restProps}>{children}</SubTitle>;
+};
+
+Ranking.TitleBar = function RankingTitleBar({ children, ...restProps }) {
+  return <TitleBar {...restProps}>{children}</TitleBar>;
 };
 
 Ranking.Bar = function RankingBar({ children, ...restProps }) {

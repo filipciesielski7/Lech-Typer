@@ -279,16 +279,16 @@ const UpdateProfile = () => {
               przypisanymi do niego wszystkimi danymi?
             </Confirmation.SubTitle>
             <Confirmation.ButtonsContainer>
-              <Confirmation.RejectDeleteAccountButton
-                onClick={rejectDeleteAccount}
-              >
-                Nie
-              </Confirmation.RejectDeleteAccountButton>
               <Confirmation.ConfirmDeleteAccountButton
                 onClick={confirmDeleteAccount}
               >
                 Tak
               </Confirmation.ConfirmDeleteAccountButton>
+              <Confirmation.RejectDeleteAccountButton
+                onClick={rejectDeleteAccount}
+              >
+                Nie
+              </Confirmation.RejectDeleteAccountButton>
             </Confirmation.ButtonsContainer>
             <Confirmation.Text>
               Ta operacja jest nieodwracalna.{" "}

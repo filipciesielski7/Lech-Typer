@@ -6,3 +6,4 @@ export const VERIFICATION = "/verification";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const UPDATE_PROFILE = "/update-profile";
 export const DELETED_ACCOUNT = "/deleted-account";
+export const RANKING = "/ranking";
