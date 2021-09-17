@@ -82,7 +82,7 @@ export function RankingContainer({ children }) {
         <Ranking.TitleBar>
           <Ranking.Title>Ranking</Ranking.Title>
           <Ranking.SubTitle to={ROUTES.RANKING}>
-            Pokaz całość
+            Pokaż całość
             <BsArrowRight
               style={{
                 marginLeft: "5px",

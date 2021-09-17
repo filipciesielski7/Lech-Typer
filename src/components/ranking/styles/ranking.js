@@ -36,24 +36,27 @@ export const SubTitle = styled(ReactRouterLink)`
   display: flex;
   align-items: center;
 
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+
   &:hover {
     color: white;
   }
   @media (max-width: 470px) {
+    bottom: 5px;
     font-size: 12px;
   }
   @media (max-width: 300px) {
     font-size: 10px;
+    bottom: 6px;
   }
 `;
 
 export const TitleBar = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  @media (max-width: 950px) {
-    align-items: center;
-  }
+  position: relative;
 `;
 
 export const Bar = styled.div`
