@@ -39,7 +39,7 @@ export const Username = styled.div`
   justify-content: start;
   width: 62%;
   overflow: hidden;
-  @media (max-width: 350px) {
+  @media (max-width: 355px) {
     width: 62%;
   }
 `;
@@ -49,7 +49,7 @@ export const Points = styled.div`
   align-items: center;
   justify-content: start;
   margin-left: 5%;
-  @media (max-width: 350px) {
+  @media (max-width: 355px) {
     margin-left: 20%;
   }
 `;
@@ -77,7 +77,7 @@ export const ProfileImageContainer = styled.div`
   width: 35px;
   height: 35px;
   right: 5px;
-  @media (max-width: 350px) {
+  @media (max-width: 355px) {
     display: none;
   }
 `;

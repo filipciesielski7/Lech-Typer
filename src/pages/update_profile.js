@@ -18,6 +18,7 @@ const UpdateProfile = () => {
     loadingBrowse,
     setLoadingBrowse,
     setDeletedAccount,
+    getUsersList,
     db,
   } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
@@ -135,6 +136,14 @@ const UpdateProfile = () => {
       ) {
         setError("Nie dokonano żadnych zmian.");
       } else if (currentUser.displayName !== firstName) {
+        const array = getUsersList();
+        let savePoints;
+        array.forEach((element) => {
+          if (element.user_name === `${currentUser.displayName}`) {
+            savePoints = element.points;
+          }
+        });
+
         currentUser
           .updateProfile({
             displayName: firstName,
@@ -144,7 +153,7 @@ const UpdateProfile = () => {
             users.child(`${currentUser.uid}`).set({
               user_id: `${currentUser.uid}`,
               user_name: `${currentUser.displayName}`,
-              points: 0,
+              points: `${savePoints}`,
             });
           })
           .then(() => {

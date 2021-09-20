@@ -151,7 +151,8 @@ export const Dropdown = styled.div`
   color: white;
   width: 190px;
   top: 80px;
-  // background: black;
+  background: #022855;
+  z-index: 1000;
   color: white;
   border-radius: 4px;
   box-shadow: 0px 0px 3px white;
