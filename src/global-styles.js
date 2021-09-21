@@ -16,4 +16,11 @@ export const GlobalStyles = createGlobalStyle`
     // background-color: black;
     color: white;
     font-size: 16px;
+}
+
+.twitterLogo{
+  color: grey;
+  @media (max-width: 950px) {
+    display: none;
+  }
 }`;

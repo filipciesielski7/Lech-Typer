@@ -1,10 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import FooterContainer from "../containers/footer";
-import { Loading, Ranking, User } from "../components";
+import { Loading, Ranking2 as Ranking, User2 as User} from "../components";
 import { useAuth } from "../contexts/AuthContext";
+import { BsArrowLeft } from "react-icons/bs";
+import { ImTwitter } from "react-icons/im";
+import * as ROUTES from "../constants/routes";
+import Switch from "@mui/material/Switch";
 
 const RankingPage = () => {
+  const label = { inputProps: { "aria-label": "Switch demo" } };
+  const [onlyTwitter, setOnlyTwitter] = useState(false);
+
   const { loadingBrowse, setLoadingBrowse, getUsersList, currentUser } =
     useAuth();
 
@@ -48,8 +55,19 @@ const RankingPage = () => {
     return array;
   }
 
-  function usersArray() {
-    const array = getUsersList();
+  function usersArray(onlyTwitter = false) {
+    let array = getUsersList();
+    let twitterArray = array;
+    if (onlyTwitter) {
+      twitterArray = [];
+      array.forEach((user) => {
+        if (user.user_name.includes("@")) {
+          twitterArray.push(user);
+        }
+      });
+    }
+    array = twitterArray;
+
     array.sort((a, b) => {
       if (a.points === b.points) {
         return a.user_name.toUpperCase() > b.user_name.toUpperCase()
@@ -91,16 +109,39 @@ const RankingPage = () => {
         <Ranking>
           <Ranking.TitleBar>
             <Ranking.Title>Ranking</Ranking.Title>
+            <Ranking.SubTitle to={ROUTES.BROWSE}>
+              <BsArrowLeft
+                style={{
+                  marginRight: "5px",
+                }}
+              />
+              Powrót
+            </Ranking.SubTitle>
           </Ranking.TitleBar>
 
           <Ranking.Bar>
             <Ranking.BarSection>Pozycja</Ranking.BarSection>
             <Ranking.BarSection>Nazwa użytkownika</Ranking.BarSection>
             <Ranking.BarSection>Punkty</Ranking.BarSection>
+            <Ranking.BarSection>
+              <Switch
+                {...label}
+                id="Email"
+                size="small"
+                onChange={() => setOnlyTwitter(!onlyTwitter)}
+                checked={onlyTwitter}
+              />
+              <ImTwitter
+                size="22px"
+                color={onlyTwitter ? "#1976D2" : ""}
+                onClick={() => setOnlyTwitter(!onlyTwitter)}
+                style={{ cursor: "pointer", marginLeft: "" }}
+              />
+            </Ranking.BarSection>
           </Ranking.Bar>
 
           <Ranking.ListContainer>
-            {usersArray().map((user, index) => {
+            {usersArray(onlyTwitter).map((user, index) => {
               const currentUserRanking = index === currentUserIndex;
               if (user && index < usersArray().length) {
                 return (

@@ -69,9 +69,13 @@ export const Bar = styled.div`
   margin-bottom: 10px;
   background: white;
 
-  @media (max-width: 950px) {
-    padding: 5px;
-  }
+  // padding-right: 45px;
+  // @media (max-width: 970px) {
+  //   padding-right: 25px;
+  // }
+  // @media (max-width: 950px) {
+  //   padding-right: 0;
+  // }
 `;
 
 export const BarSection = styled.div`

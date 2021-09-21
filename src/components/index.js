@@ -6,6 +6,8 @@ export { default as Loading } from "./loading";
 export { default as Confirmation } from "./confirmation";
 export { default as Prediction } from "./prediction";
 export { default as Ranking } from "./ranking";
+export { default as Ranking2 } from "./ranking2";
 export { default as Overview } from "./overview";
 export { default as Flexbox } from "./flexbox";
 export { default as User } from "./user";
+export { default as User2 } from "./user2";

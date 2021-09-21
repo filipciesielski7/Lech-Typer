@@ -3,6 +3,7 @@ import { Ranking, User } from "../components";
 import { useAuth } from "../contexts/AuthContext";
 import { BsThreeDots, BsArrowRight } from "react-icons/bs";
 import * as ROUTES from "../constants/routes";
+import { ImTwitter } from "react-icons/im";
 
 export function RankingContainer({ children }) {
   const { getUsersList, currentUser } = useAuth();
@@ -95,6 +96,10 @@ export function RankingContainer({ children }) {
           <Ranking.BarSection>Pozycja</Ranking.BarSection>
           <Ranking.BarSection>Nazwa użytkownika</Ranking.BarSection>
           <Ranking.BarSection>Punkty</Ranking.BarSection>
+          <ImTwitter
+            size="20px"
+            className="twitterLogo"
+          />
         </Ranking.Bar>
         <Ranking.ListContainer>
           {usersArray().map((user, index) => {
