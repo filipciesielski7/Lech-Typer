@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import FooterContainer from "../containers/footer";
-import { Loading, Ranking2 as Ranking, User2 as User} from "../components";
+import { Loading, Ranking2 as Ranking, User2 as User } from "../components";
 import { useAuth } from "../contexts/AuthContext";
 import { BsArrowLeft } from "react-icons/bs";
 import { ImTwitter } from "react-icons/im";
@@ -150,7 +150,7 @@ const RankingPage = () => {
                     user={user}
                     index={index}
                     currentUserRanking={currentUserRanking}
-                    length={usersArray().length}
+                    length={usersArray(onlyTwitter).length}
                     photoURL={user.photoURL}
                   />
                 );
