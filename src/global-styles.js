@@ -23,4 +23,10 @@ export const GlobalStyles = createGlobalStyle`
   @media (max-width: 950px) {
     display: none;
   }
+}
+
+.arrow{
+  @media (max-width: 950px) {
+    display: none;
+  }
 }`;

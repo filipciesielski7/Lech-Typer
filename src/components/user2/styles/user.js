@@ -16,7 +16,7 @@ export const Container = styled.div`
 
   // cursor: pointer;
   &:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
     z-index: 1;
     opacity: 1;
     border-radius: 4px;

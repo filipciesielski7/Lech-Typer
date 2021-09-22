@@ -4,15 +4,19 @@ import FooterContainer from "../containers/footer";
 import { Loading, Ranking2 as Ranking, User2 as User } from "../components";
 import { useAuth } from "../contexts/AuthContext";
 import { BsArrowLeft } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
+import { FaSearch, FaArrowDown } from "react-icons/fa";
 import { ImTwitter } from "react-icons/im";
 import * as ROUTES from "../constants/routes";
 import Switch from "@mui/material/Switch";
+// import { Hint } from "react-autocomplete-hint";
 
 const RankingPage = () => {
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const [onlyTwitter, setOnlyTwitter] = useState(false);
   const [sortByPoints, setSortByPoints] = useState(true);
   const [selected, setSelected] = useState(3);
+  const [searchActive, setSearchActive] = useState(false);
 
   const { loadingBrowse, setLoadingBrowse, getUsersList, currentUser } =
     useAuth();
@@ -30,7 +34,13 @@ const RankingPage = () => {
     ? "@" + twitterUsername
     : currentUser.displayName;
 
-  function addPositionsToArray(array, username, max_size, sortByPoints) {
+  function addPositionsToArray(
+    array,
+    username,
+    max_size,
+    sortByPoints,
+    searching
+  ) {
     let points;
     let position = 1;
     points = array[0].points;
@@ -41,7 +51,8 @@ const RankingPage = () => {
         } else if (element.points === points) {
           if (
             (element.user_name === username && index > max_size) ||
-            !sortByPoints
+            !sortByPoints ||
+            searching
           ) {
             element.position = position;
           } else if (index === array.length - 1 && index > max_size) {
@@ -59,7 +70,11 @@ const RankingPage = () => {
     return array;
   }
 
-  function usersArray(onlyTwitter = false, sortByPoints = true) {
+  function usersArray(
+    onlyTwitter = false,
+    sortByPoints = true,
+    searching = false
+  ) {
     let array = getUsersList();
     let twitterArray = array;
     if (onlyTwitter) {
@@ -97,7 +112,8 @@ const RankingPage = () => {
         array,
         username,
         max_size,
-        sortByPoints
+        sortByPoints,
+        searching
       );
       if (sortByPoints) {
         sortedArray = newArray.slice(0);
@@ -124,7 +140,11 @@ const RankingPage = () => {
     return sortedArray;
   }
 
-  const array = usersArray(onlyTwitter, sortByPoints);
+  const [searchTerm, setSearchTerm] = useState("");
+  const array = usersArray(onlyTwitter, sortByPoints, searchTerm !== "").filter(
+    (element) =>
+      element.user_name.toUpperCase().includes(searchTerm.toUpperCase())
+  );
 
   return (
     <>
@@ -150,14 +170,7 @@ const RankingPage = () => {
           </Ranking.TitleBar>
 
           <Ranking.Bar>
-            <Ranking.BarSection>
-              {/* <Ranking.Selection
-                // isSelected={selected === 1}
-                // onClick={() => setSelected(1)}
-              > */}
-              Pozycja
-              {/* </Ranking.Selection> */}
-            </Ranking.BarSection>
+            <Ranking.BarSection position={true}>Pozycja</Ranking.BarSection>
             <Ranking.BarSection>
               <Ranking.Selection
                 isSelected={selected === 2}
@@ -166,7 +179,10 @@ const RankingPage = () => {
                   setSortByPoints(false);
                 }}
               >
-                Nazwa użytkownika
+                Nazwa użytkownika{" "}
+                {selected === 2 ? (
+                  <FaArrowDown className="arrow" size="10px" />
+                ) : null}
               </Ranking.Selection>
             </Ranking.BarSection>
             <Ranking.BarSection>
@@ -177,7 +193,10 @@ const RankingPage = () => {
                   setSortByPoints(true);
                 }}
               >
-                Punkty
+                Punkty{" "}
+                {selected === 3 ? (
+                  <FaArrowDown className="arrow" size="10px" />
+                ) : null}
               </Ranking.Selection>
             </Ranking.BarSection>
             <Ranking.BarSection>
@@ -192,10 +211,57 @@ const RankingPage = () => {
                 size="22px"
                 color={onlyTwitter ? "#1976D2" : ""}
                 onClick={() => setOnlyTwitter(!onlyTwitter)}
-                style={{ cursor: "pointer", marginLeft: "" }}
+                style={{ cursor: "pointer" }}
               />
             </Ranking.BarSection>
+            <Ranking.BarSection search={true}>
+              <Ranking.SearchContainer>
+                <label htmlFor="user">
+                  <Ranking.SearchIcon>
+                    <FaSearch
+                      size="18px"
+                      onClick={() => setSearchActive(true)}
+                    />
+                  </Ranking.SearchIcon>
+                </label>
+                <Ranking.SearchBar
+                  type="text"
+                  id="user"
+                  autoComplete="off"
+                  placeholder="Nazwa użytkownika"
+                  searchActive={searchActive}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  value={searchTerm}
+                />
+                <Ranking.SearchIcon searchActive={searchTerm === ""}>
+                  <AiOutlineClose
+                    size="18px"
+                    onClick={() => setSearchTerm("")}
+                  />
+                </Ranking.SearchIcon>
+              </Ranking.SearchContainer>
+            </Ranking.BarSection>
           </Ranking.Bar>
+
+          <Ranking.SearchSmallContainer small={true}>
+            <label htmlFor="user2">
+              <Ranking.SearchIcon>
+                <FaSearch size="18px" onClick={() => setSearchActive(true)} />
+              </Ranking.SearchIcon>
+            </label>
+            <Ranking.SearchBar
+              type="text"
+              id="user2"
+              autoComplete="off"
+              placeholder="Nazwa użytkownika"
+              small={true}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchTerm}
+            />
+            <Ranking.SearchIcon searchActive={searchTerm === ""}>
+              <AiOutlineClose size="18px" onClick={() => setSearchTerm("")} />
+            </Ranking.SearchIcon>
+          </Ranking.SearchSmallContainer>
 
           <Ranking.ListContainer>
             {array.map((user, index) => {
@@ -214,6 +280,11 @@ const RankingPage = () => {
                 return null;
               }
             })}
+            {array.length === 0 ? (
+              <Ranking.EmptyResults>
+                Żaden z użytkowników nie spełniała Twoich kryteriów wyszukiwania
+              </Ranking.EmptyResults>
+            ) : null}
           </Ranking.ListContainer>
         </Ranking>
       </div>
