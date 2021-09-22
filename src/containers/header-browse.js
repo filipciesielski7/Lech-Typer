@@ -15,14 +15,21 @@ import { translate } from "../helpers/translate";
 export function HeaderBrowseContainer({ bg, children }) {
   const history = useHistory();
 
-  const { logout, currentUser } = useAuth();
+  const { logout, currentUser, getUsersList } = useAuth();
   const [error, setError] = useState("");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
-  const twitterProfileImage = JSON.parse(
-    localStorage.getItem("twitterProfileImage")
-  );
+  // const twitterProfileImage = JSON.parse(
+  //   localStorage.getItem("twitterProfileImage")
+  // );
+
+  let twitterProfileImage;
+  getUsersList().forEach((element) => {
+    if (element.user_name === "@".concat(twitterUsername)) {
+      twitterProfileImage = element.photoURL;
+    }
+  });
 
   function handleLogout(event) {
     event.preventDefault();

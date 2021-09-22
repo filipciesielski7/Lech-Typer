@@ -63,6 +63,7 @@ export function AuthProvider({ children }) {
         .once("value")
         .then((snapshot) => {
           if (snapshot.exists() && snapshot.val().user_name !== "null") {
+            // db.ref(`users/${uid}/photoURL`).set(photoURL);
             return null;
           } else {
             db.ref(`users/${uid}`).set({
