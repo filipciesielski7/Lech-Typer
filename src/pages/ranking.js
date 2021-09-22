@@ -11,6 +11,8 @@ import Switch from "@mui/material/Switch";
 const RankingPage = () => {
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const [onlyTwitter, setOnlyTwitter] = useState(false);
+  const [sortByPoints, setSortByPoints] = useState(true);
+  const [selected, setSelected] = useState(3);
 
   const { loadingBrowse, setLoadingBrowse, getUsersList, currentUser } =
     useAuth();
@@ -27,9 +29,8 @@ const RankingPage = () => {
   const username = isTwitterUser
     ? "@" + twitterUsername
     : currentUser.displayName;
-  let currentUserIndex;
 
-  function addPositionsToArray(array, username, max_size) {
+  function addPositionsToArray(array, username, max_size, sortByPoints) {
     let points;
     let position = 1;
     points = array[0].points;
@@ -38,7 +39,10 @@ const RankingPage = () => {
         if (index === 0) {
           element.position = position;
         } else if (element.points === points) {
-          if (element.user_name === username && index > max_size) {
+          if (
+            (element.user_name === username && index > max_size) ||
+            !sortByPoints
+          ) {
             element.position = position;
           } else if (index === array.length - 1 && index > max_size) {
             element.position = position;
@@ -55,7 +59,7 @@ const RankingPage = () => {
     return array;
   }
 
-  function usersArray(onlyTwitter = false) {
+  function usersArray(onlyTwitter = false, sortByPoints = true) {
     let array = getUsersList();
     let twitterArray = array;
     if (onlyTwitter) {
@@ -70,9 +74,15 @@ const RankingPage = () => {
 
     array.sort((a, b) => {
       if (a.points === b.points) {
-        return a.user_name.toUpperCase() > b.user_name.toUpperCase()
+        const user1 = a.user_name.includes("@")
+          ? a.user_name.slice(1)
+          : a.user_name;
+        const user2 = b.user_name.includes("@")
+          ? b.user_name.slice(1)
+          : b.user_name;
+        return user1.toUpperCase() > user2.toUpperCase()
           ? 1
-          : b.user_name.toUpperCase() > a.user_name.toUpperCase()
+          : user2.toUpperCase() > user1.toUpperCase()
           ? -1
           : 0;
       }
@@ -81,20 +91,40 @@ const RankingPage = () => {
 
     let sortedArray = [];
     if (array[0] !== undefined) {
-      const max_size = array.length + 1; // RANKING LIST SIZE
+      const max_size = array.length + 1;
 
-      const newArray = addPositionsToArray(array, username, max_size);
-      sortedArray = newArray.slice(0);
-
-      newArray.forEach((element) => {
-        if (element.user_name === username) {
-          currentUserIndex = sortedArray.indexOf(element);
-        }
-      });
+      const newArray = addPositionsToArray(
+        array,
+        username,
+        max_size,
+        sortByPoints
+      );
+      if (sortByPoints) {
+        sortedArray = newArray.slice(0);
+      } else {
+        sortedArray = newArray.sort((a, b) => {
+          if (a.points === b.points || !sortByPoints) {
+            const user1 = a.user_name.includes("@")
+              ? a.user_name.slice(1)
+              : a.user_name;
+            const user2 = b.user_name.includes("@")
+              ? b.user_name.slice(1)
+              : b.user_name;
+            return user1.toUpperCase() > user2.toUpperCase()
+              ? 1
+              : user2.toUpperCase() > user1.toUpperCase()
+              ? -1
+              : 0;
+          }
+          return a.points < b.points ? 1 : -1;
+        });
+      }
     }
 
     return sortedArray;
   }
+
+  const array = usersArray(onlyTwitter, sortByPoints);
 
   return (
     <>
@@ -120,9 +150,36 @@ const RankingPage = () => {
           </Ranking.TitleBar>
 
           <Ranking.Bar>
-            <Ranking.BarSection>Pozycja</Ranking.BarSection>
-            <Ranking.BarSection>Nazwa użytkownika</Ranking.BarSection>
-            <Ranking.BarSection>Punkty</Ranking.BarSection>
+            <Ranking.BarSection>
+              {/* <Ranking.Selection
+                // isSelected={selected === 1}
+                // onClick={() => setSelected(1)}
+              > */}
+              Pozycja
+              {/* </Ranking.Selection> */}
+            </Ranking.BarSection>
+            <Ranking.BarSection>
+              <Ranking.Selection
+                isSelected={selected === 2}
+                onClick={() => {
+                  setSelected(2);
+                  setSortByPoints(false);
+                }}
+              >
+                Nazwa użytkownika
+              </Ranking.Selection>
+            </Ranking.BarSection>
+            <Ranking.BarSection>
+              <Ranking.Selection
+                isSelected={selected === 3}
+                onClick={() => {
+                  setSelected(3);
+                  setSortByPoints(true);
+                }}
+              >
+                Punkty
+              </Ranking.Selection>
+            </Ranking.BarSection>
             <Ranking.BarSection>
               <Switch
                 {...label}
@@ -141,15 +198,14 @@ const RankingPage = () => {
           </Ranking.Bar>
 
           <Ranking.ListContainer>
-            {usersArray(onlyTwitter).map((user, index) => {
-              const currentUserRanking = index === currentUserIndex;
+            {array.map((user, index) => {
               if (user && index < usersArray().length) {
                 return (
                   <User
                     key={index}
                     user={user}
                     index={index}
-                    currentUserRanking={currentUserRanking}
+                    currentUserRanking={user.user_name === username}
                     length={usersArray(onlyTwitter).length}
                     photoURL={user.photoURL}
                   />

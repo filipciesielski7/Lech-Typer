@@ -105,3 +105,9 @@ export const ListBreak = styled(ReactRouterLink)`
     transform: scale(1.3);
   }
 `;
+
+export const Selection = styled.p`
+  cursor: pointer;
+  color: ${({ isSelected }) => (isSelected ? "#ae8745" : "")};
+  font-weight: ${({ isSelected }) => (isSelected ? "bold" : "")};
+`;

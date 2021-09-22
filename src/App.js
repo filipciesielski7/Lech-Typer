@@ -17,10 +17,12 @@ import ForgotPassword from "./pages/forgot_password";
 import UpdateProfile from "./pages/update_profile";
 import DeletedAccount from "./pages/deleted_account";
 import Ranking from "./pages/ranking";
+import ScrollToTop from "./helpers/scrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <AuthProvider>
         <Switch>
           <LoggedInRoute exact path={ROUTES.HOME} component={Home} />

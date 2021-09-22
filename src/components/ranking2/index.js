@@ -7,6 +7,7 @@ import {
   Bar,
   BarSection,
   ListContainer,
+  Selection,
   ListBreak,
 } from "./styles/ranking";
 
@@ -39,6 +40,10 @@ Ranking.ListContainer = function RankingListContainer({
   ...restProps
 }) {
   return <ListContainer {...restProps}>{children}</ListContainer>;
+};
+
+Ranking.Selection = function RankingSelection({ children, ...restProps }) {
+  return <Selection {...restProps}>{children}</Selection>;
 };
 
 Ranking.ListBreak = function RankingListBreak({
