@@ -56,23 +56,6 @@ const Signin = () => {
           JSON.stringify(result.additionalUserInfo.profile.profile_image_url)
         );
       })
-      // .then(() => {
-      //   const users = db.ref("users");
-      //   users
-      //     .child(`${currentUser.uid}`)
-      //     .once("value")
-      //     .then((snapshot) => {
-      //       if (snapshot.exists() && snapshot.val().user_name !== "null") {
-      //         return;
-      //       } else {
-      //         db.ref(`users/${currentUser.uid}`).set({
-      //           user_id: `${currentUser.uid}`,
-      //           user_name: `${currentUser.displayName}`,
-      //           points: 0,
-      //         });
-      //       }
-      //     });
-      // })
       .then(() => {
         setLoading(false);
         history.push(ROUTES.VERIFICATION);

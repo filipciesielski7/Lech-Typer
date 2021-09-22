@@ -142,24 +142,6 @@ const Signup = () => {
             pattern="^[a-zA-Z0-9]+$"
           />
 
-          {/* <Form.Username>
-            {usernameLoading ? (
-              <Form.LoadingIcon>
-                <Spinner
-                  radius={25}
-                  color={"#1d9cf0"}
-                  stroke={3}
-                  visible={true}
-                />
-              </Form.LoadingIcon>
-            ) : wrongUsername ? (
-              <>
-                <MdDoNotDisturbOn />
-                dsfsdf
-              </>
-            ) : null}
-          </Form.Username> */}
-
           <Form.Input
             placeholder="Email"
             typr="email"

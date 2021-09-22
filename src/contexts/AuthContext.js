@@ -33,8 +33,8 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    localStorage.removeItem("twitterUsername");
-    localStorage.removeItem("twitterProfileImage");
+    // localStorage.removeItem("twitterUsername"); // JAK USUNAC BEZ STRATY W REALTIME DATABASE
+    // localStorage.removeItem("twitterProfileImage"); // JAK USUNAC BEZ STRATY W REALTIME DATABASE
     setLoadingBrowse(true);
     return auth.signOut().then(() => {
       setCurrentUser(null);
@@ -63,7 +63,8 @@ export function AuthProvider({ children }) {
         .once("value")
         .then((snapshot) => {
           if (snapshot.exists() && snapshot.val().user_name !== "null") {
-            // db.ref(`users/${uid}/photoURL`).set(photoURL);
+            db.ref(`users/${uid}`).update({ photoURL: photoURL });
+            db.ref(`users/${uid}`).update({ user_name: `${username}` });
             return null;
           } else {
             db.ref(`users/${uid}`).set({
