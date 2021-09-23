@@ -15,6 +15,7 @@ const Browse = () => {
     db,
     getUsersList,
     setUsersList,
+    getGamesList,
   } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
   const isTwitterUser = currentUser.email === null;
@@ -38,6 +39,7 @@ const Browse = () => {
     twitterUsername,
     setUsersList,
     getUsersList,
+    getGamesList,
   ]);
 
   return (

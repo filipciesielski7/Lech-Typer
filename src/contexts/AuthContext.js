@@ -49,6 +49,84 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
+  function getGamesList(
+    uid = "",
+    home_score = "",
+    away_score = "",
+    home_team = "",
+    away_team = "",
+    home_team_logo = "",
+    away_team_logo = "",
+    date = "",
+    type = "",
+    type_logo = "",
+    withAdding = false
+  ) {
+    const games = db.ref("games");
+    const gamesArray = [];
+    if (withAdding) {
+      games
+        .child(`${uid}`)
+        .once("value")
+        .then((snapshot) => {
+          if (snapshot.exists() && snapshot.val().game_id !== "null") {
+            return null;
+          } else {
+            db.ref(`games/${uid}`).set({
+              game_id: `${uid}`,
+              home_score: `${home_score}`,
+              away_score: `${away_score}`,
+              home_team: `${home_team}`,
+              away_team: `${away_team}`,
+              home_team_logo: `${home_team_logo}`,
+              away_team_logo: `${away_team_logo}`,
+              date: `${date}`,
+              type: `${type}`,
+              type_logo: `${type_logo}`,
+            });
+          }
+        })
+        .then(() => {
+          games.on("value", (snapshot) => {
+            for (const [, value] of Object.entries(snapshot.val())) {
+              gamesArray.push({
+                game_id: value.game_id,
+                home_score: value.home_score,
+                away_score: value.away_score,
+                home_team: value.home_team,
+                away_team: value.away_team,
+                home_team_logo: value.home_team_logo,
+                away_team_logo: value.away_team_logo,
+                date: value.date,
+                type: value.type,
+                type_logo: value.type_logo,
+              });
+            }
+          });
+        });
+    } else {
+      games.on("value", (snapshot) => {
+        if (snapshot.exists()) {
+          for (const [, value] of Object.entries(snapshot.val())) {
+            gamesArray.push({
+              game_id: value.game_id,
+              home_score: value.home_score,
+              away_score: value.away_score,
+              home_team: value.home_team,
+              away_team: value.away_team,
+              home_team_logo: value.home_team_logo,
+              away_team_logo: value.away_team_logo,
+              date: value.date,
+              type: value.type,
+              type_logo: value.type_logo,
+            });
+          }
+        }
+      });
+    }
+    return gamesArray;
+  }
+
   function getUsersList(
     uid = "",
     username = "",
@@ -109,6 +187,23 @@ export function AuthProvider({ children }) {
       setCurrentUser(user);
       setIsAuthenticating(false);
     });
+    // fetch("https://www.thesportsdb.com/api/v1/json/1/eventslast.php?id=134010")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     let gamesArray = [];
+    //     data.results.forEach((element) => {
+    //       const { idEvent, strFilename, strEvent, intHomeScore, intAwayScore } =
+    //         element;
+    //       gamesArray.push({
+    //         idEvent,
+    //         strFilename,
+    //         strEvent,
+    //         intHomeScore,
+    //         intAwayScore,
+    //       });
+    //     });
+    //     setGamesList(gamesArray);
+    //   });
     setUsersList(getUsersList());
     return unsubscribe;
   }, []);
@@ -129,6 +224,7 @@ export function AuthProvider({ children }) {
     setDeletedAccount,
     db,
     getUsersList,
+    getGamesList,
     usersList,
     setUsersList,
   };

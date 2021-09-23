@@ -1,30 +1,38 @@
 import React from "react";
 import { Prediction } from "../components";
+import { useAuth } from "../contexts/AuthContext";
 
 export function PredictionContainer({ children }) {
+  const { getGamesList } = useAuth();
+  const nextGame = getGamesList().find((element) => element.home_score === "");
+
   return (
     <>
       <Prediction>
         <Prediction.Title>Następny mecz</Prediction.Title>
         {/* <Prediction.SubTitle>Następny mecz</Prediction.SubTitle> */}
         <Prediction.Text>
-          PKO Ekstraklasa 12.09.2021 niedziela 17:30
+          {nextGame ? nextGame.type : null} {nextGame ? nextGame.date : null}
         </Prediction.Text>
         <Prediction.GameContainer>
           <Prediction.Team>
             <Prediction.TeamLogo
-              src="https://www.lechpoznan.pl/files/cache/7/5/rth_0x85_752d6e3b9f8fc1cc5865bb599b296e8c1540020634.png"
-              alt="Raków"
+              src={nextGame ? nextGame.home_team_logo : null}
+              alt={nextGame ? nextGame.home_team : null}
             />
-            <Prediction.TeamName>Raków Częstochowa</Prediction.TeamName>
+            <Prediction.TeamName>
+              {nextGame ? nextGame.home_team : null}
+            </Prediction.TeamName>
           </Prediction.Team>
 
           <Prediction.Team>
             <Prediction.TeamLogo
-              src="https://www.lechpoznan.pl/files/cache/f/6/rth_0x85_f6c7090f58925f0d927da070091dd0631625325501.png"
-              alt="Lech"
+              src={nextGame ? nextGame.away_team_logo : null}
+              alt={nextGame ? nextGame.away_team : null}
             />
-            <Prediction.TeamName>Lech Poznań</Prediction.TeamName>
+            <Prediction.TeamName>
+              {nextGame ? nextGame.away_team : null}
+            </Prediction.TeamName>
           </Prediction.Team>
         </Prediction.GameContainer>
         {children}
