@@ -3,6 +3,15 @@ import {
   Container,
   Title,
   SubTitle,
+  Slider,
+  Dots,
+  Score,
+  ActiveIcon,
+  Section,
+  Info,
+  ScoreContainer,
+  ForwardIcon,
+  BackIcon,
   Text,
   GameContainer,
   Team,
@@ -18,6 +27,51 @@ Prediction.Title = function PredictionTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
 };
 
+Prediction.Slider = function PredictionSlider({ children, ...restProps }) {
+  return <Slider {...restProps}>{children}</Slider>;
+};
+
+Prediction.Info = function PredictionInfo({ children, ...restProps }) {
+  return <Info {...restProps}>{children}</Info>;
+};
+
+Prediction.ScoreContainer = function PredictionScoreContainer({
+  children,
+  ...restProps
+}) {
+  return <ScoreContainer {...restProps}>{children}</ScoreContainer>;
+};
+
+Prediction.Dots = function PredictionDots({ children, ...restProps }) {
+  return <Dots {...restProps}>{children}</Dots>;
+};
+
+Prediction.Score = function PredictionScore({ children, ...restProps }) {
+  return <Score {...restProps}>{children}</Score>;
+};
+
+Prediction.ActiveIcon = function PredictionActiveIcon({
+  children,
+  ...restProps
+}) {
+  return <ActiveIcon {...restProps}>{children}</ActiveIcon>;
+};
+
+Prediction.ForwardIcon = function PredictionForwardIcon({
+  children,
+  ...restProps
+}) {
+  return <ForwardIcon {...restProps}>{children}</ForwardIcon>;
+};
+
+Prediction.BackIcon = function PredictionBackIcon({ children, ...restProps }) {
+  return <BackIcon {...restProps}>{children}</BackIcon>;
+};
+
+Prediction.Section = function PredictionSection({ children, ...restProps }) {
+  return <Section {...restProps}>{children}</Section>;
+};
+
 Prediction.SubTitle = function PredictionSubTitle({ children, ...restProps }) {
   return <SubTitle {...restProps}>{children}</SubTitle>;
 };
@@ -26,7 +80,10 @@ Prediction.Text = function PredictionText({ children, ...restProps }) {
   return <Text {...restProps}>{children}</Text>;
 };
 
-Prediction.GameContainer = function PredictionGameContainer({ children, ...restProps }) {
+Prediction.GameContainer = function PredictionGameContainer({
+  children,
+  ...restProps
+}) {
   return <GameContainer {...restProps}>{children}</GameContainer>;
 };
 
