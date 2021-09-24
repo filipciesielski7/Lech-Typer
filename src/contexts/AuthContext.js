@@ -63,7 +63,7 @@ export function AuthProvider({ children }) {
     withAdding = false
   ) {
     const games = db.ref("games");
-    const gamesArray = [];
+    let gamesArray = []; // let z const aby dodac PUCHAR POLSKI
     if (withAdding) {
       games
         .child(`${uid}`)
@@ -121,6 +121,12 @@ export function AuthProvider({ children }) {
               type_logo: value.type_logo,
             });
           }
+
+          // ABY DODAC PUCHAR POLSKI (MANUALNIE)
+          let newArray = gamesArray.slice(0, 9);
+          newArray.push(gamesArray[34]);
+          gamesArray.slice(9, 34).forEach((element) => newArray.push(element));
+          gamesArray = newArray;
         }
       });
     }
@@ -187,23 +193,6 @@ export function AuthProvider({ children }) {
       setCurrentUser(user);
       setIsAuthenticating(false);
     });
-    // fetch("https://www.thesportsdb.com/api/v1/json/1/eventslast.php?id=134010")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     let gamesArray = [];
-    //     data.results.forEach((element) => {
-    //       const { idEvent, strFilename, strEvent, intHomeScore, intAwayScore } =
-    //         element;
-    //       gamesArray.push({
-    //         idEvent,
-    //         strFilename,
-    //         strEvent,
-    //         intHomeScore,
-    //         intAwayScore,
-    //       });
-    //     });
-    //     setGamesList(gamesArray);
-    //   });
     setUsersList(getUsersList());
     return unsubscribe;
   }, []);
