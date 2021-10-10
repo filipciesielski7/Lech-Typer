@@ -123,7 +123,19 @@ export const ProfileImage = styled.img`
 export const Link = styled(ReactRouterLink)`
   text-decoration: none;
   color: white;
+
+  display: flex;
+  align-items: center;
+  height: 35px;
+  padding: 20px;
+  cursor: pointer;
   transition: 0.5s;
+  border-radius: 4px;
+
+  &:hover {
+    background: white;
+    color: #022855;
+  }
 `;
 
 export const Group = styled.div`

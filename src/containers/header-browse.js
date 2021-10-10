@@ -69,24 +69,18 @@ export function HeaderBrowseContainer({ bg, children }) {
           </Header.Profile>
           {isProfileOpen ? (
             <Header.Dropdown>
-              <Header.Group>
-                <Header.Link to={ROUTES.SCHEDULE}>
-                  <AiOutlineSchedule />
-                  <p>Terminarz</p>
-                </Header.Link>
-              </Header.Group>
-              <Header.Group>
-                <Header.Link to={ROUTES.RANKING}>
-                  <FaListOl />
-                  <p>Ranking</p>
-                </Header.Link>
-              </Header.Group>
-              <Header.Group>
-                <Header.Link to={ROUTES.UPDATE_PROFILE}>
-                  <FiSettings />
-                  <p>Ustawienia konta</p>
-                </Header.Link>
-              </Header.Group>
+              <Header.Link to={ROUTES.SCHEDULE}>
+                <AiOutlineSchedule />
+                <p>Terminarz</p>
+              </Header.Link>
+              <Header.Link to={ROUTES.RANKING}>
+                <FaListOl />
+                <p>Ranking</p>
+              </Header.Link>
+              <Header.Link to={ROUTES.UPDATE_PROFILE}>
+                <FiSettings />
+                <p>Ustawienia konta</p>
+              </Header.Link>
               <Header.Group onClick={handleLogout}>
                 <BiLogOut />
                 <p>Wyloguj się</p>
