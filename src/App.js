@@ -16,8 +16,9 @@ import Verification from "./pages/verification";
 import ForgotPassword from "./pages/forgot_password";
 import UpdateProfile from "./pages/update_profile";
 import DeletedAccount from "./pages/deleted_account";
-import Ranking from "./pages/ranking";
 import ScrollToTop from "./helpers/scrollToTop";
+import Schedule from "./pages/schedule";
+import RankingPage from "./pages/ranking";
 
 function App() {
   return (
@@ -37,12 +38,13 @@ function App() {
             path={ROUTES.UPDATE_PROFILE}
             component={UpdateProfile}
           />
-          <PrivateRoute path={ROUTES.RANKING} component={Ranking} />
+          <PrivateRoute path={ROUTES.RANKING} component={RankingPage} />
+          <PrivateRoute path={ROUTES.SCHEDULE} component={Schedule} />
           <VerificationRoute
             path={ROUTES.VERIFICATION}
             component={Verification}
           />
-          <DeleteAccountRoute // zmienic na tylko po linku
+          <DeleteAccountRoute
             path={ROUTES.DELETED_ACCOUNT}
             component={DeletedAccount}
           />

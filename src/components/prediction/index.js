@@ -2,7 +2,9 @@ import React from "react";
 import {
   Container,
   Title,
+  TitleBar,
   SubTitle,
+  SubTitle2,
   Slider,
   Dots,
   Score,
@@ -25,6 +27,17 @@ export default function Prediction({ children, ...restProps }) {
 
 Prediction.Title = function PredictionTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
+};
+
+Prediction.TitleBar = function PredictionTitleBar({ children, ...restProps }) {
+  return <TitleBar {...restProps}>{children}</TitleBar>;
+};
+
+Prediction.SubTitle2 = function PredictionSubTitle2({
+  children,
+  ...restProps
+}) {
+  return <SubTitle2 {...restProps}>{children}</SubTitle2>;
 };
 
 Prediction.Slider = function PredictionSlider({ children, ...restProps }) {

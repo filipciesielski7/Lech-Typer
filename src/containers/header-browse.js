@@ -7,7 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { FiSettings } from "react-icons/fi";
 import { FaListOl } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
+import { AiOutlineDown, AiOutlineUp, AiOutlineSchedule } from "react-icons/ai";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router";
 import { translate } from "../helpers/translate";
@@ -69,6 +69,12 @@ export function HeaderBrowseContainer({ bg, children }) {
           </Header.Profile>
           {isProfileOpen ? (
             <Header.Dropdown>
+              <Header.Group>
+                <Header.Link to={ROUTES.SCHEDULE}>
+                  <AiOutlineSchedule />
+                  <p>Terminarz</p>
+                </Header.Link>
+              </Header.Group>
               <Header.Group>
                 <Header.Link to={ROUTES.RANKING}>
                   <FaListOl />

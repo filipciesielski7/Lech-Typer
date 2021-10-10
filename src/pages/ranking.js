@@ -9,7 +9,6 @@ import { FaSearch, FaArrowDown } from "react-icons/fa";
 import { ImTwitter } from "react-icons/im";
 import * as ROUTES from "../constants/routes";
 import Switch from "@mui/material/Switch";
-// import { Hint } from "react-autocomplete-hint";
 
 const RankingPage = () => {
   const label = { inputProps: { "aria-label": "Switch demo" } };

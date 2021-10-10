@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 export const Container = styled.div`
   position: relative;
@@ -168,4 +169,41 @@ export const Info = styled.div`
   justify-content: center;
   width: 30%;
   margin: 0 auto;
+`;
+
+export const SubTitle2 = styled(ReactRouterLink)`
+  color: #737373;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+
+  &:hover {
+    color: white;
+  }
+
+  @media (max-width: 1050px) {
+    display: none;
+  }
+
+  @media (max-width: 470px) {
+    bottom: 5px;
+    font-size: 12px;
+  }
+  @media (max-width: 300px) {
+    font-size: 10px;
+    bottom: 6px;
+  }
+`;
+
+export const TitleBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
 `;

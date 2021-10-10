@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Prediction } from "../components";
 import { useAuth } from "../contexts/AuthContext";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
+import { BsArrowRight } from "react-icons/bs";
+import * as ROUTES from "../constants/routes";
 import {
   RiCheckboxBlankCircleFill,
   RiCheckboxBlankCircleLine,
@@ -52,15 +54,26 @@ export function PredictionContainer({ children }) {
                   key={Game.game_id}
                   active={index === active}
                 >
-                  {index === nextGameIndex ? (
-                    <Prediction.Title>Następny mecz</Prediction.Title>
-                  ) : null}
-                  {index < nextGameIndex ? (
-                    <Prediction.Title>Poprzedni mecz</Prediction.Title>
-                  ) : null}
-                  {index > nextGameIndex ? (
-                    <Prediction.Title>Kolejny mecz</Prediction.Title>
-                  ) : null}
+                  <Prediction.TitleBar>
+                    {index === nextGameIndex ? (
+                      <Prediction.Title>Następny mecz</Prediction.Title>
+                    ) : null}
+                    {index < nextGameIndex ? (
+                      <Prediction.Title>Poprzedni mecz</Prediction.Title>
+                    ) : null}
+                    {index > nextGameIndex ? (
+                      <Prediction.Title>Kolejny mecz</Prediction.Title>
+                    ) : null}
+
+                    <Prediction.SubTitle2 to={ROUTES.SCHEDULE}>
+                      Pełny terminarz
+                      <BsArrowRight
+                        style={{
+                          marginLeft: "5px",
+                        }}
+                      />
+                    </Prediction.SubTitle2>
+                  </Prediction.TitleBar>
 
                   <Prediction.Text>
                     {Game ? Game.type : null} {Game ? Game.date : null}

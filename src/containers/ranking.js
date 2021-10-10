@@ -96,10 +96,7 @@ export function RankingContainer({ children }) {
           <Ranking.BarSection>Pozycja</Ranking.BarSection>
           <Ranking.BarSection>Nazwa użytkownika</Ranking.BarSection>
           <Ranking.BarSection>Punkty</Ranking.BarSection>
-          <ImTwitter
-            size="20px"
-            className="twitterLogo"
-          />
+          <ImTwitter size="20px" className="twitterLogo" />
         </Ranking.Bar>
         <Ranking.ListContainer>
           {usersArray().map((user, index) => {
