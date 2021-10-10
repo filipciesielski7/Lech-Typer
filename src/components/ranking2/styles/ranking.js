@@ -155,9 +155,9 @@ export const SearchSmallContainer = styled.div`
   margin-bottom: 10px;
   background: white;
 
-  // @media (min-width: 400px) {
-  //   padding-left: 25px;
-  // }
+  @media (min-width: 400px) {
+    padding-left: 25px;
+  }
 
   @media (min-width: 950px) {
     display: ${({ small }) => (small ? "none" : "")};
@@ -166,14 +166,16 @@ export const SearchSmallContainer = styled.div`
 
 export const SearchIcon = styled.span`
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   opacity: ${({ searchActive }) => (searchActive ? "0" : "100%")};
+  // display: ${({ searchActive }) => (searchActive ? "none" : "")};
 `;
 
 export const EmptyResults = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   width: 100%;
   color: white;
   background: #022855;

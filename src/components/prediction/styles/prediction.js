@@ -115,11 +115,9 @@ export const BackIcon = styled.span`
 export const Slider = styled.div`
   display: inline-flex;
   justify-content: center;
-  // flex-direction: column;
-  // align-items: center;
+  flex-direction: column;
   overflow: hidden;
   height: 100%;
-  // border: 1px solid white;
 `;
 
 export const Section = styled.div`
@@ -128,9 +126,10 @@ export const Section = styled.div`
 `;
 
 export const Dots = styled.div`
-  position: absolute;
-  bottom: 5%;
   color: grey;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 20px;
 `;
 
 export const ActiveIcon = styled.span`
@@ -176,20 +175,19 @@ export const SubTitle2 = styled(ReactRouterLink)`
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
-  margin-bottom: 28px;
   display: flex;
   align-items: center;
 
   position: absolute;
   bottom: 4px;
-  right: 0;
+  right: 0px;
 
   &:hover {
     color: white;
   }
 
-  @media (max-width: 1050px) {
-    display: none;
+  @media (min-width: 1050px) {
+    position: relative;
   }
 
   @media (max-width: 470px) {
@@ -206,4 +204,5 @@ export const TitleBar = styled.div`
   display: flex;
   justify-content: space-between;
   position: relative;
+  margin-bottom: 15px;
 `;
