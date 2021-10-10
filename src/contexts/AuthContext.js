@@ -11,6 +11,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [loadingBrowse, setLoadingBrowse] = useState(true);
+  const [loadingFirstBrowse, setLoadingFirstBrowse] = useState(true);
   const [deletedAccount, setDeletedAccount] = useState(false);
   const [usersList, setUsersList] = useState([]);
 
@@ -209,6 +210,8 @@ export function AuthProvider({ children }) {
     signinWithTwitter,
     loadingBrowse,
     setLoadingBrowse,
+    loadingFirstBrowse,
+    setLoadingFirstBrowse,
     deletedAccount,
     setDeletedAccount,
     db,

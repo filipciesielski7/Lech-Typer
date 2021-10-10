@@ -12,6 +12,8 @@ const Browse = () => {
     currentUser,
     loadingBrowse,
     setLoadingBrowse,
+    loadingFirstBrowse,
+    setLoadingFirstBrowse,
     db,
     getUsersList,
     setUsersList,
@@ -30,8 +32,12 @@ const Browse = () => {
     setTimeout(() => {
       setLoadingBrowse(false);
     }, 800);
+    setTimeout(() => {
+      setLoadingFirstBrowse(false);
+    }, 200);
   }, [
     setLoadingBrowse,
+    setLoadingFirstBrowse,
     currentUser.displayName,
     currentUser.uid,
     db,
@@ -44,7 +50,7 @@ const Browse = () => {
 
   return (
     <>
-      {loadingBrowse ? <Loading /> : <Loading.ReleaseBody />}
+      {loadingBrowse || loadingFirstBrowse ? <Loading /> : <Loading.ReleaseBody />}
       <HeaderBrowseContainer />
       <Flexbox>
         <Flexbox.Column>
