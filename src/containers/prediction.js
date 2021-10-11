@@ -97,6 +97,10 @@ export function PredictionContainer({ children }) {
                             ""
                           )}.png`
                         }
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `${Game ? Game.home_team_logo : null}`;
+                        }}
                         alt={Game ? Game.home_team : null}
                       />
                       <Prediction.TeamName>
@@ -124,6 +128,10 @@ export function PredictionContainer({ children }) {
                             ""
                           )}.png`
                         }
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = `${Game ? Game.away_team_logo : null}`;
+                        }}
                         alt={Game ? Game.away_team : null}
                       />
                       <Prediction.TeamName>

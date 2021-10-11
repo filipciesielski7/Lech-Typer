@@ -50,7 +50,11 @@ const Browse = () => {
 
   return (
     <>
-      {loadingBrowse || loadingFirstBrowse ? <Loading /> : <Loading.ReleaseBody />}
+      {loadingBrowse || loadingFirstBrowse ? (
+        <Loading />
+      ) : (
+        <Loading.ReleaseBody />
+      )}
       <HeaderBrowseContainer />
       <Flexbox>
         <Flexbox.Column>
