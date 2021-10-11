@@ -89,7 +89,14 @@ export function PredictionContainer({ children }) {
                   <Prediction.GameContainer>
                     <Prediction.Team>
                       <Prediction.TeamLogo
-                        src={Game ? Game.home_team_logo : null}
+                        // src={Game ? Game.home_team_logo : null}
+                        src={
+                          process.env.PUBLIC_URL +
+                          `/images/teams_logo/${Game.home_team.replace(
+                            " ",
+                            ""
+                          )}.png`
+                        }
                         alt={Game ? Game.home_team : null}
                       />
                       <Prediction.TeamName>
@@ -109,7 +116,14 @@ export function PredictionContainer({ children }) {
 
                     <Prediction.Team>
                       <Prediction.TeamLogo
-                        src={Game ? Game.away_team_logo : null}
+                        // src={Game ? Game.away_team_logo : null}
+                        src={
+                          process.env.PUBLIC_URL +
+                          `/images/teams_logo/${Game.away_team.replace(
+                            " ",
+                            ""
+                          )}.png`
+                        }
                         alt={Game ? Game.away_team : null}
                       />
                       <Prediction.TeamName>
