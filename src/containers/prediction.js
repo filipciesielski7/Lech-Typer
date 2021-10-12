@@ -150,21 +150,28 @@ export function PredictionContainer({ children }) {
               if (numberOfGames < 5) {
                 return (
                   <Prediction.ActiveIcon key={index}>
+                    {/* <Prediction.DotButton> */}
                     {index === active ? (
-                      <RiCheckboxBlankCircleFill color={"white"} />
+                      <button>
+                        <RiCheckboxBlankCircleFill color={"white"} />
+                      </button>
                     ) : (
-                      <RiCheckboxBlankCircleLine
-                        onClick={() => {
-                          setActive(nextGameIndex + index - 2);
-                          setActiveDot(index);
-                        }}
-                      />
+                      <button>
+                        <RiCheckboxBlankCircleLine
+                          onClick={() => {
+                            setActive(nextGameIndex + index - 2);
+                            setActiveDot(index);
+                          }}
+                        />
+                      </button>
                     )}
+                    {/* </Prediction.DotButton> */}
                   </Prediction.ActiveIcon>
                 );
               } else {
                 return (
                   <Prediction.ActiveIcon key={index}>
+                    {/* <Prediction.DotButton> */}
                     {index === activeDot ? (
                       <RiCheckboxBlankCircleFill color={"white"} />
                     ) : (
@@ -175,6 +182,7 @@ export function PredictionContainer({ children }) {
                         }}
                       />
                     )}
+                    {/* </Prediction.DotButton> */}
                   </Prediction.ActiveIcon>
                 );
               }

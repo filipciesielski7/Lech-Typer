@@ -7,6 +7,7 @@ import {
   SubTitle2,
   Slider,
   Dots,
+  DotButton,
   Score,
   ActiveIcon,
   Section,
@@ -57,6 +58,13 @@ Prediction.ScoreContainer = function PredictionScoreContainer({
 
 Prediction.Dots = function PredictionDots({ children, ...restProps }) {
   return <Dots {...restProps}>{children}</Dots>;
+};
+
+Prediction.DotButton = function PredictionDotButton({
+  children,
+  ...restProps
+}) {
+  return <DotButton {...restProps}>{children}</DotButton>;
 };
 
 Prediction.Score = function PredictionScore({ children, ...restProps }) {

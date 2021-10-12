@@ -77,7 +77,9 @@ export const TeamName = styled.p`
   }
 `;
 
-export const ForwardIcon = styled.span`
+export const ForwardIcon = styled.button`
+  background: none;
+  border: none;
   position: absolute;
   right: 5%;
   top: 25%;
@@ -94,7 +96,9 @@ export const ForwardIcon = styled.span`
     transform: ${({ click }) => (click ? "scale(1.3)" : "")};
   }
 `;
-export const BackIcon = styled.span`
+export const BackIcon = styled.button`
+  background: none;
+  border: none;
   position: absolute;
   left: 5%;
   top: 25%;
@@ -205,4 +209,11 @@ export const TitleBar = styled.div`
   justify-content: space-between;
   position: relative;
   margin-bottom: 15px;
+`;
+
+export const DotButton = styled.button`
+  color: grey;
+  background: none;
+  border: none;
+  text-decoration: none;
 `;
