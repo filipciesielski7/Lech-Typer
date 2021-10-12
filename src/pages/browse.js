@@ -18,6 +18,8 @@ const Browse = () => {
     getUsersList,
     setUsersList,
     getGamesList,
+    gamesList,
+    usersList,
   } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
   const isTwitterUser = currentUser.email === null;
@@ -29,12 +31,18 @@ const Browse = () => {
       JSON.parse(localStorage.getItem("twitterProfileImage")),
       true
     );
-    setTimeout(() => {
-      setLoadingBrowse(false);
-    }, 800);
+    const interval = setInterval(function () {
+      if (
+        typeof usersList[0] === "object" &&
+        typeof gamesList[0] === "object"
+      ) {
+        setLoadingBrowse(false);
+        clearInterval(interval);
+      }
+    }, 500);
     setTimeout(() => {
       setLoadingFirstBrowse(false);
-    }, 200);
+    }, 100);
   }, [
     setLoadingBrowse,
     setLoadingFirstBrowse,
@@ -46,6 +54,8 @@ const Browse = () => {
     setUsersList,
     getUsersList,
     getGamesList,
+    gamesList,
+    usersList,
   ]);
 
   return (

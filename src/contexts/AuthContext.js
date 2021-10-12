@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   const [loadingFirstBrowse, setLoadingFirstBrowse] = useState(true);
   const [deletedAccount, setDeletedAccount] = useState(false);
   const [usersList, setUsersList] = useState([]);
+  const [gamesList, setGamesList] = useState([]);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -195,6 +196,7 @@ export function AuthProvider({ children }) {
       setIsAuthenticating(false);
     });
     setUsersList(getUsersList());
+    setGamesList(getGamesList());
     return unsubscribe;
   }, []);
 
@@ -219,6 +221,7 @@ export function AuthProvider({ children }) {
     getGamesList,
     usersList,
     setUsersList,
+    gamesList,
   };
   return (
     <AuthContext.Provider value={value}>

@@ -17,14 +17,20 @@ const RankingPage = () => {
   const [selected, setSelected] = useState(3);
   const [searchActive, setSearchActive] = useState(false);
 
-  const { loadingBrowse, setLoadingBrowse, getUsersList, currentUser } =
+  const { loadingBrowse, setLoadingBrowse, getUsersList, currentUser, usersList, gamesList } =
     useAuth();
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoadingBrowse(false);
-    }, 800);
-  }, [setLoadingBrowse]);
+    const interval = setInterval(function () {
+      if (
+        typeof usersList[0] === "object" &&
+        typeof gamesList[0] === "object"
+      ) {
+        setLoadingBrowse(false);
+        clearInterval(interval);
+      }
+    }, 100);
+  }, [setLoadingBrowse, usersList, gamesList]);
 
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
   const isTwitterUser = currentUser.email === null;

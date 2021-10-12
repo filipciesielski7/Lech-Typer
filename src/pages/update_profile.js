@@ -20,6 +20,8 @@ const UpdateProfile = () => {
     setDeletedAccount,
     getUsersList,
     db,
+    usersList,
+    gamesList,
   } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
 
@@ -75,10 +77,16 @@ const UpdateProfile = () => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoadingBrowse(false);
-    }, 800);
-  }, [setLoadingBrowse]);
+    const interval = setInterval(function () {
+      if (
+        typeof usersList[0] === "object" &&
+        typeof gamesList[0] === "object"
+      ) {
+        setLoadingBrowse(false);
+        clearInterval(interval);
+      }
+    }, 100);
+  }, [setLoadingBrowse, usersList, gamesList]);
 
   function ValidCheck(username, email, passwordProp) {
     clearAllMessages();
