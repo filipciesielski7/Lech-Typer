@@ -7,19 +7,11 @@ import { BsArrowLeft } from "react-icons/bs";
 import * as ROUTES from "../constants/routes";
 
 const Schedule = () => {
-  const { loadingBrowse, setLoadingBrowse, usersList, gamesList } = useAuth();
+  const { loadingBrowse, loadData } = useAuth();
 
   useEffect(() => {
-    const interval = setInterval(function () {
-      if (
-        typeof usersList[0] === "object" &&
-        typeof gamesList[0] === "object"
-      ) {
-        setLoadingBrowse(false);
-        clearInterval(interval);
-      }
-    }, 100);
-  }, [setLoadingBrowse, usersList, gamesList]);
+    loadData();
+  }, [loadData]);
 
   return (
     <>

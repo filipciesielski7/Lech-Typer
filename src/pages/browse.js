@@ -14,12 +14,8 @@ const Browse = () => {
     setLoadingBrowse,
     loadingFirstBrowse,
     setLoadingFirstBrowse,
-    db,
     getUsersList,
-    setUsersList,
-    getGamesList,
-    gamesList,
-    usersList,
+    loadData,
   } = useAuth();
 
   useEffect(() => {
@@ -31,15 +27,7 @@ const Browse = () => {
       JSON.parse(localStorage.getItem("twitterProfileImage")),
       true
     );
-    const interval = setInterval(function () {
-      if (
-        typeof usersList[0] === "object" &&
-        typeof gamesList[0] === "object"
-      ) {
-        setLoadingBrowse(false);
-        clearInterval(interval);
-      }
-    }, 500);
+    loadData();
     setTimeout(() => {
       setLoadingFirstBrowse(false);
     }, 100);
@@ -48,13 +36,9 @@ const Browse = () => {
     setLoadingFirstBrowse,
     currentUser.displayName,
     currentUser.uid,
-    db,
     currentUser.email,
-    setUsersList,
     getUsersList,
-    getGamesList,
-    gamesList,
-    usersList,
+    loadData,
   ]);
 
   return (

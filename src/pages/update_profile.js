@@ -16,12 +16,10 @@ const UpdateProfile = () => {
   const {
     currentUser,
     loadingBrowse,
-    setLoadingBrowse,
     setDeletedAccount,
     getUsersList,
     db,
-    usersList,
-    gamesList,
+    loadData,
   } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
 
@@ -77,16 +75,8 @@ const UpdateProfile = () => {
   }
 
   useEffect(() => {
-    const interval = setInterval(function () {
-      if (
-        typeof usersList[0] === "object" &&
-        typeof gamesList[0] === "object"
-      ) {
-        setLoadingBrowse(false);
-        clearInterval(interval);
-      }
-    }, 100);
-  }, [setLoadingBrowse, usersList, gamesList]);
+    loadData();
+  }, [loadData]);
 
   function ValidCheck(username, email, passwordProp) {
     clearAllMessages();

@@ -51,6 +51,18 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
+  function loadData(time = 100) {
+    const interval = setInterval(function () {
+      if (
+        typeof usersList[0] === "object" &&
+        typeof gamesList[0] === "object"
+      ) {
+        setLoadingBrowse(false);
+        clearInterval(interval);
+      }
+    }, time);
+  }
+
   function getGamesList(
     uid = "",
     home_score = "",
@@ -222,6 +234,7 @@ export function AuthProvider({ children }) {
     usersList,
     setUsersList,
     gamesList,
+    loadData,
   };
   return (
     <AuthContext.Provider value={value}>
