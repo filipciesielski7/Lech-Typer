@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
-import Home from "./pages/home";
-import Signup from "./pages/signup";
-import Signin from "./pages/signin";
+import * as ROUTES from "./constants/routes";
+import ScrollToTop from "./helpers/scrollToTop";
 import { AuthProvider } from "./contexts/AuthContext";
 import {
   PrivateRoute,
@@ -10,13 +9,14 @@ import {
   VerificationRoute,
   DeleteAccountRoute,
 } from "./helpers/routes";
-import * as ROUTES from "./constants/routes";
+import Home from "./pages/home";
+import Signup from "./pages/signup";
+import Signin from "./pages/signin";
 import Browse from "./pages/browse";
 import Verification from "./pages/verification";
 import ForgotPassword from "./pages/forgot_password";
 import UpdateProfile from "./pages/update_profile";
 import DeletedAccount from "./pages/deleted_account";
-import ScrollToTop from "./helpers/scrollToTop";
 import Schedule from "./pages/schedule";
 import RankingPage from "./pages/ranking";
 

@@ -1,9 +1,9 @@
 export function translate(message) {
   if (message === "The email address is already in use by another account.") {
-    return "Ten e-mail już jest przypisany do konta.";
+    return "Adres e-mail jest już używany przez inne konto.";
   }
   if (message === "Password should be at least 6 characters") {
-    return "Hasło musi zawierać minimum 6 znaków.";
+    return "Hasło powinno zawierać co najmniej 6 znaków";
   }
   if (message === "The email address is badly formatted.") {
     return "Błędny adres e-mail.";
@@ -35,7 +35,7 @@ export function translate(message) {
     message ===
     "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later."
   ) {
-    return "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.";
+    return "Dostęp do tego konta został tymczasowo wyłączony z powodu wielu nieudanych prób logowania. Możesz je natychmiast przywrócić, resetując hasło, lub możesz spróbować ponownie później.";
   }
   return message;
 }
