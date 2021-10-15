@@ -21,10 +21,10 @@ const Browse = () => {
     gamesList,
     usersList,
   } = useAuth();
-  const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
-  const isTwitterUser = currentUser.email === null;
 
   useEffect(() => {
+    const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
+    const isTwitterUser = currentUser.email === null;
     getUsersList(
       currentUser.uid,
       isTwitterUser ? "@" + twitterUsername : currentUser.displayName,
@@ -49,8 +49,7 @@ const Browse = () => {
     currentUser.displayName,
     currentUser.uid,
     db,
-    isTwitterUser,
-    twitterUsername,
+    currentUser.email,
     setUsersList,
     getUsersList,
     getGamesList,

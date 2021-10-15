@@ -35,8 +35,8 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    // localStorage.removeItem("twitterUsername"); // JAK USUNAC BEZ STRATY W REALTIME DATABASE
-    // localStorage.removeItem("twitterProfileImage"); // JAK USUNAC BEZ STRATY W REALTIME DATABASE
+    localStorage.removeItem("twitterUsername");
+    localStorage.removeItem("twitterProfileImage");
     setLoadingBrowse(true);
     return auth.signOut().then(() => {
       setCurrentUser(null);
