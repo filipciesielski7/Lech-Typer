@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import FooterContainer from "../containers/footer";
-import { Loading, Ranking2 as Ranking } from "../components";
+import { Loading, Schedule } from "../components";
 import { useAuth } from "../contexts/AuthContext";
 import { BsArrowLeft } from "react-icons/bs";
 import * as ROUTES from "../constants/routes";
 
-const Schedule = () => {
-  const { loadingBrowse, loadData } = useAuth();
+const SchedulePage = () => {
+  const { loadingBrowse, loadData, getGamesList } = useAuth();
 
   useEffect(() => {
     loadData();
@@ -23,23 +23,29 @@ const Schedule = () => {
           margin: "0 auto",
         }}
       >
-        <Ranking>
-          <Ranking.TitleBar>
-            <Ranking.Title>Terminarz</Ranking.Title>
-            <Ranking.SubTitle to={ROUTES.BROWSE}>
+        <Schedule>
+          <Schedule.TitleBar>
+            <Schedule.Title>Terminarz</Schedule.Title>
+            <Schedule.SubTitle to={ROUTES.BROWSE}>
               <BsArrowLeft
                 style={{
                   marginRight: "5px",
                 }}
               />
               Powrót
-            </Ranking.SubTitle>
-          </Ranking.TitleBar>
-        </Ranking>
+            </Schedule.SubTitle>
+          </Schedule.TitleBar>
+          <Schedule.ListContainer>
+            {getGamesList().map((element, index) => {
+              //return element.home_team;
+              return true;
+            })}
+          </Schedule.ListContainer>
+        </Schedule>
       </div>
       <FooterContainer />
     </>
   );
 };
 
-export default Schedule;
+export default SchedulePage;

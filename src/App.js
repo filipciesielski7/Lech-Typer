@@ -17,7 +17,7 @@ import Verification from "./pages/verification";
 import ForgotPassword from "./pages/forgot_password";
 import UpdateProfile from "./pages/update_profile";
 import DeletedAccount from "./pages/deleted_account";
-import Schedule from "./pages/schedule";
+import SchedulePage from "./pages/schedule";
 import RankingPage from "./pages/ranking";
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
             component={UpdateProfile}
           />
           <PrivateRoute path={ROUTES.RANKING} component={RankingPage} />
-          <PrivateRoute path={ROUTES.SCHEDULE} component={Schedule} />
+          <PrivateRoute path={ROUTES.SCHEDULE} component={SchedulePage} />
           <VerificationRoute
             path={ROUTES.VERIFICATION}
             component={Verification}

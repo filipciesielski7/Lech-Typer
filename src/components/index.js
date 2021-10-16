@@ -11,3 +11,4 @@ export { default as Overview } from "./overview";
 export { default as Flexbox } from "./flexbox";
 export { default as User } from "./user";
 export { default as User2 } from "./user2";
+export { default as Schedule } from "./schedule";
