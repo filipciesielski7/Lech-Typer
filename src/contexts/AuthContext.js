@@ -137,9 +137,9 @@ export function AuthProvider({ children }) {
           }
 
           // ABY DODAC PUCHAR POLSKI (MANUALNIE)
-          let newArray = gamesArray.slice(0, 9);
+          let newArray = gamesArray.slice(0, 12);
           newArray.push(gamesArray[34]);
-          gamesArray.slice(9, 34).forEach((element) => newArray.push(element));
+          gamesArray.slice(12, 34).forEach((element) => newArray.push(element));
           gamesArray = newArray;
         }
       });
