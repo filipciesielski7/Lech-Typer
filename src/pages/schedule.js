@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HeaderBrowseContainer } from "../containers/header-browse";
 import FooterContainer from "../containers/footer";
-import { Loading, Schedule, Game } from "../components";
+import { Loading, Schedule, Game, Ranking } from "../components";
 import { useAuth } from "../contexts/AuthContext";
 import { BsArrowLeft } from "react-icons/bs";
 import * as ROUTES from "../constants/routes";
@@ -37,6 +37,13 @@ const SchedulePage = () => {
               Powrót
             </Schedule.SubTitle>
           </Schedule.TitleBar>
+
+          <Ranking.Bar>
+            <Ranking.BarSection>Ekstraklasa</Ranking.BarSection>
+            <Ranking.BarSection>Puchar Polski</Ranking.BarSection>
+            <Ranking.BarSection>Wyszukiwarka meczu</Ranking.BarSection>
+          </Ranking.Bar>
+
           <Schedule.ListContainer>
             {gamesList.map((game, index) => {
               if (index < 34 && active === "Ekstraklasa") {

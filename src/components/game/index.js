@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Container,
-  TeamLogo,
-  Round,
-  // Username,
-  // Points,
-  // Position,
-  // ProfileImage,
-  // ProfileImageContainer,
-} from "./styles/game";
+import { Container, TeamLogo, TeamLogoContainer, TeamInfo, Result } from "./styles/game";
 
 const Game = ({ index, game, length }) => {
   const {
@@ -24,56 +15,38 @@ const Game = ({ index, game, length }) => {
   } = game;
 
   return (
-    // <Container
-    //   index={index}
-    //   length={length}
-    //   currentUserRanking={currentUserRanking}
-    // >
-    //   <Position position={position}>
-    //     <p>{position ? `${position}.` : "0."}</p>
-    //   </Position>
-    //   <Username>
-    //     <p>{user_name}</p>
-    //   </Username>
-    //   <Points>
-    //     <p>{points}</p>
-    //   </Points>
-
-    //   {photoURL ? (
-    //     <ProfileImageContainer>
-    //       <ProfileImage src={photoURL} alt={user_name}></ProfileImage>
-    //     </ProfileImageContainer>
-    //   ) : null}
-    // </Container>
     <Container index={index} length={length}>
-      <Round>{index + 1}.</Round>
-      <TeamLogo
-        src={
-          process.env.PUBLIC_URL +
-          `/images/teams_logo/${home_team.replace(" ", "")}.png`
-        }
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = { home_team_logo };
-        }}
-        alt={home_team}
-      />
+      <TeamLogoContainer>
+        <TeamLogo
+          src={
+            process.env.PUBLIC_URL +
+            `/images/teams_logo/${home_team.replace(" ", "")}.png`
+          }
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = { home_team_logo };
+          }}
+          alt={home_team}
+        />
+      </TeamLogoContainer>
+      <TeamInfo type="home">{home_team}</TeamInfo>
 
-      <h3>
-        {home_team} vs {game.away_team}
-      </h3>
+      <Result></Result>
 
-      <TeamLogo
-        src={
-          process.env.PUBLIC_URL +
-          `/images/teams_logo/${away_team.replace(" ", "")}.png`
-        }
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = { away_team_logo };
-        }}
-        alt={away_team}
-      />
+      <TeamInfo type="away">{game.away_team}</TeamInfo>
+      <TeamLogoContainer>
+        <TeamLogo
+          src={
+            process.env.PUBLIC_URL +
+            `/images/teams_logo/${away_team.replace(" ", "")}.png`
+          }
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = { away_team_logo };
+          }}
+          alt={away_team}
+        />
+      </TeamLogoContainer>
     </Container>
   );
 };
