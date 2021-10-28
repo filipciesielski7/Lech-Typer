@@ -4,6 +4,9 @@ export const Container = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
+  @media (max-width: 950px) {
+    justify-content: space-between;
+  }
   align-items: center;
 
   padding: 40px;
@@ -31,9 +34,9 @@ export const TeamLogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (max-width: 950px) {
-    width: 40%;
-  }
+  // @media (max-width: 950px) {
+  //   width: 30%;
+  // }
 `;
 
 export const TeamLogo = styled.img`
@@ -69,9 +72,8 @@ export const Result = styled.div`
   align-items: center;
   justify-content: center;
   @media (max-width: 950px) {
-    width: 20%;
+    width: 50%;
   }
-
   font-weight: bold;
   font-size: 24px;
 `;
@@ -79,13 +81,7 @@ export const Result = styled.div`
 export const DateContainer = styled.div`
   position: absolute;
   top: 0;
-  padding: 5px;
-  background: white;
-  width: 100%;
-  color: black;
   display: flex;
-  align-items: center;
+  align-item: center;
   justify-content: center;
-  // margin: 5px;
-  // border-radius: 4px;
 `;

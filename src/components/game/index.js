@@ -1,4 +1,5 @@
 import React from "react";
+import { translate } from "../../helpers/translate";
 import {
   Container,
   TeamLogo,
@@ -18,19 +19,22 @@ const Game = ({ index, game, length }) => {
     home_team,
     home_team_logo,
     // type,
-    // type_logo,
+    type_logo,
   } = game;
 
   const [game_date, day_name, time] = date.split(" ");
   console.log(game_date);
-  console.log(day_name);
-  console.log(time);
+  const [day_date, month, year] = game_date.split(".");
+  console.log(day_date);
 
   return (
     <Container index={index} length={length}>
-      {/* <DateContainer>
-        {day_name} {game_date} {time !== "00:00" ? time : null}
-      </DateContainer> */}
+      {/* {home_score === "" ? (
+        <DateContainer>
+          {day_name.toUpperCase()} {day_date} {translate(month)} {year}{" "}
+          {time !== "00:00" ? time : null}
+        </DateContainer>
+      ) : null} */}
       <TeamInfo type="home" winner={away_score < home_score}>
         {home_team}
       </TeamInfo>
@@ -42,7 +46,7 @@ const Game = ({ index, game, length }) => {
           }
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = { home_team_logo };
+            e.target.src = `${home_team_logo}`;
           }}
           alt={home_team}
         />
@@ -60,7 +64,7 @@ const Game = ({ index, game, length }) => {
           }
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = { away_team_logo };
+            e.target.src = `${away_team_logo}`;
           }}
           alt={away_team}
         />
