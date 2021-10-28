@@ -57,15 +57,35 @@ export const TeamInfo = styled.div`
   display: flex;
   align-items: center;
   justify-content: ${({ type }) => (type === "home" ? "end" : "start")};
+  font-weight: ${({ winner }) => (winner === true ? "bold" : "")};
   @media (max-width: 950px) {
     display: none;
   }
-  font-weight: bold;
 `;
 
 export const Result = styled.div`
   width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media (max-width: 950px) {
     width: 20%;
   }
+
+  font-weight: bold;
+  font-size: 24px;
+`;
+
+export const DateContainer = styled.div`
+  position: absolute;
+  top: 0;
+  padding: 5px;
+  background: white;
+  width: 100%;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // margin: 5px;
+  // border-radius: 4px;
 `;

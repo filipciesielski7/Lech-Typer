@@ -1,21 +1,39 @@
 import React from "react";
-import { Container, TeamLogo, TeamLogoContainer, TeamInfo, Result } from "./styles/game";
+import {
+  Container,
+  TeamLogo,
+  TeamLogoContainer,
+  TeamInfo,
+  Result,
+  DateContainer,
+} from "./styles/game";
 
 const Game = ({ index, game, length }) => {
   const {
-    // away_score,
+    away_score,
     away_team,
     away_team_logo,
-    // date,
-    // home_score,
+    date,
+    home_score,
     home_team,
     home_team_logo,
     // type,
     // type_logo,
   } = game;
 
+  const [game_date, day_name, time] = date.split(" ");
+  console.log(game_date);
+  console.log(day_name);
+  console.log(time);
+
   return (
     <Container index={index} length={length}>
+      {/* <DateContainer>
+        {day_name} {game_date} {time !== "00:00" ? time : null}
+      </DateContainer> */}
+      <TeamInfo type="home" winner={away_score < home_score}>
+        {home_team}
+      </TeamInfo>
       <TeamLogoContainer>
         <TeamLogo
           src={
@@ -29,11 +47,11 @@ const Game = ({ index, game, length }) => {
           alt={home_team}
         />
       </TeamLogoContainer>
-      <TeamInfo type="home">{home_team}</TeamInfo>
 
-      <Result></Result>
+      <Result>
+        {home_score} {home_score !== "" ? ":" : null} {away_score}
+      </Result>
 
-      <TeamInfo type="away">{game.away_team}</TeamInfo>
       <TeamLogoContainer>
         <TeamLogo
           src={
@@ -47,6 +65,9 @@ const Game = ({ index, game, length }) => {
           alt={away_team}
         />
       </TeamLogoContainer>
+      <TeamInfo type="away" winner={away_score > home_score}>
+        {game.away_team}
+      </TeamInfo>
     </Container>
   );
 };
