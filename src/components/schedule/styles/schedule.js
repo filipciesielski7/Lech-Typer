@@ -101,3 +101,73 @@ export const ListContainer = styled.div`
   border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.75);
 `;
+
+export const Selection = styled.p`
+  cursor: pointer;
+  color: #737373;
+  color: ${({ isSelected }) => (isSelected ? "#ae8745" : "")};
+  font-weight: ${({ isSelected }) => (isSelected ? "bold" : "")};
+`;
+
+export const SearchBar = styled.input`
+  border-radius: 4px;
+  padding: 7px;
+  background: white;
+  border: none;
+  outline: none;
+  color: grey;
+  // width: ${({ small }) => (small ? "400px" : "")};
+
+  @media (max-width: 950px) {
+    display: ${({ small }) => (!small ? "none" : "")};
+  }
+`;
+
+export const SearchContainer = styled.div`
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+export const SearchSmallContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: grey;
+  border-radius: 4px;
+  padding: 7px;
+  margin-bottom: 10px;
+  background: white;
+
+  @media (min-width: 400px) {
+    padding-left: 25px;
+  }
+
+  @media (min-width: 950px) {
+    display: ${({ small }) => (small ? "none" : "")};
+  }
+`;
+
+export const SearchIcon = styled.span`
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  opacity: ${({ searchActive }) => (searchActive ? "0" : "100%")};
+  // display: ${({ searchActive }) => (searchActive ? "none" : "")};
+`;
+
+export const EmptyResults = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  color: white;
+  background: #022855;
+  padding: 20px;
+  border-radius: 4px;
+`;

@@ -1,12 +1,10 @@
 import React from "react";
-import { translate } from "../../helpers/translate";
 import {
   Container,
   TeamLogo,
   TeamLogoContainer,
   TeamInfo,
   Result,
-  DateContainer,
 } from "./styles/game";
 
 const Game = ({ index, game, length }) => {
@@ -19,27 +17,20 @@ const Game = ({ index, game, length }) => {
     home_team,
     home_team_logo,
     // type,
-    type_logo,
+    // type_logo,
   } = game;
 
-  const [game_date, day_name, time] = date.split(" ");
-  console.log(game_date);
-  const [day_date, month, year] = game_date.split(".");
-  console.log(day_date);
+  const [game_date, day_name] = date.split(" ");
+  // const [day_date, month, year] = game_date.split(".");
 
   return (
     <Container index={index} length={length}>
-      {/* {home_score === "" ? (
-        <DateContainer>
-          {day_name.toUpperCase()} {day_date} {translate(month)} {year}{" "}
-          {time !== "00:00" ? time : null}
-        </DateContainer>
-      ) : null} */}
       <TeamInfo type="home" winner={away_score < home_score}>
         {home_team}
       </TeamInfo>
       <TeamLogoContainer>
         <TeamLogo
+          home={true}
           src={
             process.env.PUBLIC_URL +
             `/images/teams_logo/${home_team.replace(" ", "")}.png`
@@ -52,12 +43,18 @@ const Game = ({ index, game, length }) => {
         />
       </TeamLogoContainer>
 
-      <Result>
-        {home_score} {home_score !== "" ? ":" : null} {away_score}
+      <Result home_score={home_score}>
+        {home_score}{" "}
+        {home_score !== ""
+          ? ":"
+          : `${day_name} 
+          ${"\n"} ${game_date}`}{" "}
+        {away_score}
       </Result>
 
       <TeamLogoContainer>
         <TeamLogo
+          home={false}
           src={
             process.env.PUBLIC_URL +
             `/images/teams_logo/${away_team.replace(" ", "")}.png`

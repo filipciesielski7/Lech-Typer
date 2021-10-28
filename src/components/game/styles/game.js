@@ -21,12 +21,15 @@ export const Container = styled.div`
   }
 
   background: ${({ index }) => (index % 2 === 0 ? "#014B94" : "#022855")};
-  border-radius: ${({ index, length }) =>
-    index === length - 1 || index === 0 ? "4px" : "0px"};
+ 
+  border-top-left-radius: ${({ index}) =>
+    index === 0 ? "4px" : "0px"};
+  border-top-right-radius: ${({ index }) =>
+    index === 0 ? "4px" : "0px"};
   border-bottom-left-radius: ${({ index, length }) =>
-    index === length - 2 || index === length - 1 ? "4px" : "0px"};
+    index === length - 1 ? "4px" : "0px"};
   border-bottom-right-radius: ${({ index, length }) =>
-    index === length - 2 || index === length - 1 ? "4px" : "0px"};
+    index === length - 1 ? "4px" : "0px"};
 `;
 
 export const TeamLogoContainer = styled.div`
@@ -34,17 +37,15 @@ export const TeamLogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  // @media (max-width: 950px) {
-  //   width: 30%;
-  // }
 `;
 
 export const TeamLogo = styled.img`
   margin-right: 50px;
   margin-left: 50px;
-  // @media (max-width: 950px) {
-  //   display: none;
-  // }
+  @media (max-width: 400px) {
+    margin-right: ${({ home }) => (home === true ? "70px" : "")};
+    margin-left: ${({ home }) => (home === false ? "70px" : "")};
+  }
 `;
 
 export const Round = styled.h3`
@@ -71,17 +72,19 @@ export const Result = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   @media (max-width: 950px) {
     width: 50%;
   }
-  font-weight: bold;
-  font-size: 24px;
-`;
-
-export const DateContainer = styled.div`
-  position: absolute;
-  top: 0;
-  display: flex;
-  align-item: center;
-  justify-content: center;
+  font-weight: ${({ home_score }) => (home_score !== "" ? "bold" : "")};
+  font-size: ${({ home_score }) => (home_score !== "" ? "24px" : "16px")};
+  @media (max-width: 950px) {
+    font-size: ${({ home_score }) => (home_score !== "" ? "24px" : "15px")};
+  }
+  @media (max-width: 382px) {
+    font-size: ${({ home_score }) => (home_score !== "" ? "24px" : "12px")};
+  }
+  @media (max-width: 300px) {
+    display: ${({ home_score }) => (home_score !== "" ? "" : "none")};
+  }
 `;
