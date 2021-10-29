@@ -5,6 +5,7 @@ import {
   TeamLogoContainer,
   TeamInfo,
   Result,
+  Round,
 } from "./styles/game";
 
 const Game = ({ index, game, length }) => {
@@ -16,15 +17,20 @@ const Game = ({ index, game, length }) => {
     home_score,
     home_team,
     home_team_logo,
-    // type,
+    game_id,
+    type,
     // type_logo,
   } = game;
 
   const [game_date, day_name] = date.split(" ");
-  // const [day_date, month, year] = game_date.split(".");
+
+  function PolishCupRound(index) {}
 
   return (
     <Container index={index} length={length}>
+      <Round>
+        {type === "PKO EKSTRAKLASA" ? game_id.toString().concat(".") : game_id}
+      </Round>
       <TeamInfo type="home" winner={away_score < home_score}>
         {home_team}
       </TeamInfo>

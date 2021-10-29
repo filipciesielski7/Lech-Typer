@@ -21,11 +21,9 @@ export const Container = styled.div`
   }
 
   background: ${({ index }) => (index % 2 === 0 ? "#014B94" : "#022855")};
- 
-  border-top-left-radius: ${({ index}) =>
-    index === 0 ? "4px" : "0px"};
-  border-top-right-radius: ${({ index }) =>
-    index === 0 ? "4px" : "0px"};
+
+  border-top-left-radius: ${({ index }) => (index === 0 ? "4px" : "0px")};
+  border-top-right-radius: ${({ index }) => (index === 0 ? "4px" : "0px")};
   border-bottom-left-radius: ${({ index, length }) =>
     index === length - 1 ? "4px" : "0px"};
   border-bottom-right-radius: ${({ index, length }) =>
@@ -48,9 +46,9 @@ export const TeamLogo = styled.img`
   }
 `;
 
-export const Round = styled.h3`
-  margin-right: 50px;
-  margin-left: 50px;
+export const Round = styled.div`
+  position: absolute;
+  left: 5%;
   @media (max-width: 950px) {
     display: none;
   }

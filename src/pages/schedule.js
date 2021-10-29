@@ -35,7 +35,17 @@ const SchedulePage = () => {
       ) {
         return true;
       } else if (
-        element.date.toUpperCase().includes(searchTerm.toUpperCase())
+        element.away_score
+          .toString()
+          .concat(":", element.home_score.toString())
+          .includes(searchTerm.toUpperCase())
+      ) {
+        return true;
+      } else if (
+        element.game_id
+          .toString()
+          .toUpperCase()
+          .includes(searchTerm.toUpperCase())
       ) {
         return true;
       } else {
@@ -109,7 +119,7 @@ const SchedulePage = () => {
                   type="text"
                   id="game"
                   autoComplete="off"
-                  placeholder="Drużyna, wynik, data"
+                  placeholder="Drużyna, wynik, kolejka"
                   searchActive={searchActive}
                   onChange={(e) => setSearchTerm(e.target.value.toString())}
                   value={searchTerm}
