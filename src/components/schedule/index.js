@@ -13,6 +13,7 @@ import {
   SearchSmallContainer,
   SearchIcon,
   EmptyResults,
+  GameTypeImage,
 } from "./styles/schedule";
 
 export default function Schedule({ children, ...restProps }) {
@@ -41,6 +42,10 @@ Schedule.TitleBar = function ScheduleTitleBar({ children, ...restProps }) {
 
 Schedule.Selection = function ScheduleSelection({ children, ...restProps }) {
   return <Selection {...restProps}>{children}</Selection>;
+};
+
+Schedule.GameTypeImage = function ScheduleGameTypeImage({ children, ...restProps }) {
+  return <GameTypeImage {...restProps}>{children}</GameTypeImage>;
 };
 
 Schedule.SearchBar = function ScheduleSearchBar({ children, ...restProps }) {

@@ -79,6 +79,7 @@ const SchedulePage = () => {
 
           <Schedule.Bar>
             <Schedule.BarSection>
+              {/* <Schedule.GameTypeImage src="https://www.lechpoznan.pl/files/cache/8/b/rth_0x21_8b03d1b7a07893f114138d23b080122d1564046049.png" /> */}
               <Schedule.Selection
                 isSelected={active === "Ekstraklasa"}
                 onClick={() => {
@@ -92,6 +93,7 @@ const SchedulePage = () => {
               </Schedule.Selection>
             </Schedule.BarSection>
             <Schedule.BarSection>
+              {/* <Schedule.GameTypeImage src="https://www.lechpoznan.pl/files/cache/f/c/rth_0x21_fcd3cadd0a410f15a424de8d4ff12e5f1599822816.png" /> */}
               <Schedule.Selection
                 isSelected={active === "Puchar Polski"}
                 onClick={() => {

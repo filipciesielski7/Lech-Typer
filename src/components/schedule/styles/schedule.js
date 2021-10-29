@@ -171,3 +171,10 @@ export const EmptyResults = styled.div`
   padding: 20px;
   border-radius: 4px;
 `;
+
+export const GameTypeImage = styled.img`
+  margin-right: 10px;
+  @media (max-width: 950px) {
+    display: none;
+  }
+`;
