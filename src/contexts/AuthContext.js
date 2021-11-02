@@ -77,7 +77,7 @@ export function AuthProvider({ children }) {
     withAdding = false
   ) {
     const games = db.ref("games");
-    let gamesArray = []; // let z const aby dodac PUCHAR POLSKI
+    let gamesArray = []; // LET TO ADD POLISH CUP
     if (withAdding) {
       games
         .child(`${uid}`)
@@ -136,11 +136,11 @@ export function AuthProvider({ children }) {
             });
           }
 
-          // ABY DODAC PUCHAR POLSKI (MANUALNIE)
+          // ADDING POLISH CUP
           let newArray = gamesArray.slice(0, 12);
           newArray.push(gamesArray[34]);
           gamesArray.slice(12, 35).forEach((element) => newArray.push(element));
-          newArray.push(gamesArray[35])
+          newArray.push(gamesArray[35]);
           gamesArray = newArray;
         }
       });
@@ -162,8 +162,9 @@ export function AuthProvider({ children }) {
         .once("value")
         .then((snapshot) => {
           if (snapshot.exists() && snapshot.val().user_name !== "null") {
-            db.ref(`users/${uid}`).update({ photoURL: photoURL });
-            db.ref(`users/${uid}`).update({ user_name: `${username}` });
+            // db.ref(`users/${uid}`).update({ photoURL: photoURL });
+            // db.ref(`users/${uid}`).update({ user_name: `${username}` });
+            // TO BE ADDED IN THE FUTURE - UPDATING USERNAME AND PHOTOURL FROM TWITTER ON CHANGE
             return null;
           } else {
             db.ref(`users/${uid}`).set({
