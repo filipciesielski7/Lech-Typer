@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [deletedAccount, setDeletedAccount] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const [gamesList, setGamesList] = useState([]);
+  const [betsList, setBetsList] = useState([]);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -55,7 +56,8 @@ export function AuthProvider({ children }) {
     const interval = setInterval(function () {
       if (
         typeof usersList[0] === "object" &&
-        typeof gamesList[0] === "object"
+        typeof gamesList[0] === "object" &&
+        typeof betsList[0] === "object"
       ) {
         setLoadingBrowse(false);
         clearInterval(interval);
@@ -204,6 +206,19 @@ export function AuthProvider({ children }) {
     return usersArray;
   }
 
+  function getBetsList() {
+    const bets = db.ref("bets");
+    const betsArray = [];
+    bets.on("value", (snapshot) => {
+      if (snapshot.exists()) {
+        for (const [user, value] of Object.entries(snapshot.val())) {
+          betsArray.push({ user: user, bets: value });
+        }
+      }
+    });
+    return betsArray;
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -211,6 +226,7 @@ export function AuthProvider({ children }) {
     });
     setUsersList(getUsersList());
     setGamesList(getGamesList());
+    setBetsList(getBetsList());
     return unsubscribe;
   }, []);
 
@@ -233,6 +249,8 @@ export function AuthProvider({ children }) {
     db,
     getUsersList,
     getGamesList,
+    getBetsList,
+    betsList,
     usersList,
     setUsersList,
     gamesList,

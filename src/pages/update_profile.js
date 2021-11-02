@@ -223,6 +223,8 @@ const UpdateProfile = () => {
       .then(() => {
         const users = db.ref("users");
         users.child(`${currentUser.uid}`).remove();
+        const bets = db.ref("bets");
+        bets.child(`${currentUser.uid}`).remove();
         localStorage.removeItem("twitterUsername");
         localStorage.removeItem("twitterProfileImage");
       })
