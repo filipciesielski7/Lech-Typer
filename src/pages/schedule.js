@@ -48,6 +48,13 @@ const SchedulePage = () => {
           .includes(searchTerm.toUpperCase())
       ) {
         return true;
+      } else if (
+        currentUserBetsList[`${element.game_id}`]
+          .toString()
+          .toUpperCase()
+          .includes(searchTerm.toUpperCase())
+      ) {
+        return true;
       } else {
         return false;
       }

@@ -86,3 +86,34 @@ export const Result = styled.div`
     display: ${({ home_score }) => (home_score !== "" ? "" : "none")};
   }
 `;
+
+export const BetResult = styled.div`
+  position: absolute;
+  bottom: 15%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  border: 1px solid white;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: white;
+
+  color ${({ index }) => (index % 2 === 0 ? "#014B94" : "#022855")};
+  font-weight: bold;
+  font-size: 14px;
+
+  @media (max-width: 950px) {
+    bottom: 11%;
+    right: 50%;
+    transform: translate(50%, 0);
+  }
+  @media (max-width: 400px) {
+    font-size: 12px;
+  }
+  @media (max-width: 300px) {
+    font-size: 10px;
+  }
+`;

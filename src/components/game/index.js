@@ -5,6 +5,7 @@ import {
   TeamLogoContainer,
   TeamInfo,
   Result,
+  BetResult,
   Round,
 } from "./styles/game";
 
@@ -27,8 +28,9 @@ const Game = ({ index, game, length, betsList }) => {
   return (
     <Container index={index} length={length}>
       <Round>
-        {type === "PKO EKSTRAKLASA" ? game_id.toString().concat(".") : game_id}
-        {betsList[`${game_id}`]}
+        {type === "PKO EKSTRAKLASA"
+          ? game_id.toString().concat(".")
+          : game_id.substring(0, 1) + "/" + game_id.substring(2)}
       </Round>
       <TeamInfo type="home" winner={away_score < home_score}>
         {home_team}
@@ -56,6 +58,20 @@ const Game = ({ index, game, length, betsList }) => {
           ${"\n"} ${game_date}`}{" "}
         {away_score}
       </Result>
+
+      {betsList[`${game_id}`] !== "" ? (
+        <BetResult home_score={true} index={index}>
+          {"Twój typ "}
+          {betsList[`${game_id}`].substr(
+            0,
+            betsList[`${game_id}`].indexOf(":")
+          )}{" "}
+          {":"}{" "}
+          {betsList[`${game_id}`].substr(
+            betsList[`${game_id}`].indexOf(":") + 1
+          )}
+        </BetResult>
+      ) : null}
 
       <TeamLogoContainer>
         <TeamLogo
