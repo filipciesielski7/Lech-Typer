@@ -9,7 +9,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import * as ROUTES from "../constants/routes";
 
 const SchedulePage = () => {
-  const { loadingBrowse, loadData, gamesList } = useAuth();
+  const { loadingBrowse, loadData, gamesList, currentUserBetsList } = useAuth();
   const [active, setActive] = useState("Ekstraklasa");
   const [searchActive, setSearchActive] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -160,7 +160,13 @@ const SchedulePage = () => {
             {newGamesList().map((game, index) => {
               if (active === "Ekstraklasa" && game.type === "PKO EKSTRAKLASA") {
                 return (
-                  <Game key={index} game={game} index={index} length={34} />
+                  <Game
+                    key={index}
+                    game={game}
+                    index={index}
+                    length={34}
+                    betsList={currentUserBetsList}
+                  />
                 );
               } else if (
                 game.type === "FORTUNA PUCHAR POLSKI" &&
@@ -172,6 +178,7 @@ const SchedulePage = () => {
                     game={game}
                     index={index - 34}
                     length={2}
+                    betsList={currentUserBetsList}
                   />
                 );
               } else {

@@ -1,15 +1,15 @@
 import React from "react";
 import { Overview } from "../components";
-// import { useAuth } from "../contexts/AuthContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export function OverviewContainer({ children }) {
-  // const { betsList } = useAuth();
+  const { currentUserBetsList } = useAuth();
 
   return (
     <>
       <Overview>
         <Overview.Title>Przegląd</Overview.Title>
-        {/* <p>{betsList[0] !== undefined ? betsList[0].user : null}</p> */}
+        <p>{currentUserBetsList["0"]}</p>
         {children}
       </Overview>
     </>

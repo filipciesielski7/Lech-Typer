@@ -8,7 +8,7 @@ import {
   Round,
 } from "./styles/game";
 
-const Game = ({ index, game, length }) => {
+const Game = ({ index, game, length, betsList }) => {
   const {
     away_score,
     away_team,
@@ -28,6 +28,7 @@ const Game = ({ index, game, length }) => {
     <Container index={index} length={length}>
       <Round>
         {type === "PKO EKSTRAKLASA" ? game_id.toString().concat(".") : game_id}
+        {betsList[`${game_id}`]}
       </Round>
       <TeamInfo type="home" winner={away_score < home_score}>
         {home_team}
