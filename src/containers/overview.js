@@ -1,40 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Overview } from "../components";
 import * as ROUTES from "../constants/routes";
 import { BsArrowRight } from "react-icons/bs";
 import { useAuth } from "../contexts/AuthContext";
 
+const defaultRemainingTime = {
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+};
+
 export function OverviewContainer({ children }) {
   const { nextGame } = useAuth();
+  const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
+  const [active, setActive] = useState(false);
+  // const [nextGameDate, setNextGameDate] = useState(nextGame.date);
 
-  // var endDate = new Date("2021-11-20T20:00:00").getTime();
-  // const [active, setActive] = useState(false);
-  // const [daysLeft, setDaysLeft] = useState("");
-  // const [hoursLeft, setHoursLeft] = useState("");
-  // const [minutesLeft, setMinutesLeft] = useState("");
-  // const [secondsLeft, setSecondsLeft] = useState("");
+  var endDate = new Date(`2021-11-20T20:00:00`).getTime();
 
-  // useEffect(() => {
-  //   if (componentMounted.current) {
-  //     var countDownTimer = setInterval(() => {
-  //       setActive(true);
-  //       var now = new Date().getTime();
-  //       var remainingTime = endDate - now;
-  //       const second = 1000;
-  //       const minute = second * 60;
-  //       const hour = minute * 60;
-  //       const day = hour * 24;
-  //       setDaysLeft(Math.trunc(remainingTime / day));
-  //       setHoursLeft(Math.trunc((remainingTime % day) / hour));
-  //       setMinutesLeft(Math.trunc((remainingTime % hour) / minute));
-  //       setSecondsLeft(Math.trunc((remainingTime % minute) / second));
-  //       if (remainingTime <= 0) {
-  //         clearInterval(countDownTimer);
-  //         setActive(false);
-  //       }
-  //     }, 1000);
-  //   }
-  // }, [endDate]);
+  useEffect(() => {
+    var countDownTimer = setInterval(() => {
+      setActive(true);
+      var now = new Date().getTime();
+      var remainingTime = endDate - now;
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
+
+      const tempDefaultRemainingTime = {
+        days: Math.trunc(remainingTime / day),
+        hours: Math.trunc((remainingTime % day) / hour),
+        minutes: Math.trunc((remainingTime % hour) / minute),
+        seconds: Math.trunc((remainingTime % minute) / second),
+      };
+      setRemainingTime(tempDefaultRemainingTime);
+
+      if (remainingTime <= 0) {
+        clearInterval(countDownTimer);
+        setActive(false);
+      }
+    }, 100);
+    return () => clearInterval(countDownTimer);
+  }, [endDate, nextGame.date]);
 
   return (
     <>
@@ -50,9 +59,15 @@ export function OverviewContainer({ children }) {
             />
           </Overview.SubTitle>
         </Overview.TitleBar>
-        <Overview.BetContainer>
-          <p>{nextGame.date}</p>
-        </Overview.BetContainer>
+        <Overview.TimeLeftContainer active={active}>
+          <p>Typowanie aktywne. Do meczu nr. {nextGame.game_id} pozostało:</p>
+          <p>
+            {remainingTime.days + " dni "}
+            {remainingTime.hours + " godzin "}
+            {remainingTime.minutes + " minut i "}
+            {remainingTime.seconds + " sekund "}
+          </p>
+        </Overview.TimeLeftContainer>
         {children}
       </Overview>
     </>

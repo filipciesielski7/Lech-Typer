@@ -60,4 +60,9 @@ export const SubTitle = styled(ReactRouterLink)`
   }
 `;
 
-export const BetContainer = styled.div``;
+export const TimeLeftContainer = styled.div`
+  display ${({ active }) => (active ? "" : "none")};
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+`;

@@ -4,7 +4,7 @@ import {
   Title,
   TitleBar,
   SubTitle,
-  BetContainer,
+  TimeLeftContainer,
 } from "./styles/overview";
 
 export default function Overview({ children, ...restProps }) {
@@ -23,6 +23,9 @@ Overview.TitleBar = function OverviewTitleBar({ children, ...restProps }) {
   return <TitleBar {...restProps}>{children}</TitleBar>;
 };
 
-Overview.BetContainer = function OverviewBetContainer({ children, ...restProps }) {
-  return <BetContainer {...restProps}>{children}</BetContainer>;
+Overview.TimeLeftContainer = function OverviewTimeLeftContainer({
+  children,
+  ...restProps
+}) {
+  return <TimeLeftContainer {...restProps}>{children}</TimeLeftContainer>;
 };
