@@ -190,8 +190,8 @@ export const SubTitle2 = styled(ReactRouterLink)`
     color: white;
   }
 
-  @media (min-width: 1050px) {
-    position: relative;
+  @media (min-width: 950px) {
+    display: none;
   }
 
   @media (max-width: 470px) {

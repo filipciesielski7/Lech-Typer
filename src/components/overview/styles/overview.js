@@ -1,7 +1,9 @@
 import styled from "styled-components/macro";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
+  // position: relative;
   flex-direction: column;
   height: 100%;
   min-height: 450px;
@@ -19,9 +21,43 @@ export const Container = styled.div`
   }
 `;
 
+export const TitleBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+`;
+
 export const Title = styled.h1`
   color: #fff;
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 28px;
 `;
+
+export const SubTitle = styled(ReactRouterLink)`
+  color: #737373;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+  bottom: 4px;
+  right: 0;
+
+  &:hover {
+    color: white;
+  }
+  @media (max-width: 470px) {
+    bottom: 5px;
+    font-size: 12px;
+  }
+  @media (max-width: 350px) {
+    bottom: -20px;
+    font-size: 10px;
+  }
+`;
+
+export const BetContainer = styled.div``;

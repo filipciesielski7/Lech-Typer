@@ -17,6 +17,7 @@ export function AuthProvider({ children }) {
   const [gamesList, setGamesList] = useState([]);
   const [betsList, setBetsList] = useState([]);
   const [currentUserBetsList, setCurrentUserBetsList] = useState([]);
+  const [nextGame, setNextGame] = useState({});
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -66,8 +67,12 @@ export function AuthProvider({ children }) {
             setCurrentUserBetsList(betsList[i].bets);
           }
         }
+        setNextGame(gamesList.find((element) => element.home_score === ""));
         const interval2 = setInterval(function () {
-          if (typeof currentUserBetsList !== []) {
+          if (
+            typeof currentUserBetsList !== [] &&
+            typeof nextGame === "object"
+          ) {
             setLoadingBrowse(false);
             clearInterval(interval2);
             clearInterval(interval);
@@ -269,6 +274,7 @@ export function AuthProvider({ children }) {
     loadData,
     currentUserBetsList,
     setCurrentUserBetsList,
+    nextGame,
   };
   return (
     <AuthContext.Provider value={value}>
