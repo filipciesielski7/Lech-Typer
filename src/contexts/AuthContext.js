@@ -17,7 +17,8 @@ export function AuthProvider({ children }) {
   const [gamesList, setGamesList] = useState([]);
   const [betsList, setBetsList] = useState([]);
   const [currentUserBetsList, setCurrentUserBetsList] = useState([]);
-  const [nextGame, setNextGame] = useState({});
+  const [nextGame, setNextGame] = useState("");
+  const [endDate, setEndDate] = useState("");
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -73,6 +74,20 @@ export function AuthProvider({ children }) {
             typeof currentUserBetsList !== [] &&
             typeof nextGame === "object"
           ) {
+            setEndDate(
+              new Date(
+                `${
+                  nextGame.date.slice(6, 10) +
+                  "-" +
+                  nextGame.date.slice(3, 5) +
+                  "-" +
+                  nextGame.date.slice(0, 2) +
+                  "T" +
+                  nextGame.date.slice(-5) +
+                  ":00"
+                }`
+              ).getTime()
+            );
             setLoadingBrowse(false);
             clearInterval(interval2);
             clearInterval(interval);
@@ -164,6 +179,7 @@ export function AuthProvider({ children }) {
         }
       });
     }
+
     return gamesArray;
   }
 
@@ -275,6 +291,7 @@ export function AuthProvider({ children }) {
     currentUserBetsList,
     setCurrentUserBetsList,
     nextGame,
+    endDate,
   };
   return (
     <AuthContext.Provider value={value}>

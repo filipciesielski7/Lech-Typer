@@ -12,38 +12,37 @@ const defaultRemainingTime = {
 };
 
 export function OverviewContainer({ children }) {
-  const { nextGame } = useAuth();
+  const { nextGame, endDate } = useAuth();
   const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
   const [active, setActive] = useState(false);
-  // const [nextGameDate, setNextGameDate] = useState(nextGame.date);
-
-  var endDate = new Date(`2021-11-20T20:00:00`).getTime();
 
   useEffect(() => {
     var countDownTimer = setInterval(() => {
-      setActive(true);
-      var now = new Date().getTime();
-      var remainingTime = endDate - now;
-      const second = 1000;
-      const minute = second * 60;
-      const hour = minute * 60;
-      const day = hour * 24;
+      if (endDate !== undefined) {
+        setActive(true);
+        var now = new Date().getTime();
+        var remainingTime = endDate - now;
+        const second = 1000;
+        const minute = second * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
 
-      const tempDefaultRemainingTime = {
-        days: Math.trunc(remainingTime / day),
-        hours: Math.trunc((remainingTime % day) / hour),
-        minutes: Math.trunc((remainingTime % hour) / minute),
-        seconds: Math.trunc((remainingTime % minute) / second),
-      };
-      setRemainingTime(tempDefaultRemainingTime);
+        const tempDefaultRemainingTime = {
+          days: Math.trunc(remainingTime / day),
+          hours: Math.trunc((remainingTime % day) / hour),
+          minutes: Math.trunc((remainingTime % hour) / minute),
+          seconds: Math.trunc((remainingTime % minute) / second),
+        };
+        setRemainingTime(tempDefaultRemainingTime);
 
-      if (remainingTime <= 0) {
-        clearInterval(countDownTimer);
-        setActive(false);
+        if (remainingTime <= 0) {
+          clearInterval(countDownTimer);
+          setActive(false);
+        }
       }
     }, 100);
     return () => clearInterval(countDownTimer);
-  }, [endDate, nextGame.date]);
+  }, [endDate, nextGame]);
 
   return (
     <>
