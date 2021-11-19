@@ -37,6 +37,7 @@ export function OverviewContainer({ children }) {
 
         if (remainingTime <= 0) {
           clearInterval(countDownTimer);
+          setRemainingTime(defaultRemainingTime);
           setActive(false);
         }
       }
@@ -58,14 +59,36 @@ export function OverviewContainer({ children }) {
             />
           </Overview.SubTitle>
         </Overview.TitleBar>
-        <Overview.TimeLeftContainer active={active}>
-          <p>Typowanie aktywne. Do meczu nr. {nextGame.game_id} pozostało:</p>
-          <p>
-            {remainingTime.days + " dni "}
-            {remainingTime.hours + " godzin "}
-            {remainingTime.minutes + " minut i "}
-            {remainingTime.seconds + " sekund "}
-          </p>
+        <Overview.TimeLeftContainer active={true}>
+          {active
+            ? "Typowanie aktywne. Do nastepnego meczu pozostało:"
+            : "Typowanie nieaktywne. Mecz rozpoczął się:"}
+          <Overview.Timer
+            remainingTime={
+              remainingTime.days === 0 &&
+              remainingTime.hours === 0 &&
+              remainingTime.minutes === 0 &&
+              remainingTime.seconds > 0
+            }
+          >
+            {remainingTime.days === 0 &&
+            remainingTime.hours === 0 &&
+            remainingTime.minutes === 0 &&
+            remainingTime.seconds === 0
+              ? nextGame
+                ? nextGame.date.slice(0, 10) +
+                  " o godzinie " +
+                  nextGame.date.slice(-5)
+                : null
+              : remainingTime.days +
+                " dni " +
+                remainingTime.hours +
+                " godzin " +
+                remainingTime.minutes +
+                " minut i " +
+                remainingTime.seconds +
+                " sekund "}
+          </Overview.Timer>
         </Overview.TimeLeftContainer>
         {children}
       </Overview>

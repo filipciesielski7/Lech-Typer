@@ -4,6 +4,7 @@ import {
   Title,
   TitleBar,
   SubTitle,
+  Timer,
   TimeLeftContainer,
 } from "./styles/overview";
 
@@ -21,6 +22,10 @@ Overview.SubTitle = function OverviewSubTitle({ children, ...restProps }) {
 
 Overview.TitleBar = function OverviewTitleBar({ children, ...restProps }) {
   return <TitleBar {...restProps}>{children}</TitleBar>;
+};
+
+Overview.Timer = function OverviewTimer({ children, ...restProps }) {
+  return <Timer {...restProps}>{children}</Timer>;
 };
 
 Overview.TimeLeftContainer = function OverviewTimeLeftContainer({

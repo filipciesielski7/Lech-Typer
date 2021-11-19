@@ -62,7 +62,52 @@ export const SubTitle = styled(ReactRouterLink)`
 
 export const TimeLeftContainer = styled.div`
   display ${({ active }) => (active ? "" : "none")};
+  color: #737373;
+  font-size: 16px;
+  font-weight: 500;
   // display: flex;
   // align-items: center;
   // justify-content: center;
+`;
+
+export const Timer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 7px;
+  border-radius: 4px;
+  background: white;
+  margin: 20px auto;
+
+  color: rgba(0, 0, 0, 0.75);
+  font-weight: bold;
+
+  @media (max-width: 950px) {
+    font-size: 14px;
+  }
+  @media (max-width: 320px) {
+    font-size: 12px;
+  }
+
+  color: ${({ remainingTime }) =>
+    remainingTime ? "#ed4337" : "rgba(0, 0, 0, 0.75)"};
+  animation: ${({ remainingTime }) =>
+    remainingTime ? "pulse 1.8s infinite" : ""};
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.96);
+      box-shadow: 0 0 0 0 #ed4337;
+    }
+
+    50% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+
+    100% {
+      transform: scale(0.96);
+      box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+  }
 `;
