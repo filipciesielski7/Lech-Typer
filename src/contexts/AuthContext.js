@@ -171,10 +171,11 @@ export function AuthProvider({ children }) {
           }
 
           // ADDING POLISH CUP
-          let newArray = gamesArray.slice(0, 12);
+          let newArray = gamesArray.slice(0, 16);
           newArray.push(gamesArray[34]);
-          gamesArray.slice(12, 35).forEach((element) => newArray.push(element));
+          gamesArray.slice(16, 35).forEach((element) => newArray.push(element));
           newArray.push(gamesArray[35]);
+          newArray.push(gamesArray[36]);
           gamesArray = newArray;
         }
       });
