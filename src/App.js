@@ -8,6 +8,8 @@ import {
   LoggedInRoute,
   VerificationRoute,
   DeleteAccountRoute,
+  ContactRoute,
+  AboutRoute,
 } from "./helpers/routes";
 import Home from "./pages/home";
 import Signup from "./pages/signup";
@@ -19,6 +21,10 @@ import UpdateProfile from "./pages/update_profile";
 import DeletedAccount from "./pages/deleted_account";
 import SchedulePage from "./pages/schedule";
 import RankingPage from "./pages/ranking";
+import ContactPage from "./pages/contact";
+import ContactInfoPage from "./pages/contact_info";
+import AboutPage from "./pages/about";
+import AboutInfoPage from "./pages/about_info";
 
 function App() {
   return (
@@ -48,6 +54,17 @@ function App() {
             path={ROUTES.DELETED_ACCOUNT}
             component={DeletedAccount}
           />
+          <PrivateRoute
+            path={ROUTES.CONTACT_INFO}
+            component={ContactInfoPage}
+          />
+          <ContactRoute path={ROUTES.CONTACT} component={ContactPage} />
+          
+          <PrivateRoute
+            path={ROUTES.ABOUT_INFO}
+            component={AboutInfoPage}
+          />
+          <AboutRoute path={ROUTES.ABOUT} component={AboutPage} />
           <LoggedInRoute exact path="*" component={Home} />
         </Switch>
       </AuthProvider>

@@ -1,4 +1,5 @@
 import styled from "styled-components/macro";
+import { Link as ReactRouterLink } from "react-router-dom";
 
 export const Container = styled.div`
   display: flex;
@@ -28,7 +29,7 @@ export const Row = styled.div`
   }
 `;
 
-export const Link = styled.a`
+export const Link = styled(ReactRouterLink)`
   color: white;
   margin-bottom: 20px;
   font-size: 13px;

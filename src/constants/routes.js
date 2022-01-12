@@ -8,3 +8,7 @@ export const UPDATE_PROFILE = "/update-profile";
 export const DELETED_ACCOUNT = "/deleted-account";
 export const RANKING = "/ranking";
 export const SCHEDULE = "/schedule";
+export const CONTACT = "/contact";
+export const CONTACT_INFO = "/contact-info";
+export const ABOUT = "/about";
+export const ABOUT_INFO = "/about-info";

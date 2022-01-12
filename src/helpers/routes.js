@@ -80,3 +80,35 @@ export function VerificationRoute({ component: Component, ...restProps }) {
     />
   );
 }
+
+export function ContactRoute({ component: Component, ...restProps }) {
+  const { currentUser } = useAuth();
+  return (
+    <Route
+      {...restProps}
+      render={(props) => {
+        return currentUser ? (
+          <Redirect to={ROUTES.CONTACT_INFO} />
+        ) : (
+          <Component {...props} />
+        );
+      }}
+    />
+  );
+}
+
+export function AboutRoute({ component: Component, ...restProps }) {
+  const { currentUser } = useAuth();
+  return (
+    <Route
+      {...restProps}
+      render={(props) => {
+        return currentUser ? (
+          <Redirect to={ROUTES.ABOUT_INFO} />
+        ) : (
+          <Component {...props} />
+        );
+      }}
+    />
+  );
+}
