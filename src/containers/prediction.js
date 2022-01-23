@@ -22,13 +22,14 @@ export function PredictionContainer({ children }) {
     setActive(
       getGamesList().findIndex(
         (element) => element.game_id === nextGame.game_id
-      )
+      ) - 1
     );
   }, [getGamesList]);
 
-  let nextGameIndex = getGamesList().findIndex(
-    (element) => element.game_id === nextGame.game_id
-  );
+  let nextGameIndex =
+    getGamesList().findIndex(
+      (element) => element.game_id === nextGame.game_id
+    ) - 1;
   const numberOfNextAndPreviousGames = 2;
 
   let numberOfGames;
@@ -56,12 +57,15 @@ export function PredictionContainer({ children }) {
                 >
                   <Prediction.TitleBar>
                     {index === nextGameIndex ? (
-                      <Prediction.Title>Następny mecz</Prediction.Title>
+                      <Prediction.Title>Ostatni mecz</Prediction.Title>
                     ) : null}
                     {index < nextGameIndex ? (
                       <Prediction.Title>Poprzedni mecz</Prediction.Title>
                     ) : null}
-                    {index > nextGameIndex ? (
+                    {index === nextGameIndex + 1 ? (
+                      <Prediction.Title>Następny mecz</Prediction.Title>
+                    ) : null}
+                    {index > nextGameIndex + 1 ? (
                       <Prediction.Title>Kolejny mecz</Prediction.Title>
                     ) : null}
 
@@ -109,7 +113,7 @@ export function PredictionContainer({ children }) {
                     </Prediction.Team>
 
                     <Prediction.ScoreContainer>
-                      {index < nextGameIndex ? (
+                      {index < nextGameIndex + 1 ? (
                         Game ? (
                           <Prediction.Score>
                             {`${Game.home_score} : ${Game.away_score}`}
