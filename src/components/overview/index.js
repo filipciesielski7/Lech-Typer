@@ -6,6 +6,10 @@ import {
   SubTitle,
   Timer,
   TimeLeftContainer,
+  ScoreInput,
+  Submit,
+  Form,
+  ScoreContainer,
 } from "./styles/overview";
 
 export default function Overview({ children, ...restProps }) {
@@ -26,6 +30,25 @@ Overview.TitleBar = function OverviewTitleBar({ children, ...restProps }) {
 
 Overview.Timer = function OverviewTimer({ children, ...restProps }) {
   return <Timer {...restProps}>{children}</Timer>;
+};
+
+Overview.ScoreInput = function OverviewScoreInput({ children, ...restProps }) {
+  return <ScoreInput {...restProps}>{children}</ScoreInput>;
+};
+
+Overview.Submit = function OverviewSubmit({ children, ...restProps }) {
+  return <Submit {...restProps}>{children}</Submit>;
+};
+
+Overview.Form = function OverviewForm({ children, ...restProps }) {
+  return <Form {...restProps}>{children}</Form>;
+};
+
+Overview.ScoreContainer = function OverviewScoreContainer({
+  children,
+  ...restProps
+}) {
+  return <ScoreContainer {...restProps}>{children}</ScoreContainer>;
 };
 
 Overview.TimeLeftContainer = function OverviewTimeLeftContainer({
