@@ -43,6 +43,20 @@ export const Text = styled.p`
   font-weight: 500;
 `;
 
+export const AboutText = styled.p`
+  color: #737373;
+  font-weight: 500;
+  font-size: 18px;
+  text-align: justify;
+  margin-bottom: 20px;
+`;
+
+export const ContactText = styled.p`
+  color: #737373;
+  font-weight: 500;
+  font-size: 20px;
+`;
+
 export const TextSmall = styled.p`
   margin-top: 10px;
   font-size: 13px;
@@ -51,6 +65,14 @@ export const TextSmall = styled.p`
 `;
 
 export const Link = styled(ReactRouterLink)`
+  color: #fff;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+export const ExternalLink = styled.a`
   color: #fff;
   text-decoration: none;
   &:hover {

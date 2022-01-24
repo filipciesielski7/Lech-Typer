@@ -6,8 +6,11 @@ import {
   SettingSubTitle,
   SubTitleSpan,
   Text,
+  AboutText,
+  ContactText,
   Edit,
   Link,
+  ExternalLink,
   TextSmall,
   Base,
   Input,
@@ -59,8 +62,20 @@ Form.Text = function FormText({ children, ...restProps }) {
   return <Text {...restProps}>{children}</Text>;
 };
 
+Form.AboutText = function FormAboutText({ children, ...restProps }) {
+  return <AboutText {...restProps}>{children}</AboutText>;
+};
+
+Form.ContactText = function FormContactText({ children, ...restProps }) {
+  return <ContactText {...restProps}>{children}</ContactText>;
+};
+
 Form.Link = function FormLink({ children, ...restProps }) {
   return <Link {...restProps}>{children}</Link>;
+};
+
+Form.ExternalLink = function FormExternalLink({ children, ...restProps }) {
+  return <ExternalLink {...restProps}>{children}</ExternalLink>;
 };
 
 Form.TextSmall = function FormTextSmall({ children, ...restProps }) {
