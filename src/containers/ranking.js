@@ -6,7 +6,7 @@ import * as ROUTES from "../constants/routes";
 import { ImTwitter } from "react-icons/im";
 
 export function RankingContainer({ children }) {
-  const { getUsersList, currentUser } = useAuth();
+  const { getUsersList, currentUser, updatePoints } = useAuth();
   const twitterUsername = JSON.parse(localStorage.getItem("twitterUsername"));
   const isTwitterUser = currentUser.email === null;
 
@@ -82,7 +82,7 @@ export function RankingContainer({ children }) {
       <Ranking>
         <Ranking.TitleBar>
           <Ranking.Title>Ranking</Ranking.Title>
-          <Ranking.SubTitle to={ROUTES.RANKING}>
+          <Ranking.SubTitle to={ROUTES.RANKING} onClick={() => updatePoints()}>
             Pokaż całość
             <BsArrowRight
               style={{

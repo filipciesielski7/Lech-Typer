@@ -225,6 +225,8 @@ const UpdateProfile = () => {
         users.child(`${currentUser.uid}`).remove();
         const bets = db.ref("bets");
         bets.child(`${currentUser.uid}`).remove();
+        const points = db.ref("points");
+        points.child(`${currentUser.uid}`).remove();
         localStorage.removeItem("twitterUsername");
         localStorage.removeItem("twitterProfileImage");
       })

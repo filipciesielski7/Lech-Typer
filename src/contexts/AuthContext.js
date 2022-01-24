@@ -253,6 +253,90 @@ export function AuthProvider({ children }) {
     return betsArray;
   }
 
+  function updatePoints() {
+    const previousGame = gamesList[nextGame.game_id - 2];
+    const users = db.ref("users");
+    const points = db.ref("points");
+    points.on("value", (snapshot) => {
+      if (snapshot.exists()) {
+        for (const [user, value] of Object.entries(snapshot.val())) {
+          if (value[previousGame.game_id] === "") {
+            let homeBetScore;
+            let awayBetScore;
+
+            betsList.forEach((bet) => {
+              if (bet.user === user) {
+                homeBetScore = "";
+                awayBetScore = "";
+
+                homeBetScore = bet.bets[previousGame.game_id].substr(
+                  0,
+                  bet.bets[previousGame.game_id].indexOf(":")
+                );
+                awayBetScore = bet.bets[previousGame.game_id].substr(
+                  bet.bets[previousGame.game_id].indexOf(":") + 1
+                );
+
+                let pointsNumber;
+                if (
+                  homeBetScore === previousGame.home_score &&
+                  awayBetScore === previousGame.away_score
+                ) {
+                  pointsNumber = 3;
+                } else if (
+                  parseInt(homeBetScore) - parseInt(awayBetScore) ===
+                  previousGame.home_score - previousGame.away_score
+                ) {
+                  pointsNumber = 2;
+                } else if (
+                  parseInt(homeBetScore) - parseInt(awayBetScore) > 0 &&
+                  previousGame.home_score - previousGame.away_score > 0
+                ) {
+                  pointsNumber = 1;
+                } else if (
+                  parseInt(homeBetScore) - parseInt(awayBetScore) < 0 &&
+                  previousGame.home_score - previousGame.away_score < 0
+                ) {
+                  pointsNumber = 1;
+                } else {
+                  pointsNumber = 0;
+                }
+
+                points
+                  .child(`${user}/${previousGame.game_id}`)
+                  .set(`${pointsNumber}`);
+              }
+
+              let pointsSum = 0;
+              for (const item of Object.entries(value)) {
+                if (item[0] !== "exists" && item[1] !== "") {
+                  pointsSum = pointsSum + parseInt(item[1]);
+                }
+              }
+
+              users.child(`${user}/points`).set(`${pointsSum}`);
+            });
+          }
+        }
+      }
+    });
+    points.on("value", (snapshot) => {
+      if (snapshot.exists()) {
+        for (const [user, value] of Object.entries(snapshot.val())) {
+          let pointsSum = 0;
+          for (const item of Object.entries(value)) {
+            if (item[0] !== "exists" && item[1] !== "") {
+              pointsSum = pointsSum + parseInt(item[1]);
+            }
+          }
+
+          users.child(`${user}/points`).set(`${pointsSum}`);
+        }
+      }
+    });
+    return;
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -293,6 +377,7 @@ export function AuthProvider({ children }) {
     setCurrentUserBetsList,
     nextGame,
     endDate,
+    updatePoints,
   };
   return (
     <AuthContext.Provider value={value}>
