@@ -520,7 +520,7 @@ const UpdateProfile = () => {
               )}
               {errorPassword && <Form.Error>{errorPassword}</Form.Error>}
               <Form.Submit
-                disabled={saveChanges(isValid, wrongUsername)}
+                disabled={saveChanges(isValid, wrongUsername) || currentUser.displayName === "test"}
                 type="submit"
                 // onClick={handleSubmit}
               >
@@ -551,7 +551,11 @@ const UpdateProfile = () => {
             </>
           )}
 
-          <Form.SubmitDeleteAccount type="submit" onClick={handleDeleteButton}>
+          <Form.SubmitDeleteAccount
+            type="submit"
+            onClick={handleDeleteButton}
+            disabled={currentUser.displayName === "test"}
+          >
             {loading2 ? (
               <Form.LoadingIcon>
                 <Spinner
