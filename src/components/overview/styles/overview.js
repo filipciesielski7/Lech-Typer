@@ -4,6 +4,7 @@ import { Link as ReactRouterLink } from "react-router-dom";
 export const Container = styled.div`
   display: flex;
   // position: relative;
+  // justify-content: space-around;
   flex-direction: column;
   height: 100%;
   min-height: 450px;
@@ -177,4 +178,23 @@ export const Form = styled.form`
   flex-direction: column;
   max-width: 450px;
   width: 100%;
+`;
+
+export const BallContainer = styled.div`
+  // height: 400px;
+  // width: 1600px;
+  // border-radius: 8px;
+  // position: absolute;
+  // bottom: -10%;
+  // left: 50%",
+  // transform: translate(-50%, -50%);
+  // border: 3px solid white;
+  margin-top: 0px;
+  height: 41%;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  @media (max-width: 950px) {
+    display: none;
+  }
 `;

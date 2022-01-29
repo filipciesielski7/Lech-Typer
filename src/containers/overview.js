@@ -6,6 +6,34 @@ import { useAuth } from "../contexts/AuthContext";
 import Spinner from "react-spinner-material";
 import { translate } from "../helpers/translate";
 
+import { Suspense } from "react";
+import { OrbitControls, Environment } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
+
+// import { useLoader } from "@react-three/fiber";
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
+// const BallModel = () => {
+//   const gltf = useLoader(GLTFLoader, "./images/model3D/ball.gltf");
+//   return (
+//     <>
+//       <primitive object={gltf.scene} scale={1.5} />
+//     </>
+//   );
+// };
+
+const Scene = () => {
+  return (
+    <Canvas camera={{ position: [-15, -2, 0] }}>
+      <Suspense fallback={null}>
+        {/* <BallModel /> */}
+        <OrbitControls />
+        <Environment files={"./images/model3D/stadium.pic"} background />
+      </Suspense>
+    </Canvas>
+  );
+};
+
 const defaultRemainingTime = {
   days: 0,
   hours: 0,
@@ -56,9 +84,6 @@ export function OverviewContainer({ children }) {
         .then(() => {
           window.location.reload();
         })
-        // .then(() => {
-        //   setConfirmation("Zaaktualizowano wynik następnego meczu.");
-        // })
         .catch((error) => {
           setError(translate(error.message));
         });
@@ -116,7 +141,7 @@ export function OverviewContainer({ children }) {
 
   return (
     <>
-      <Overview>
+      <Overview style={{ position: "relative", overflow: "hidden" }}>
         <Overview.TitleBar>
           <Overview.Title>Typowanie</Overview.Title>
           <Overview.SubTitle to={ROUTES.SCHEDULE}>
@@ -159,11 +184,9 @@ export function OverviewContainer({ children }) {
                 " sekund "}
           </Overview.Timer>
         </Overview.TimeLeftContainer>
-
         <Prediction.GameContainer>
           <Prediction.Team>
             <Prediction.TeamLogo
-              // src={Game ? Game.home_team_logo : null}
               src={
                 process.env.PUBLIC_URL +
                 `/images/teams_logo/${
@@ -183,7 +206,6 @@ export function OverviewContainer({ children }) {
 
           <Prediction.Team>
             <Prediction.TeamLogo
-              // src={nextGame ? nextGame.away_team_logo : null}
               src={
                 process.env.PUBLIC_URL +
                 `/images/teams_logo/${
@@ -201,7 +223,6 @@ export function OverviewContainer({ children }) {
             </Prediction.TeamName>
           </Prediction.Team>
         </Prediction.GameContainer>
-
         <Form.Base method="POST" onSubmit={handleSubmit}>
           <Overview.ScoreContainer>
             <Overview.ScoreInput
@@ -255,9 +276,10 @@ export function OverviewContainer({ children }) {
           </Form.Submit>
         </Form.Base>
         {error && <Form.Error>{error}</Form.Error>}
-        {/* {confirmation ? (
-          <Form.Confirmation>{confirmation}</Form.Confirmation>
-        ) : null} */}
+
+        <Overview.BallContainer style={{ marginTop: "20px" }}>
+          <Scene />
+        </Overview.BallContainer>
 
         {children}
       </Overview>

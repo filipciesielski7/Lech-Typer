@@ -9,6 +9,7 @@ import {
   ScoreInput,
   Submit,
   Form,
+  BallContainer,
   ScoreContainer,
 } from "./styles/overview";
 
@@ -38,6 +39,13 @@ Overview.ScoreInput = function OverviewScoreInput({ children, ...restProps }) {
 
 Overview.Submit = function OverviewSubmit({ children, ...restProps }) {
   return <Submit {...restProps}>{children}</Submit>;
+};
+
+Overview.BallContainer = function OverviewBallContainer({
+  children,
+  ...restProps
+}) {
+  return <BallContainer {...restProps}>{children}</BallContainer>;
 };
 
 Overview.Form = function OverviewForm({ children, ...restProps }) {
