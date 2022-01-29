@@ -18,7 +18,7 @@ import {
 export default function Header({ bg = false, children, ...restProps }) {
   return bg ? (
     <Background
-      src={process.env.PUBLIC_URL + "/images/fans5.png"}
+      src={process.env.PUBLIC_URL + "/images/fans.png"}
       {...restProps}
     >
       {children}

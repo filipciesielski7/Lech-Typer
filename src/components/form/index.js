@@ -159,7 +159,7 @@ Form.Divider = function FormDivider({ children, ...restProps }) {
 Form.ImageTwitter = function FormImageTwitter({ children, ...restProps }) {
   return (
     <ImageTwitter
-      src={process.env.PUBLIC_URL + "/images/Twitter3.png"}
+      src={process.env.PUBLIC_URL + "/images/twitter.png"}
       {...restProps}
     >
       {children}
