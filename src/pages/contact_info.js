@@ -10,9 +10,9 @@ const ContactInfo = () => {
       <HeaderBrowseContainer />
       <Form>
         <Form.Title>Kontakt</Form.Title>
-        <Form.ContactText>{`Interesuje Cię kod źródłowy?`}</Form.ContactText>
-        <Form.ContactText>{`Chcesz nawiązać kontakt?`}</Form.ContactText>
-        <Form.ContactText>{`Znalazłeś błąd? `}</Form.ContactText>
+        <Form.ContactText>{`Znalazłeś błąd lub chcesz nawiązać kontakt? A może interesuje Cię kod źródłowy?`}</Form.ContactText>
+        {/* <Form.ContactText>{`Chcesz nawiązać kontakt?`}</Form.ContactText>
+        <Form.ContactText>{`Znalazłeś błąd? `}</Form.ContactText> */}
 
         <Form.ContactText style={{ margin: "20px 0" }}>
           {`Zapraszam na mojego `}
