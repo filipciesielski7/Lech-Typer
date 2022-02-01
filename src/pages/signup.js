@@ -137,14 +137,14 @@ const Signup = () => {
         <Form.Base method="POST" onSubmit={handleSubmit}>
           <Form.Input
             placeholder="Nazwa gracza"
-            value={firstName}
+            // value={firstName}
             onChange={({ target }) => isUsernameValid(target.value)}
             pattern="^[a-zA-Z0-9]+$"
           />
 
           <Form.Input
             placeholder="Email"
-            typr="email"
+            type="email"
             value={emailAddress}
             onChange={({ target }) => setEmailAddress(target.value)}
           />

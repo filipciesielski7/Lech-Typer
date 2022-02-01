@@ -11,14 +11,10 @@ const AboutInfo = () => {
       <Form>
         <Form.Title>O nas</Form.Title>
         <Form.AboutText>
-          {`Lech Typer to nowa aplikacja internetowa napisana z myślą o kibicach
-          Lecha Poznań, pozwalająca obstawiać i śledzić na bieżąco wyniki
-          wszystkich meczów ich ulubionego zespołu, a takze rywalizować między
-          sobą o miano najlepszego typera.`}
+          {`Lech Typer to nowa aplikacja internetowa napisana z myślą o kibicach Lecha Poznań, pozwalająca obstawiać i śledzić na bieżąco wyniki wszystkich meczów ich ulubionego zespołu, a takze rywalizować między sobą o miano najlepszego typera.`}
         </Form.AboutText>
         <Form.AboutText>
-          {`Jeśli idealnie obstawisz wynik zdobędziesz 3 punkty, w przypadku gdy wskażesz poprawnego zwycięzce, a różnica bramek będzie identyczna z faktyczną otrzymasz 2 punkty. Szansą na zdobycie 1 punktu jest poprawne wskazanie zwycięzcy, nie
-          wyniku. Powodzenia!`}
+          {`Jeśli idealnie obstawisz wynik zdobędziesz 3 punkty, w przypadku gdy wskażesz poprawnego zwycięzce, a różnica bramek będzie identyczna z faktyczną otrzymasz 2 punkty. Szansą na zdobycie 1 punktu jest poprawne wskazanie zwycięzcy, nie wyniku. Powodzenia!`}
         </Form.AboutText>
         <Form.Text>
           <Form.Link to={ROUTES.BROWSE}>Powrót do strony głównej.</Form.Link>

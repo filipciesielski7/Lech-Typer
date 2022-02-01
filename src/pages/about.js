@@ -11,16 +11,13 @@ const About = () => {
       <Form>
         <Form.Title>O nas</Form.Title>
         <Form.AboutText>
-          {`Lech Typer to nowa aplikacja internetowa napisana z myślą o kibicach
-          Lecha Poznań, pozwalająca obstawiać i śledzić na bieżąco wyniki
-          wszystkich meczów ich ulubionego zespołu, a takze rywalizować między
-          sobą o miano najlepszego typera.`}
+          {`Lech Typer to nowa aplikacja internetowa napisana z myślą o kibicach Lecha Poznań, pozwalająca obstawiać i śledzić na bieżąco wyniki wszystkich meczów ich ulubionego zespołu, a także rywalizować między sobą o miano najlepszego typera.`}
         </Form.AboutText>
         <Form.AboutText>
           {`Więcej funkcjonalności i informacji wraz z aktualnym rankingiem graczy znaleźć można w odpowiedniej sekcji aplikacji po zalogowaniu się. Powodzenia!`}
         </Form.AboutText>
         <Form.AboutText>
-          {`Istnieje dostępne konto testowe w celu przestestowania aplikacji:`}
+          {`Istnieje ogólnie dostępne konto testowe w celu poznania aplikacji:`}
         </Form.AboutText>
 
         <Form.AboutText style={{ marginBottom: "0" }}>

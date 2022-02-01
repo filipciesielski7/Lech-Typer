@@ -27,7 +27,10 @@ const Scene = () => {
     <Canvas camera={{ position: [-15, -2, 0] }}>
       <Suspense fallback={null}>
         {/* <BallModel /> */}
-        <OrbitControls />
+        <OrbitControls
+          minPolarAngle={Math.PI / 2}
+          maxPolarAngle={Math.PI / 2}
+        />
         <Environment files={"./images/model3D/stadium.pic"} background />
       </Suspense>
     </Canvas>
@@ -50,6 +53,7 @@ export function OverviewContainer({ children }) {
   const [homeScore, setHomeScore] = useState("");
   const [awayScore, setAwayScore] = useState("");
   const [error, setError] = useState("");
+  const [title, setTitle] = useState("Zaktualizuj wynik");
 
   function handleSubmit(event) {
     setLoading(true);
@@ -82,6 +86,7 @@ export function OverviewContainer({ children }) {
         .child(`${currentUser.uid}/${nextGame.game_id}`)
         .set(`${homeScore}:${awayScore}`)
         .then(() => {
+          setTitle("Zaktualizuj wynik");
           window.location.reload();
         })
         .catch((error) => {
@@ -92,6 +97,7 @@ export function OverviewContainer({ children }) {
       awayScore !== "" &&
       currentUserBetsList[nextGame.game_id] !== ""
     ) {
+      setTitle("Potwierdź wynik");
       setError(
         `Czy na pewno chcesz wykorzystać poprzednio ustawioną liczbę goli dla zespołu ${nextGame.home_team}?`
       );
@@ -100,6 +106,7 @@ export function OverviewContainer({ children }) {
       awayScore === "" &&
       currentUserBetsList[nextGame.game_id] !== ""
     ) {
+      setTitle("Potwierdź wynik");
       setError(
         `Czy na pewno chcesz wykorzystać poprzednio ustawioną liczbę goli dla zespołu ${nextGame.away_team}?`
       );
@@ -229,7 +236,24 @@ export function OverviewContainer({ children }) {
               value={homeScore}
               id="HomeScore"
               onChange={({ target }) => {
-                setHomeScore(target.value);
+                if (homeScore === "") {
+                  setHomeScore(
+                    currentUserBetsList && nextGame
+                      ? currentUserBetsList[nextGame.game_id].slice(
+                          0,
+                          currentUserBetsList[nextGame.game_id].indexOf(":")
+                        ) !== ""
+                        ? currentUserBetsList[nextGame.game_id].slice(
+                            0,
+                            currentUserBetsList[nextGame.game_id].indexOf(":")
+                          )
+                        : 0
+                      : null
+                  );
+                  setHomeScore(target.value);
+                } else {
+                  setHomeScore(target.value);
+                }
               }}
               placeholder={
                 currentUserBetsList && nextGame
@@ -245,7 +269,23 @@ export function OverviewContainer({ children }) {
               value={awayScore}
               id="AwayScore"
               onChange={({ target }) => {
-                setAwayScore(target.value);
+                if (awayScore === "") {
+                  setAwayScore(
+                    currentUserBetsList && nextGame
+                      ? currentUserBetsList[nextGame.game_id].slice(
+                          currentUserBetsList[nextGame.game_id].indexOf(":") + 1
+                        ) !== ""
+                        ? currentUserBetsList[nextGame.game_id].slice(
+                            currentUserBetsList[nextGame.game_id].indexOf(":") +
+                              1
+                          )
+                        : 0
+                      : null
+                  );
+                  setAwayScore(target.value);
+                } else {
+                  setAwayScore(target.value);
+                }
               }}
               placeholder={
                 currentUserBetsList && nextGame
@@ -268,7 +308,7 @@ export function OverviewContainer({ children }) {
               </Form.LoadingIcon>
             ) : currentUserBetsList && nextGame ? (
               currentUserBetsList[nextGame.game_id] !== "" ? (
-                "Zaktualizuj wynik"
+                title
               ) : (
                 "Obstaw wynik"
               )

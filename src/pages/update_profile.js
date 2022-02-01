@@ -382,7 +382,7 @@ const UpdateProfile = () => {
                 : currentUser.displayName
             }
             disabled={invalidUpdateFirstName}
-            value={firstName}
+            // value={firstName}
             autoComplete="off"
             id="FirstName"
             onChange={({ target }) => {
@@ -520,7 +520,10 @@ const UpdateProfile = () => {
               )}
               {errorPassword && <Form.Error>{errorPassword}</Form.Error>}
               <Form.Submit
-                disabled={saveChanges(isValid, wrongUsername) || currentUser.displayName === "test"}
+                disabled={
+                  saveChanges(isValid, wrongUsername) ||
+                  currentUser.displayName === "test"
+                }
                 type="submit"
                 // onClick={handleSubmit}
               >

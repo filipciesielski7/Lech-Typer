@@ -29,7 +29,7 @@ const User = ({ index, currentUserRanking, length, user, photoURL }) => {
 
       {photoURL ? (
         <ProfileImageContainer>
-          <ProfileImage src={photoURL} alt={user_name}></ProfileImage>
+          <ProfileImage src={photoURL} alt={""}></ProfileImage>
         </ProfileImageContainer>
       ) : null}
     </Container>
